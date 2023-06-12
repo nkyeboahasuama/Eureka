@@ -1,12 +1,12 @@
 import Container from "../../../shared_components/atoms/container/Container";
-import { BaseInput } from "../../../shared_components/atoms/input/Input";
+import { TextArea } from "../../../shared_components/atoms/input/Input";
 import Button from "../../../shared_components/atoms/button/Button";
 
 const AnswerField = () => {
   return (
-    <Container variant="primary" h="45%">
-      <Container h="100%">
-        <BaseInput h="80%" w="90%" border="black 1px solid" />
+    <Container h="300px">
+      <Container w="90%" h="100%">
+        <TextArea style={{ height: "80%", margin: 0, padding: 0 }} />
         <Button variant="secondary">Submit your answer</Button>
       </Container>
     </Container>

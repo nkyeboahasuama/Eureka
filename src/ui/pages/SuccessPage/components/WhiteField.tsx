@@ -1,4 +1,3 @@
-import React from "react";
 import Container from "../../../shared_components/atoms/container/Container";
 import Logo from "../../../shared_components/logo/Logo";
 import Typography from "../../../shared_components/atoms/typography/Typography";

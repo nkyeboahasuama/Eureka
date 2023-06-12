@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export interface BaseProps {
+export interface BaseProps extends React.HTMLAttributes<HTMLParagraphElement> {
   p?: string;
   m?: string;
   weight?: number;
   props?: string;
+  textAlign?: string;
 }
 
 export const Base = styled.p<BaseProps>`
@@ -14,6 +15,10 @@ export const Base = styled.p<BaseProps>`
   padding: ${({ p }) => p || "0px"};
   margin: ${({ m }) => m || "0px"};
   color: ${({ color }) => color};
+  text-align: ${({ textAlign }) => textAlign};
+  :link {
+    text-decoration: none;
+  }
 `;
 
 export const HeaderOne = styled(Base)`
