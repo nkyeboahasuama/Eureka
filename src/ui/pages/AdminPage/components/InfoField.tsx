@@ -1,19 +1,19 @@
 import Container from "../../../shared_components/atoms/container/Container";
 import Date from "../../../shared_components/date/Date";
 import UserEmail from "../../../shared_components/user/UserEmail";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../shared_components/atoms/button/Button";
 
 const InfoField = () => {
   const navigate = useNavigate();
   return (
-    <Container bg="red" w="100%" h="100px">
+    <Container w="100%" h="130px" justify="space-between">
       <Container w="90%" h="50px" align="left">
         <Button
           onClick={() => navigate(-1)}
           variant="secondary"
           w="100px"
-          style={{ marginLeft: 0 }}
+          style={{ margin: 0 }}
         >
           Back
         </Button>

@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 const SAEPageQField = () => {
   const navigate = useNavigate();
   return (
-    <Container w="90%" align="start" h="250px" p="0px 0">
+    <Container w="90%" align="start" h="37%" justify="space-between">
       <Button
         onClick={() => navigate(-1)}
         variant="secondary"

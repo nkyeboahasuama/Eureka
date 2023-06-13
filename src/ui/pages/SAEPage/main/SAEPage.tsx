@@ -7,14 +7,14 @@ import { NavLink } from "../../../shared_components/header/Header";
 const SAEPage = () => {
   const navigations = (
     <>
-      <NavLink href="/questions">Question poll</NavLink>
+      <NavLink href="/verifyquestion">Question poll</NavLink>
       <NavLink href="/verifyanswer" isActive={true}>
         Answer poll
       </NavLink>
     </>
   );
   return (
-    <Container h="100vh" justify="space-between">
+    <Container justify="space-between">
       <Header page={navigations} />
       <SAEPageQField />
       <SAEPageInput />
