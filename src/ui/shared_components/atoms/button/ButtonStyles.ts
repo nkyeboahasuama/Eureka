@@ -8,12 +8,13 @@ export interface ButtonProps
   color?: string;
   size?: string;
   weight?: number;
+  w?: string;
+  radius?: number;
   children: React.ReactNode;
 }
 
 export const BaseButton = styled.button<ButtonProps>`
   // Default styles
-  width: 91%;
   height: 40px;
   border: none;
   font-family: "Montserrat", sans-serif;
@@ -29,6 +30,12 @@ export const BaseButton = styled.button<ButtonProps>`
   color: ${(props) => props.color || "white"};
   background-color: ${(props) => props.bg || "black"};
   font-size: ${(props) => props.size || "18px"};
+  border-radius: ${(props) => props.radius};
+  width: ${(props) => props.w || "100%"};
+
+  :link {
+    text-decoration: none;
+  }
 `;
 
 // Variants

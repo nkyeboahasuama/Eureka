@@ -1,20 +1,14 @@
 import styled from "styled-components";
 
-interface InputProps {
-  border?: string;
-  w?: string;
-  h?: string;
-  color?: string;
-  bg?: string;
-  m?: string;
-}
-export const BaseInput = styled.input<InputProps>`
-  margin: ${({ m }) => m};
-  border: ${({ border }) => border};
-  width: ${({ w }) => w};
-  height: ${({ h }) => h};
-  color: ${({ color }) => color || "black"};
-  background: ${({ bg }) => bg || "white"};
+export const TextArea = styled.textarea`
+  margin: 10px;
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  color: "black";
+  background: "white";
   font-family: "Montserrat", sans-serif;
-  text-align: center;
+  text-align: left;
+  font-size: 20px;
+  word-wrap: break-word;
 `;

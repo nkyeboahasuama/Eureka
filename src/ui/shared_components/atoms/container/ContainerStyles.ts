@@ -20,9 +20,9 @@ export interface BaseProps {
 
 export const BaseContainer = styled.div<BaseProps>`
   font-family: "Montserrat", sans-serif;
-  width: ${(props) => props.w || "400px"};
+  width: ${(props) => props.w || "100%"};
   max-width: 100%;
-  height: ${(props) => props.h || "90vh"};
+  height: ${(props) => props.h || "100vh"};
   margin: ${(props) => props.m};
   padding: ${(props) => props.p};
   border: ${(props) => props.border};
