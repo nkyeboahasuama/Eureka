@@ -1,24 +1,17 @@
 import Container from "../../../shared_components/atoms/container/Container";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import { Icon } from "@iconify/react";
-import Date from "../../../shared_components/date/Date";
-import UserEmail from "../../../shared_components/user/UserEmail";
-import BackBtn from "../../../shared_components/backBtn/BackBtn";
+import InfoField from "../../../shared_components/infoBackBtn/InfoBackBtnField";
 
 const SAEPageQField = () => {
   return (
-    <Container w="90%" align="start" h="37%" justify="space-between">
-      <BackBtn />
-
-      <Container fd="row" h="30px">
-        <Date />
-        <UserEmail />
-      </Container>
-      <Container m="0px 0" h="150px" fd="row" align="start">
+    <Container w="90%" align="start" h="40%" justify="space-between">
+      <InfoField />
+      <Container h="150px" fd="row" justify="space-between" align="start">
         <Icon
           style={{
             fontSize: 20,
-            width: 120,
+            width: 100,
             marginRight: 5,
           }}
           icon="mdi:help-circle-outline"

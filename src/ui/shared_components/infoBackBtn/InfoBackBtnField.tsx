@@ -1,13 +1,13 @@
-import Container from "../../../shared_components/atoms/container/Container";
-import Date from "../../../shared_components/date/Date";
-import UserEmail from "../../../shared_components/user/UserEmail";
-import BackBtn from "../../../shared_components/backBtn/BackBtn";
+import Container from "../atoms/container/Container";
+import Date from "../date/Date";
+import UserEmail from "../user/UserEmail";
+import BackBtn from "../backBtn/BackBtn";
 
 const InfoField = () => {
   return (
     <Container
       style={{ height: 110, flexShrink: 0 }}
-      w="90%"
+      w="100%"
       justify="center"
       align="start"
     >
