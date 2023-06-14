@@ -6,7 +6,7 @@ import { NavLink } from "../../../shared_components/header/Header";
 const SAQPage = () => {
   const navigations = (
     <>
-      <NavLink href="/questions" isActive={true}>
+      <NavLink href="/verifyquestion" isActive={true}>
         Question poll
       </NavLink>
       <NavLink href="/verifyanswer">Answer poll</NavLink>

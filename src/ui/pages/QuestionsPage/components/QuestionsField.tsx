@@ -3,7 +3,7 @@ import QuestionContainer from "./QuestionContainer";
 
 const QuestionsField = () => {
   return (
-    <Container h="85%" variant="primary" justify="start">
+    <Container h="88%" variant="primary" justify="start">
       <QuestionContainer />
     </Container>
   );
