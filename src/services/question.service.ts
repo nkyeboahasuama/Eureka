@@ -52,8 +52,20 @@ const markQuestion = async (adminId: string, questionId: string) => {
   } else throw new Error("Invalid Question or User");
 };
 
+const getQuestions = async () => {
+  const results = await QuestionRepo.getDocs();
+  return results;
+};
+
+const getValidatedQuestions = async () => {
+  const results = await QuestionRepo.getValidatedDocs();
+  return results;
+};
+
 export const questionService = {
   addQuestion,
   markQuestion,
   validateQuestion,
+  getQuestions,
+  getValidatedQuestions,
 } as const;

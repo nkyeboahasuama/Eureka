@@ -34,6 +34,22 @@ class QuestionRepoClass extends BaseRepository<IQuestion, IQuestionDocument> {
       validators: arrayUnion(validator),
     });
   };
+
+  getValidatedDocs = async () => {
+    const queryRef = query(this.collection);
+    const docsRef = await getDocs(queryRef);
+    const results = docsRef.docs
+      .filter((doc) => qtnValidated(doc.data() as IQuestionDocument))
+      .map((ref) => ({ ...ref.data(), id: ref.id }));
+    return results as IQuestionDocument[];
+  };
 }
 
 export const QuestionRepo = new QuestionRepoClass();
+
+function qtnValidated(question: IQuestionDocument) {
+  const { validators } = question;
+  const approvals = validators.filter((vl) => vl.status === "approve");
+  if (approvals.length >= 2) return true;
+  return false;
+}
