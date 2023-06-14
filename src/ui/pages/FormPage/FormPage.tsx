@@ -1,6 +1,4 @@
 import React from "react";
-import { Container } from "../../atoms/Container";
-import { Button } from "../../atoms/Button";
 import {
   EmailContainer,
   FormButton,
@@ -8,15 +6,30 @@ import {
   InputContainer,
   InputField,
 } from "./FormPage.styles";
+import { questionService } from "../../../services";
 
 const FormPage = () => {
+  const onClickSubmit = async () => {
+    try {
+      await questionService.validateQuestion(
+        "Ab0fZiGHESoIYdRhCmLE",
+        "h4FaMascJsOwGzK3YSOB",
+        "reject"
+      );
+      alert("Question Validated");
+    } catch (error: any) {
+      console.log("There was an error");
+      console.log(error);
+    }
+  };
+
   return (
     <FormContainer>
       <EmailContainer>Fill email... blah blah blah</EmailContainer>
       <InputContainer>
         What is your worry?
         <InputField></InputField>
-        <FormButton>Submit</FormButton>
+        <FormButton onClick={onClickSubmit}>Submit</FormButton>
       </InputContainer>
     </FormContainer>
   );
