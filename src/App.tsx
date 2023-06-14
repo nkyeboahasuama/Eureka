@@ -1,23 +1,32 @@
-import styled from "styled-components";
-import FormPage from "./ui/pages/FormPage/FormPage";
-import { Container } from "./ui/atoms/Container";
+import FormPage from "./ui/pages/FormPage/main/FormPage";
+import { GlobalStyles } from "./globalStyles/GlobalStyles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import SuccessPage from "./ui/pages/SuccessPage/main/SuccessPage";
+import AdminPage from "./ui/pages/AdminPage/main/AdminPage";
+import QuestionsPage from "./ui/pages/QuestionsPage/main/QuestionsPage";
+import SAAPage from "./ui/pages/SAAPage/main/SAAPage";
+import SAQPage from "./ui/pages/SuperAdminPage/main/SAQPage";
+import SAEPage from "./ui/pages/SAEPage/main/SAEPage";
 
 function App() {
-  const AppContainer = styled(Container)`
-    background-color: gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
-    height: 100vh;
-  `;
-
   return (
-    <AppContainer>
-      <FormPage />
-    </AppContainer>
+    <>
+      <GlobalStyles />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<FormPage />} />
+
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/questions" element={<QuestionsPage />} />
+          <Route path="/question/:id" element={<AdminPage />} />
+          <Route path="/verifyquestion" element={<SAQPage />} />
+          <Route path="/verifyanswer" element={<SAAPage />} />
+          <Route path="/edit" element={<SAEPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
