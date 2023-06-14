@@ -25,6 +25,7 @@ export const BaseButton = styled.button<ButtonProps>`
   justify-content: center;
   align-items: center;
   font-weight: 700;
+  flex-shrink: 0;
 
   // Variant styles
   color: ${(props) => props.color || "white"};

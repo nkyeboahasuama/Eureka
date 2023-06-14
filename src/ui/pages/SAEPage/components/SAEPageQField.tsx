@@ -1,23 +1,14 @@
 import Container from "../../../shared_components/atoms/container/Container";
 import Typography from "../../../shared_components/atoms/typography/Typography";
-import Button from "../../../shared_components/atoms/button/Button";
 import { Icon } from "@iconify/react";
 import Date from "../../../shared_components/date/Date";
 import UserEmail from "../../../shared_components/user/UserEmail";
-import { Link, useNavigate } from "react-router-dom";
+import BackBtn from "../../../shared_components/backBtn/BackBtn";
 
 const SAEPageQField = () => {
-  const navigate = useNavigate();
   return (
     <Container w="90%" align="start" h="37%" justify="space-between">
-      <Button
-        onClick={() => navigate(-1)}
-        variant="secondary"
-        w="100px"
-        style={{ marginLeft: 0 }}
-      >
-        Back
-      </Button>
+      <BackBtn />
 
       <Container fd="row" h="30px">
         <Date />

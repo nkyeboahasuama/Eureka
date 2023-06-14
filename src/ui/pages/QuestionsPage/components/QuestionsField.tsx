@@ -1,11 +1,11 @@
-import Container from "../../../shared_components/atoms/container/Container";
+import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 import QuestionContainer from "./QuestionContainer";
 
 const QuestionsField = () => {
   return (
-    <Container h="88%" variant="primary" justify="start">
+    <BodyContainer justify="start">
       <QuestionContainer />
-    </Container>
+    </BodyContainer>
   );
 };
 

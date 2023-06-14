@@ -10,7 +10,7 @@ import { Question } from "../../pages/QuestionsPage/components/QuestionContainer
 
 interface AdminModalProps {
   closeAdminModal: () => void;
-  question: Question | null;
+  question?: Question | null;
   index?: number;
 }
 

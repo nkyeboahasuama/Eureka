@@ -3,14 +3,14 @@ import { TextArea } from "../../../shared_components/atoms/input/Input";
 
 import Button from "../../../shared_components/atoms/button/Button";
 import Typography from "../../../shared_components/atoms/typography/Typography";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FormField = () => {
   const navigate = useNavigate();
   return (
     <Container w="100%" h="65%" variant="secondary">
       <Container w="90%">
-        <Container text="justify" align="start" w="90%" h="20%">
+        <Container text="left" align="start" h="20%">
           <Typography variant="h2">What is on your mind?</Typography>
           <Typography variant="normal">
             Share your thoughts with an amazing community of leaders.
@@ -21,7 +21,7 @@ const FormField = () => {
             style={{
               backgroundColor: "black",
               color: "white",
-              height: "73%",
+              height: "79%",
               margin: 0,
             }}
           />

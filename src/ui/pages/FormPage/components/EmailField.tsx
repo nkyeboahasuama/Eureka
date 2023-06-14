@@ -4,9 +4,9 @@ import Logo from "../../../shared_components/logo/Logo";
 
 const EmailField = () => {
   return (
-    <Container variant="primary" text="left" w="100%" h="40%">
+    <Container text="left" w="100%" h="40%">
       <Logo />
-      <Container align="start" w="90%" h="80%">
+      <Container align="start" w="90%" h="75%">
         <Typography variant="h1">Share your worries</Typography>
         <Typography textAlign="start" variant="normal" m="2px 0 ">
           An amazing lorem ipsum is used for dummy texts
