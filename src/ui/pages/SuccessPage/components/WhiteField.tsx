@@ -4,9 +4,9 @@ import Typography from "../../../shared_components/atoms/typography/Typography";
 
 const WhiteField = () => {
   return (
-    <Container variant="primary" h="40%">
+    <Container variant="primary" h="35%">
       <Logo />
-      <Container h="80%" w="91%">
+      <Container h="75%" w="91%">
         <Typography variant="h1">Just white space!</Typography>
       </Container>
     </Container>

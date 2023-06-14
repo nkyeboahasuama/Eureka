@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const BaseChip = styled.button`
-  width: 50px;
+  width: 55px;
   height: 20px;
   border-radius: 20px;
   border: none;
   cursor: pointer;
 `;
-
+ 
 const openChip = styled(BaseChip)`
   background-color: rgba(3, 201, 136, 0.1);
   color: #03c988;
@@ -30,7 +30,11 @@ const closedChip = styled(BaseChip)`
   }
 `;
 
-export const chipVariants = {
+interface ChipVariantsTypes {
+  [key: string]: any;
+}
+
+export const chipVariants: ChipVariantsTypes = {
   open: openChip,
   closed: closedChip,
 };

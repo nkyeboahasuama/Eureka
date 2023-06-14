@@ -4,8 +4,8 @@ import Button from "../../../shared_components/atoms/button/Button";
 
 const SAEPageInput = () => {
   return (
-    <Container h="50%" w="90%">
-      <TextArea style={{ height: "75%" }} />
+    <Container h="45%" w="90%">
+      <TextArea style={{ height: "80%", margin: "0" }} />
       <Button variant="secondary">Submit Review</Button>
     </Container>
   );

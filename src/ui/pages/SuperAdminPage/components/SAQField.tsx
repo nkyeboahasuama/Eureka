@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Container from "../../../shared_components/atoms/container/Container";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import Chips from "../../../shared_components/atoms/chips/Chips";
 import Button from "../../../shared_components/atoms/button/Button";
-import Date from "../../../shared_components/date/Date";
-import UserEmail from "../../../shared_components/user/UserEmail";
 import SAdminModal from "../../../modals/superAdminModal/SAdminModal";
 import AdminModal from "../../../modals/adminModal/AdminModal";
+import SAQUserDetails from "./SAQUserDetails";
+import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
+import { adminQuestions } from "./SAQAdminQs";
 
 const SAdminQuestionField = () => {
   const [modal, setModal] = useState(false);
@@ -28,21 +28,17 @@ const SAdminQuestionField = () => {
   };
 
   return (
-    <Container h="20%" w="90%" text="left" m="10px 0">
-      <Container justify="space-between" w="100%" fd="row">
-        <Date />
-        <UserEmail />
-      </Container>
-
+    <BodyContainer h="fit" w="90%" text="left" m="0px 0">
+      <SAQUserDetails />
       <Typography
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", margin: "5px 0 10px 0" }}
         variant="h3"
         onClick={openAdminModal}
       >
-        How can you How can you How can How can you How can?
+        {adminQuestions.question}
       </Typography>
 
-      <Container justify="space-between" fd="row">
+      <BodyContainer justify="space-between" fd="row">
         <Button
           variant="secondary"
           w="40%"
@@ -51,11 +47,16 @@ const SAdminQuestionField = () => {
         >
           Review
         </Button>
-        <Chips variant="open" />
-      </Container>
+        <Chips variant={adminQuestions.status} />
+      </BodyContainer>
       {modal && <SAdminModal closeSAdminModal={closeSAdminModal} />}
-      {/* {adminModal && <AdminModal closeAdminModal={closeAdminModal} />} */}
-    </Container>
+      {adminModal && (
+        <AdminModal
+          question={adminQuestions}
+          closeAdminModal={closeAdminModal}
+        />
+      )}
+    </BodyContainer>
   );
 };
 

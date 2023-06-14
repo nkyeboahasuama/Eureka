@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export interface BaseProps {
+export interface BaseProps extends React.HTMLAttributes<HTMLDivElement> {
   bg?: string;
   w?: string;
   h?: string;
@@ -44,4 +44,7 @@ export const PrimaryContainer = styled(BaseContainer)`
 export const SecondaryContainer = styled(BaseContainer)`
   background-color: black;
   color: white;
+`;
+export const BodyContainer = styled(BaseContainer)`
+  height: auto;
 `;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Container from "../../../shared_components/atoms/container/Container";
+import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import Chips from "../../../shared_components/atoms/chips/Chips";
 import UserEmail from "../../../shared_components/user/UserEmail";
@@ -29,14 +29,7 @@ const QuestionContainer = () => {
   return (
     <>
       {questions.map((question, index: number) => (
-        <Container
-          key={index}
-          h="20%"
-          w="90%"
-          text="left"
-          m="10px 0"
-          align="left"
-        >
+        <BodyContainer key={index} w="90%" text="left" m="20px 0" align="left">
           <Date />
           <Typography
             style={{
@@ -46,20 +39,27 @@ const QuestionContainer = () => {
             variant="h3"
             weight={500}
           >
-            {question.question}
+            {question.question.length > 50
+              ? question.question.slice(0, 50) + "..."
+              : question.question}
           </Typography>
 
-          <Container m="10px 0 0 0" fd="row" justify="space-between" w="100%">
+          <BodyContainer
+            m="10px 0 0 0"
+            fd="row"
+            justify="space-between"
+            w="100%"
+          >
             <UserEmail />
-            <Chips variant="open" />
-          </Container>
+            <Chips variant={question.status} />
+          </BodyContainer>
           {modal && (
             <AdminModal
               question={selectedQuestion}
               closeAdminModal={closeAdminModal}
             />
           )}
-        </Container>
+        </BodyContainer>
       ))}
     </>
   );

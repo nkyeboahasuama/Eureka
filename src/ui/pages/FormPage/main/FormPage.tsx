@@ -4,7 +4,7 @@ import FormField from "../components/FormField";
 
 const FormPage = () => {
   return (
-    <Container m="10px auto">
+    <Container justify="space-between">
       <EmailField />
       <FormField />
     </Container>

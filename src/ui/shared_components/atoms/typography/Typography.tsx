@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Base } from "./TypographyStyles";
 import { BaseProps } from "./TypographyStyles";
 import { typographyVariants } from "./TypographyStyles";

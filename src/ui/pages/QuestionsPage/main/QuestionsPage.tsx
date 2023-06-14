@@ -4,7 +4,7 @@ import QuestionsField from "../components/QuestionsField";
 
 const QuestionsPage = () => {
   return (
-    <Container variant="primary">
+    <Container h="auto" justify="space-between" variant="primary">
       <Header page="Questions Poll" />
       <QuestionsField />
     </Container>
