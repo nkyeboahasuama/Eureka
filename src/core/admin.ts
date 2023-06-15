@@ -5,6 +5,11 @@ export const superAdmins = ["sp@gmail.com", "anthony@gmail.com"];
 export const admins = ["ad@gmail.com"];
 //
 
+export function isValidAdmin(email: string) {
+  const combined = superAdmins.concat(admins);
+  return combined.includes(email);
+}
+
 export function isSuperAdmin(email: string) {
   if (superAdmins.includes(email)) return true;
   return false;
