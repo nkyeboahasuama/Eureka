@@ -9,7 +9,6 @@ import {
   doc,
   query,
   updateDoc,
-  where,
 } from "firebase/firestore";
 import { cloud } from "../setup";
 
@@ -22,7 +21,7 @@ export class BaseRepository<T = any, DocType = any> {
   }
 
   addDoc = async (data: T) => {
-    await addDoc(this.collection, data as any); //cast to avoid linting error
+    return await addDoc(this.collection, data as any); //cast to avoid linting error
   };
 
   getDoc = async (id: string) => {

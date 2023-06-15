@@ -1,18 +1,27 @@
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import { useParams } from "react-router-dom";
-import { questions } from "../../QuestionsPage/questionsList";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
-import { adminQuestions } from "../../SuperAdminPage/components/SAQAdminQs";
 import InfoField from "../../../shared_components/infoBackBtn/InfoBackBtnField";
 import Container from "../../../shared_components/atoms/container/Container";
+import { questionService } from "../../../../services";
+import { useState, useEffect } from "react";
+import { IQuestionDocument } from "../../../../core";
 
 const QuestionField = () => {
   const params = useParams();
   const questionId = params.id;
+  const [questions, setQuestions] = useState<IQuestionDocument[] | null>(null);
 
-  const question = questions.find(
-    (q) => q.id === parseInt(questionId ?? "", 10)
-  );
+  const question = questions?.find((q) => q.id === questionId ?? "", 10);
+
+  useEffect(() => {
+    const getQuestionsList = async () => {
+      const data = await questionService.getValidatedQuestions();
+      console.log(data);
+      setQuestions(data);
+    };
+    getQuestionsList();
+  }, []);
   return (
     <BodyContainer
       style={{ height: "40%", overflow: "scroll" }}
@@ -21,13 +30,10 @@ const QuestionField = () => {
       align="start"
       justify="space-between"
     >
-      <InfoField />
+      <InfoField user={question?.user} />
       <Container h="150px" fd="row" justify="space-between" align="start">
         <Typography variant="h3" weight={600} textAlign="left">
-          {question
-            ? question.question
-            : adminQuestions.id === parseInt(questionId ?? "", 10) &&
-              adminQuestions.question}
+          {question && question.body}
         </Typography>
       </Container>
     </BodyContainer>

@@ -1,5 +1,6 @@
+import { runTransaction } from "firebase/firestore";
 import { IAnswer } from "../core";
-import { AdminRepo, AnswerRepo, QuestionRepo } from "../infras/cloud";
+import { AdminRepo, AnswerRepo } from "../infras/cloud";
 
 const submitDraftAnswer = async (
   adminId: string,
@@ -21,17 +22,34 @@ const submitDraftAnswer = async (
 
 const editAndSubmitDraft = async (
   adminId: string,
-  questionId: string,
+  answerId: string,
   body: string
 ) => {
-  const [admin, qtn] = await Promise.all([
+  const [admin, answer] = await Promise.all([
     AdminRepo.getDoc(adminId),
-    QuestionRepo.getDoc(questionId),
+    AnswerRepo.getDoc(answerId),
   ]);
 
-  if (!admin || !qtn) throw new Error("Invalid");
+  if (!admin || !answer) throw new Error("Invalid");
+  let payload: any = {};
+  if (isEditted(answer.body, body)) {
+    payload.body = body;
+    payload.editedBy = adminId;
+    payload.submittedBy = adminId;
+  } else {
+    // close answer
+    payload.submittedBy = answer.admin;
+  }
+  payload.availability = "closed";
+  // await AnswerRepo.editDocById(answerId, payload);
 };
 
 export const answerService = {
   submitDraftAnswer,
+  editAndSubmitDraft,
 } as const;
+
+function isEditted(oldBody: string, newBody: string) {
+  if (oldBody !== newBody) return true;
+  return false;
+}

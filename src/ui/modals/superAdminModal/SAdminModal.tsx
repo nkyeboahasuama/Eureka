@@ -6,12 +6,17 @@ import Button from "../../shared_components/atoms/button/Button";
 
 import Typography from "../../shared_components/atoms/typography/Typography";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";
+import { IQuestionDocument } from "../../../core";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
+  question?: IQuestionDocument | null;
 }
 
-const SAdminModal: React.FC<SAdminModalProps> = ({ closeSAdminModal }) => {
+const SAdminModal: React.FC<SAdminModalProps> = ({
+  closeSAdminModal,
+  question,
+}) => {
   return (
     <ModalWrapper>
       <ModalContent>
@@ -24,15 +29,10 @@ const SAdminModal: React.FC<SAdminModalProps> = ({ closeSAdminModal }) => {
         >
           <Container w="95%" m="5px 0" h="10%" fd="row" align="start">
             <Date />
-            <UserEmail />
+            <UserEmail user={question?.user} />
           </Container>
           <Container h="330px" justify="start" lh="1.5">
-            <Typography variant="h3">
-              How can I be saved if I am dead but I know with no money and I
-              pray at the last hour that God should save me but I dont end the
-              prayer with Amen and my land lady comes out to rape me and I
-              scream God and I dont see it?
-            </Typography>
+            <Typography variant="h3">{question?.body}</Typography>
           </Container>
         </Container>
         <Container h="fit">

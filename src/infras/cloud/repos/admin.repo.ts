@@ -1,4 +1,4 @@
-import { where, query, getDocs } from "firebase/firestore/lite";
+import { where, query, getDocs, addDoc } from "firebase/firestore/lite";
 import { IAdmin, IAdminDocument } from "../../../core";
 import { BaseRepository } from "./base.repository";
 

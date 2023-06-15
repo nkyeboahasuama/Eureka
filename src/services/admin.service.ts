@@ -8,11 +8,12 @@ const initAdmin = async (email: string) => {
     const username = getUsernameFromEmail(email);
     const isSuper = isSuperAdmin(email);
     const admin: IAdmin = { email, isSuper, username: username };
-    await AdminRepo.addDoc(admin);
-    return;
+    const ref = await AdminRepo.addDoc(admin);
+    return { ...admin, id: ref.id };
     // first time login. Init user.
   }
   // skip
+  return admin;
 };
 
 export const adminService = {

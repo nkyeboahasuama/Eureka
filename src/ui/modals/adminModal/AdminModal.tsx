@@ -6,11 +6,11 @@ import Button from "../../shared_components/atoms/button/Button";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";
 import Typography from "../../shared_components/atoms/typography/Typography";
 import { Link } from "react-router-dom";
-import { Question } from "../../pages/QuestionsPage/components/QuestionContainer";
+import { IQuestionDocument } from "../../../core";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
-  question?: Question | null;
+  question?: IQuestionDocument | null;
   index?: number;
 }
 
@@ -31,10 +31,10 @@ const AdminModal: React.FC<AdminModalProps> = ({
         >
           <Container h="10%" w="95%" m=" 5px 0px" fd="row" align="start">
             <Date />
-            <UserEmail />
+            <UserEmail user={question?.user} />
           </Container>
           <Container justify="start" h="400px" lh="1.5">
-            {<Typography variant="h3">{question?.question}</Typography>}
+            {<Typography variant="h3">{question?.body}</Typography>}
           </Container>
         </Container>
         <Button style={{ backgroundColor: "#03C988", color: "white" }}>

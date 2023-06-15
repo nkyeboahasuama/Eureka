@@ -3,10 +3,28 @@ import { TextArea } from "../../../shared_components/atoms/input/Input";
 
 import Button from "../../../shared_components/atoms/button/Button";
 import Typography from "../../../shared_components/atoms/typography/Typography";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const FormField = () => {
-  const navigate = useNavigate();
+interface IBodyFnc {
+  bodyFnc: (body: string) => void;
+  handleSubmit: () => Promise<void>;
+}
+const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
+  const [textareaContent, setTextareaContent] = useState("");
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      bodyFnc(textareaContent);
+    }, 1000);
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [textareaContent, bodyFnc]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaContent(e.target.value);
+  };
+
   return (
     <Container w="100%" h="65%" variant="secondary">
       <Container w="90%">
@@ -18,6 +36,7 @@ const FormField = () => {
         </Container>
         <Container h="80%">
           <TextArea
+            onChange={handleChange}
             style={{
               backgroundColor: "black",
               color: "white",
@@ -25,7 +44,7 @@ const FormField = () => {
               margin: 0,
             }}
           />
-          <Button onClick={() => navigate("/success")} variant="primary">
+          <Button onClick={handleSubmit} variant="primary">
             Submit
           </Button>
         </Container>

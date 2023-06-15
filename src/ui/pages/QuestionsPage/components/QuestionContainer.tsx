@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import Chips from "../../../shared_components/atoms/chips/Chips";
 import UserEmail from "../../../shared_components/user/UserEmail";
 import Date from "../../../shared_components/date/Date";
 import AdminModal from "../../../modals/adminModal/AdminModal";
-import { questions } from "../questionsList";
+import { questionService } from "../../../../services";
+import { IQuestionDocument } from "../../../../core";
 
-export interface Question {
-  id: number;
-  question: string;
-}
 const QuestionContainer = () => {
   const [modal, setModal] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(
-    null
-  );
+  const [questions, setQuestions] = useState<IQuestionDocument[]>([]);
+  const [selectedQuestion, setSelectedQuestion] =
+    useState<IQuestionDocument | null>(null);
 
-  const openAdminModal = (question: Question) => {
+  useEffect(() => {
+    const getQuestionsList = async () => {
+      const data = await questionService.getValidatedQuestions();
+      console.log(data);
+      setQuestions(data);
+    };
+    getQuestionsList();
+  }, []);
+
+  const openAdminModal = (question: IQuestionDocument) => {
     setModal(true);
     setSelectedQuestion(question);
   };
@@ -28,8 +34,14 @@ const QuestionContainer = () => {
   };
   return (
     <>
-      {questions.map((question, index: number) => (
-        <BodyContainer key={index} w="90%" text="left" m="20px 0" align="left">
+      {questions.map((question) => (
+        <BodyContainer
+          key={question.id}
+          w="90%"
+          text="left"
+          m="20px 0"
+          align="left"
+        >
           <Date />
           <Typography
             style={{
@@ -39,9 +51,9 @@ const QuestionContainer = () => {
             variant="h3"
             weight={500}
           >
-            {question.question.length > 50
-              ? question.question.slice(0, 50) + "..."
-              : question.question}
+            {question.body.length > 50
+              ? question.body.slice(0, 50) + "..."
+              : question.body}
           </Typography>
 
           <BodyContainer
@@ -50,8 +62,8 @@ const QuestionContainer = () => {
             justify="space-between"
             w="100%"
           >
-            <UserEmail />
-            <Chips variant={question.status} />
+            <UserEmail user={question.user} />
+            <Chips variant={question.availability} />
           </BodyContainer>
           {modal && (
             <AdminModal

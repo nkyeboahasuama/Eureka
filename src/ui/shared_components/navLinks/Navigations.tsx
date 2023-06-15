@@ -4,10 +4,10 @@ import { navStyle } from "./NavLinkStyles";
 const Navigations = () => {
   return (
     <div style={{ display: "flex", gap: 20 }}>
-      <NavLink style={navStyle} to="/verifyquestion">
+      <NavLink style={navStyle} to="/validatequestions">
         Question poll
       </NavLink>
-      <NavLink style={navStyle} to="/verifyanswer">
+      <NavLink style={navStyle} to="/validateanswers">
         Answer poll
       </NavLink>
     </div>
