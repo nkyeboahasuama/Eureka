@@ -41,12 +41,16 @@ const editAndSubmitDraft = async (
     payload.submittedBy = answer.admin;
   }
   payload.availability = "closed";
-  // await AnswerRepo.editDocById(answerId, payload);
+};
+
+const getAnswers = async () => {
+  return await AnswerRepo.getDocs();
 };
 
 export const answerService = {
   submitDraftAnswer,
   editAndSubmitDraft,
+  getAnswers,
 } as const;
 
 function isEditted(oldBody: string, newBody: string) {
