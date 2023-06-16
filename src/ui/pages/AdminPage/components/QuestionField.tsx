@@ -12,15 +12,23 @@ const QuestionField = () => {
   const questionId = params.id;
   const [questions, setQuestions] = useState<IQuestionDocument[] | null>(null);
 
-  const question = questions?.find((q) => q.id === questionId ?? "", 10);
+  const question = questions?.find((q) => q.id === questionId);
 
   useEffect(() => {
-    const getQuestionsList = async () => {
+    const getValidatedQuestionsList = async () => {
       const data = await questionService.getValidatedQuestions();
-      console.log(data);
       setQuestions(data);
     };
-    getQuestionsList();
+
+    const getAllQuestions = async () => {
+      const allQuestions = await questionService.getQuestions();
+      setQuestions(allQuestions);
+      console.log(allQuestions);
+    };
+    getValidatedQuestionsList();
+    if (!question) {
+      getAllQuestions();
+    }
   }, []);
   return (
     <BodyContainer
@@ -32,7 +40,7 @@ const QuestionField = () => {
     >
       <InfoField user={question?.user} />
       <Container h="150px" fd="row" justify="space-between" align="start">
-        <Typography variant="h3" weight={600} textAlign="left">
+        <Typography variant="h3" weight={600} textalign="left">
           {question && question.body}
         </Typography>
       </Container>

@@ -16,7 +16,7 @@ const SAEPageQField = () => {
           }}
           icon="mdi:help-circle-outline"
         />
-        <Typography textAlign="left" variant="normal" weight={600}>
+        <Typography textalign="left" variant="normal" weight={600}>
           Hows can I be saved if I am dead but I know with no money and I pray
           at the last hour that God should save me but I dont end the prayer
           with Amen and my land lady comes out to rape me and I scream God and I

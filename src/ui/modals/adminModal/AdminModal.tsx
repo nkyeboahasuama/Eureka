@@ -5,8 +5,10 @@ import UserEmail from "../../shared_components/user/UserEmail";
 import Button from "../../shared_components/atoms/button/Button";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";
 import Typography from "../../shared_components/atoms/typography/Typography";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IQuestionDocument } from "../../../core";
+import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
+import { questionService } from "../../../services";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
@@ -18,7 +20,30 @@ const AdminModal: React.FC<AdminModalProps> = ({
   closeAdminModal,
   question,
 }) => {
-  console.log(question);
+  const navigate = useNavigate();
+
+  const AdminData = localStorage.getItem("isAdminLocal")
+    ? JSON.parse(localStorage.getItem("isAdminLocal")!)
+    : null;
+
+  const SuperAdminData = localStorage.getItem("isSuperLocal")
+    ? JSON.parse(localStorage.getItem("isSuperLocal")!)
+    : null;
+  // WYc4fcTqIhtfjTfrjHzi
+  const handleMarkQuestion = async () => {
+    try {
+      const adminId: string = AdminData.id;
+      console.log(adminId);
+      if (question) {
+        console.log(question.id);
+        const mark = await questionService.markQuestion(adminId, question.id);
+        console.log(mark);
+        navigate(`/questions/question/${question?.id}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <ModalWrapper>
       <ModalContent>
@@ -33,15 +58,23 @@ const AdminModal: React.FC<AdminModalProps> = ({
             <Date />
             <UserEmail user={question?.user} />
           </Container>
-          <Container justify="start" h="400px" lh="1.5">
+          <BodyContainer
+            justify="start"
+            lh="2.0"
+            style={{ overflow: "scroll" }}
+          >
             {<Typography variant="h3">{question?.body}</Typography>}
-          </Container>
+          </BodyContainer>
         </Container>
-        <Button style={{ backgroundColor: "#03C988", color: "white" }}>
-          <Link to={`/question/${question?.id}`} style={{ color: "inherit" }}>
+
+        {question?.marked ? (
+          <Button variant="disabled">I would like to answer</Button>
+        ) : (
+          <Button onClick={handleMarkQuestion} variant="accept">
             I would like to answer
-          </Link>
-        </Button>
+          </Button>
+        )}
+
         <Button w="100%" onClick={() => closeAdminModal()} variant="secondary">
           Close
         </Button>

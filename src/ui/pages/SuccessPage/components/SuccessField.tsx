@@ -8,7 +8,7 @@ const SuccessField = () => {
   return (
     <Container h="65%" variant="secondary">
       <Container w="90%">
-        <Container w="90%" h="83%" justify="start">
+        <Container w="90%" h="85%" justify="start">
           <Typography variant="h1">{"\u{1F389}"}Congratulations!</Typography>
           <Typography variant="normal">
             An answer will be sent to via your mail soon.

@@ -7,6 +7,8 @@ import Date from "../../../shared_components/date/Date";
 import AdminModal from "../../../modals/adminModal/AdminModal";
 import { questionService } from "../../../../services";
 import { IQuestionDocument } from "../../../../core";
+import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
+import Loader from "../../../shared_components/loader/Loader";
 
 const QuestionContainer = () => {
   const [modal, setModal] = useState(false);
@@ -32,47 +34,53 @@ const QuestionContainer = () => {
     setModal(false);
     setSelectedQuestion(null);
   };
+
   return (
     <>
-      {questions.map((question) => (
-        <BodyContainer
-          key={question.id}
-          w="90%"
-          text="left"
-          m="20px 0"
-          align="left"
-        >
-          <Date />
-          <Typography
-            style={{
-              cursor: "pointer",
-            }}
-            onClick={() => openAdminModal(question)}
-            variant="h3"
-            weight={500}
-          >
-            {question.body.length > 50
-              ? question.body.slice(0, 50) + "..."
-              : question.body}
-          </Typography>
+      {questions.length === 0 ? (
+        <Loader />
+      ) : (
+        <>
+          {questions.map((question) => (
+            <BodyContainer
+              key={question.id}
+              w="90%"
+              text="left"
+              m="20px 0"
+              align="left"
+            >
+              <Date />
+              <Typography
+                style={{
+                  cursor: "pointer",
+                  ...lineClampStyle,
+                }}
+                onClick={() => openAdminModal(question)}
+                variant="h3"
+                weight={500}
+              >
+                {question.body}
+              </Typography>
 
-          <BodyContainer
-            m="10px 0 0 0"
-            fd="row"
-            justify="space-between"
-            w="100%"
-          >
-            <UserEmail user={question.user} />
-            <Chips variant={question.availability} />
-          </BodyContainer>
-          {modal && (
-            <AdminModal
-              question={selectedQuestion}
-              closeAdminModal={closeAdminModal}
-            />
-          )}
-        </BodyContainer>
-      ))}
+              <BodyContainer
+                m="10px 0 0 0"
+                fd="row"
+                justify="space-between"
+                w="100%"
+              >
+                <UserEmail user={question.user} />
+                <Chips variant={question.availability} />
+              </BodyContainer>
+              {modal && (
+                <AdminModal
+                  question={selectedQuestion}
+                  closeAdminModal={closeAdminModal}
+                />
+              )}
+            </BodyContainer>
+          ))}
+        </>
+      )}
     </>
   );
 };

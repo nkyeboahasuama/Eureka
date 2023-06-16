@@ -10,21 +10,47 @@ import { useEffect } from "react";
 import { questionService } from "../../../../services";
 import { IQuestionDocument } from "../../../../core";
 
+import ValidationChips from "../../../shared_components/atoms/validations/ValidationChips";
+import { useNavigate, useParams } from "react-router";
+import Loader from "../../../shared_components/loader/Loader";
+import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
+
 const SAdminQuestionField = () => {
   const [modal, setModal] = useState(false);
   const [adminModal, setAdminModal] = useState(false);
   const [questions, setQuestions] = useState<IQuestionDocument[]>([]);
+  const [selectedQuestion, setSelectedQuestion] =
+    useState<IQuestionDocument | null>(null);
+  const { email } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const getQuestionsList = async () => {
-      const data = await questionService.getQuestions();
-      console.log(data);
-      setQuestions(data);
-    };
     getQuestionsList();
+    verifySuperAdmin();
   }, []);
 
-  const openSAdminModal = () => {
+  const getQuestionsList = async () => {
+    const data = await questionService.getQuestions();
+    // console.log(data);
+    setQuestions(data);
+  };
+
+  const verifySuperAdmin = () => {
+    if (localStorage.getItem("isSuperLocal")) {
+      const SuperAdminDate = JSON.parse(localStorage.getItem("isSuperLocal")!);
+      console.log(SuperAdminDate);
+      if (SuperAdminDate.isSuper) {
+        console.log("Super User exists");
+      } else {
+        console.log("Is not Super admin");
+      }
+    } else {
+      console.log("Does not exist");
+    }
+  };
+
+  const openSAdminModal = (question: IQuestionDocument) => {
+    setSelectedQuestion(question);
     setModal(true);
   };
 
@@ -32,7 +58,8 @@ const SAdminQuestionField = () => {
     setModal(false);
   };
 
-  const openAdminModal = () => {
+  const openAdminModal = (question: IQuestionDocument) => {
+    setSelectedQuestion(question);
     setAdminModal(true);
   };
   const closeAdminModal = () => {
@@ -40,48 +67,91 @@ const SAdminQuestionField = () => {
   };
 
   return (
-    <BodyContainer
-      style={{ overflow: "scrollY" }}
-      h="auto"
-      w="90%"
-      text="left"
-      m="20px 0"
-    >
-      {questions.map((question) => (
-        <>
-          <SAQUserDetails />
-          <Typography
-            key={question.id}
-            style={{ cursor: "pointer", margin: "5px 0 10px 0" }}
-            variant="h3"
-            onClick={openAdminModal}
-          >
-            {question.body}
-          </Typography>
+    <>
+      {questions.length === 0 ? (
+        <Loader />
+      ) : (
+        <BodyContainer
+          // bg="blue"
+          style={{ overflow: "scrollY" }}
+          w="90%"
+          text="left"
+          m="20px 0"
+        >
+          {questions.map((question) => (
+            <>
+              {question.user && question.body && (
+                <>
+                  <SAQUserDetails user={question.user} />
 
-          <BodyContainer justify="space-between" fd="row">
-            <Button
-              variant="secondary"
-              w="40%"
-              style={{ borderRadius: 20, margin: 0 }}
-              onClick={openSAdminModal}
-            >
-              Review
-            </Button>
-            <Chips variant={question.availability} />
-          </BodyContainer>
-          {modal && (
-            <SAdminModal
-              closeSAdminModal={closeSAdminModal}
-              question={question}
-            />
-          )}
-          {adminModal && (
-            <AdminModal question={question} closeAdminModal={closeAdminModal} />
-          )}
-        </>
-      ))}
-    </BodyContainer>
+                  <Typography
+                    key={question.id}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      margin: "5px 0 10px 0",
+                      ...lineClampStyle,
+                      // backgroundColor: "red",
+                    }}
+                    variant="h3"
+                    onClick={() => openAdminModal(question)}
+                  >
+                    {question.body}
+                  </Typography>
+
+                  <BodyContainer
+                    justify="space-between"
+                    m="0 0 40px 0"
+                    fd="row"
+                    // bg="green"
+                  >
+                    <Button
+                      variant="secondary"
+                      w="40%"
+                      style={{ borderRadius: 20, margin: 0 }}
+                      onClick={() => openSAdminModal(question)}
+                    >
+                      Review
+                    </Button>
+                    <BodyContainer
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "6px",
+                        justifyContent: "end",
+                      }}
+                    >
+                      {question.validators.map((state) => (
+                        <ValidationChips
+                          key={state.admin}
+                          validation={state.status}
+                        />
+                      ))}
+
+                      <Chips variant={question.availability} />
+                    </BodyContainer>
+                  </BodyContainer>
+                  {modal && (
+                    <SAdminModal
+                      getQuestionsList={getQuestionsList}
+                      closeSAdminModal={closeSAdminModal}
+                      question={selectedQuestion}
+                    />
+                  )}
+                  {adminModal && (
+                    <AdminModal
+                      question={selectedQuestion}
+                      closeAdminModal={closeAdminModal}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          ))}
+        </BodyContainer>
+      )}
+    </>
   );
 };
 

@@ -11,10 +11,11 @@ interface IInfoProps {
 const InfoField: React.FC<IInfoProps> = ({ user, date }) => {
   return (
     <Container
-      style={{ height: 110, flexShrink: 0 }}
+      style={{ height: 110, flexShrink: 0, position: "sticky", top: "0" }}
       w="100%"
       justify="center"
       align="start"
+      variant="primary"
     >
       <BackBtn />
       <Container h="45px" m="5px 0 0 0" align="start" fd="row">
