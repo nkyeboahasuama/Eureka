@@ -41,8 +41,8 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   useEffect(() => {
     const getAdminId = async () => {
       try {
-        const user = localStorage.getItem("isSuperLocal")
-          ? JSON.parse(localStorage.getItem("isSuperLocal")!)
+        const user = localStorage.getItem("isSAdminLocal")
+          ? JSON.parse(localStorage.getItem("isAdminLocal")!)
           : null;
         console.log(user);
         if (user.isSuper) {

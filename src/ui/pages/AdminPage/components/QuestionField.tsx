@@ -7,29 +7,10 @@ import { questionService } from "../../../../services";
 import { useState, useEffect } from "react";
 import { IQuestionDocument } from "../../../../core";
 
-const QuestionField = () => {
-  const params = useParams();
-  const questionId = params.id;
-  const [questions, setQuestions] = useState<IQuestionDocument[] | null>(null);
-
-  const question = questions?.find((q) => q.id === questionId);
-
-  useEffect(() => {
-    const getValidatedQuestionsList = async () => {
-      const data = await questionService.getValidatedQuestions();
-      setQuestions(data);
-    };
-
-    const getAllQuestions = async () => {
-      const allQuestions = await questionService.getQuestions();
-      setQuestions(allQuestions);
-      console.log(allQuestions);
-    };
-    getValidatedQuestionsList();
-    if (!question) {
-      getAllQuestions();
-    }
-  }, []);
+interface IQuestion {
+  question: IQuestionDocument | undefined;
+}
+const QuestionField: React.FC<IQuestion> = ({ question }) => {
   return (
     <BodyContainer
       style={{ height: "40%", overflow: "scroll" }}

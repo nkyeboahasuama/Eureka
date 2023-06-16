@@ -34,13 +34,13 @@ const FormPage = () => {
   const handleSubmit = async () => {
     if (user.trim().length < 5 || body.trim().length < 5) {
       alert("User field cannot be empty");
-
       return;
     }
 
     try {
       navigate("/askquestion/success");
       const res = await questionService.addQuestion(payload);
+      console.log(res);
     } catch (error: any) {
       console.log(error);
     }

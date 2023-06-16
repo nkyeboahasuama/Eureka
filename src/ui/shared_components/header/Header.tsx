@@ -1,3 +1,4 @@
+import { IAdminDocument } from "../../../core";
 import Container from "../atoms/container/Container";
 import Typography from "../atoms/typography/Typography";
 import HeaderStyles from "./HeaderStyles";
@@ -8,6 +9,10 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ page }) => {
+  const user: IAdminDocument = localStorage.getItem("isAdminLocal")
+    ? JSON.parse(localStorage.getItem("isAdminLocal")!)
+    : null;
+
   return (
     <Container style={{ flexShrink: 0 }} variant="secondary" w="100%" h="100px">
       <Container fd="row" h="60%">
@@ -16,10 +21,25 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
         </Typography>
         <HeaderStyles />
       </Container>
-      <Container h="40%" fd="row" justify="space-between" w="100%">
-        <Typography variant="medium" m="0 20px">
+      <Container
+        style={{ fontSize: "11px", color: "white" }}
+        h="40%"
+        w="90%"
+        fd="row"
+        justify="space-between"
+      >
+        <Container h="100%" fd="row" justify="space-between" w="50%">
           {page}
-        </Typography>
+        </Container>
+        {user?.isSuper ? (
+          <Container align="end" h="100%" w="50%">
+            Super Admin: {user?.username}
+          </Container>
+        ) : (
+          <Container align="end" h="100%" w="50%">
+            Admin: {user?.username}
+          </Container>
+        )}
       </Container>
     </Container>
   );
