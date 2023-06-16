@@ -17,15 +17,20 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FormPage />} />
-          <Route path="/:email" element={<InitialPage />} />
+          <Route path="/askquestion/form/" element={<FormPage />} />
 
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/questions" element={<QuestionsPage />} />
-          <Route path="/question/:id" element={<AdminPage />} />
-          <Route path="/validatequestions" element={<SAQPage />} />
-          <Route path="/validateanswers" element={<SAAPage />} />
-          <Route path="/edit" element={<SAEPage />} />
+          <Route path="/openforum/entry/:email/" element={<InitialPage />} />
+
+          <Route path="askquestion/success" element={<SuccessPage />} />
+
+          <Route path="/admin/validquestions" element={<QuestionsPage />} />
+
+          <Route path="/questions/question/:id" element={<AdminPage />} />
+
+          <Route path="/superadmin/validatequestions" element={<SAQPage />} />
+
+          <Route path="/superadmin/validateanswers" element={<SAAPage />} />
+          <Route path="superadmin/edit" element={<SAEPage />} />
         </Routes>
       </BrowserRouter>
     </>

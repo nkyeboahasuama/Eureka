@@ -13,7 +13,7 @@ const SAAField = () => {
         <SAAQField />
         <Container text="left" m="10px 0">
           <Typography variant="h2">
-            <Link to={"/edit"} style={{ color: "inherit" }}>
+            <Link to={"/superadmin/edit"} style={{ color: "inherit" }}>
               Hello Jacob, to be saved, you have to belie...
             </Link>
           </Typography>

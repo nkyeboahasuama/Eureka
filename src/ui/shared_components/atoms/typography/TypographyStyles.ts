@@ -5,7 +5,7 @@ export interface BaseProps extends React.HTMLAttributes<HTMLParagraphElement> {
   m?: string;
   weight?: number;
   props?: string;
-  textAlign?: string;
+  textalign?: string;
 }
 
 export const Base = styled.p<BaseProps>`
@@ -15,7 +15,7 @@ export const Base = styled.p<BaseProps>`
   padding: ${({ p }) => p || "0px"};
   margin: ${({ m }) => m || "0px"};
   color: ${({ color }) => color};
-  text-align: ${({ textAlign }) => textAlign};
+  text-align: ${({ textalign }) => textalign};
   :link {
     text-decoration: none;
   }

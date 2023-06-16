@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 interface IBodyFnc {
   bodyFnc: (body: string) => void;
-  handleSubmit: () => Promise<void>;
+  handleSubmit: () => void;
 }
 const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
   const [textareaContent, setTextareaContent] = useState("");
@@ -21,10 +21,6 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
     };
   }, [textareaContent, bodyFnc]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextareaContent(e.target.value);
-  };
-
   return (
     <Container w="100%" h="65%" variant="secondary">
       <Container w="90%">
@@ -36,11 +32,12 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
         </Container>
         <Container h="80%">
           <TextArea
-            onChange={handleChange}
+            required
+            onChange={(e) => setTextareaContent(e.target.value)}
             style={{
               backgroundColor: "black",
               color: "white",
-              height: "79%",
+              height: "80%",
               margin: 0,
             }}
           />

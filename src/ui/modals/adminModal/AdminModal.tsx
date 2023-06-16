@@ -5,7 +5,7 @@ import UserEmail from "../../shared_components/user/UserEmail";
 import Button from "../../shared_components/atoms/button/Button";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";
 import Typography from "../../shared_components/atoms/typography/Typography";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IQuestionDocument } from "../../../core";
 
 interface AdminModalProps {
@@ -18,7 +18,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
   closeAdminModal,
   question,
 }) => {
-  console.log(question);
+  const navigate = useNavigate();
   return (
     <ModalWrapper>
       <ModalContent>
@@ -37,11 +37,18 @@ const AdminModal: React.FC<AdminModalProps> = ({
             {<Typography variant="h3">{question?.body}</Typography>}
           </Container>
         </Container>
-        <Button style={{ backgroundColor: "#03C988", color: "white" }}>
-          <Link to={`/question/${question?.id}`} style={{ color: "inherit" }}>
+
+        {question?.marked ? (
+          <Button variant="disabled">I would like to answer</Button>
+        ) : (
+          <Button
+            onClick={() => navigate(`/questions/question/${question?.id}`)}
+            variant="accept"
+          >
             I would like to answer
-          </Link>
-        </Button>
+          </Button>
+        )}
+
         <Button w="100%" onClick={() => closeAdminModal()} variant="secondary">
           Close
         </Button>
