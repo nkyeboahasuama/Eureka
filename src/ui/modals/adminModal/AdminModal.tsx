@@ -30,7 +30,6 @@ const AdminModal: React.FC<AdminModalProps> = ({
     try {
       const adminId: string = AdminData.id;
 
-      navigate(`/questions/question/${question?.id}`);
       if (question) {
         console.log(question.id);
         console.log(adminId);
@@ -38,6 +37,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
           console.log("I marked this question");
         } else {
           const mark = await questionService.markQuestion(adminId, question.id);
+          navigate(`/questions/question/${question?.id}`);
         }
       }
     } catch (error) {

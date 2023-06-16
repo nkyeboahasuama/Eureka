@@ -9,12 +9,14 @@ import SAAPage from "./ui/pages/SAAPage/main/SAAPage";
 import SAQPage from "./ui/pages/SuperAdminPage/main/SAQPage";
 import SAEPage from "./ui/pages/SAEPage/main/SAEPage";
 import InitialPage from "./ui/pages/UserInitialPage/InitialPage";
+// import ErrorBoundary from "./ui/errorhandler/ErrorBoundary";
 
 function App() {
   return (
     <>
       <GlobalStyles />
 
+      {/* <ErrorBoundary> */}
       <BrowserRouter>
         <Routes>
           <Route path="/askquestion/form/" element={<FormPage />} />
@@ -30,9 +32,10 @@ function App() {
           <Route path="/superadmin/validatequestions" element={<SAQPage />} />
 
           <Route path="/superadmin/validateanswers" element={<SAAPage />} />
-          <Route path="superadmin/edit" element={<SAEPage />} />
+          <Route path="superadmin/edit/:answerId" element={<SAEPage />} />
         </Routes>
       </BrowserRouter>
+      {/* </ErrorBoundary> */}
     </>
   );
 }

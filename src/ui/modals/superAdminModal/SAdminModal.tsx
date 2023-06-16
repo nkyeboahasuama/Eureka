@@ -10,6 +10,7 @@ import { IQuestionDocument, ValidationStatusType } from "../../../core";
 import { adminService, questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
+// import ErrorBoundary from "../../errorhandler/ErrorBoundary";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
@@ -22,43 +23,27 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   question,
   getQuestionsList,
 }) => {
-  const [adminId, setAdminId] = useState<IAdminDocument | null>(null);
-
   const handleValidation = async (status: ValidationStatusType) => {
     try {
+      const user: IAdminDocument = JSON.parse(
+        localStorage.getItem("isAdminLocal")!
+      );
       closeSAdminModal();
-      if (status === "approve" && question?.id && adminId?.id) {
-        await questionService.validateQuestion(adminId.id, question.id, status);
+      if (status === "approve" && question?.id && user.id) {
+        await questionService.validateQuestion(user.id, question.id, status);
         getQuestionsList();
-      } else if (status === "reject" && question?.id && adminId?.id) {
-        await questionService.validateQuestion(adminId.id, question.id, status);
+      } else if (status === "reject" && question?.id && user.id) {
+        await questionService.validateQuestion(user.id, question.id, status);
         getQuestionsList();
       }
     } catch (error) {
       console.error(error);
+      throw error;
     }
   };
-  useEffect(() => {
-    const getAdminId = async () => {
-      try {
-        const user = localStorage.getItem("isSAdminLocal")
-          ? JSON.parse(localStorage.getItem("isAdminLocal")!)
-          : null;
-        console.log(user);
-        if (user.isSuper) {
-          const data = await adminService.initAdmin(user.email);
-          console.log(data.id);
-          setAdminId(data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getAdminId();
-  }, []);
 
   return (
+    // <ErrorBoundary>
     <ModalWrapper>
       <ModalContent>
         <Container
@@ -97,6 +82,7 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
         </Button>
       </ModalContent>
     </ModalWrapper>
+    // </ErrorBoundary>
   );
 };
 

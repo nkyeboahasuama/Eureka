@@ -37,6 +37,8 @@ export function checkIfAdminCanValidateQuestion(
   if (!admin.isSuper)
     throw new Error("User not privileged to validate question");
   const qtnValidtors = question.validators.map((v) => v.admin);
+  if (question.validators?.length === 3)
+    throw Error("Maximum validation length reached");
   if (qtnValidtors.includes(admin.id))
     throw new Error("User cannot validate same question twice");
 }

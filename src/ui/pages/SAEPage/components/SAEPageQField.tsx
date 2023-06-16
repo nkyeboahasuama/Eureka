@@ -2,26 +2,70 @@ import Container from "../../../shared_components/atoms/container/Container";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import { Icon } from "@iconify/react";
 import InfoField from "../../../shared_components/infoBackBtn/InfoBackBtnField";
+import { useParams } from "react-router";
+import { getQuestionById } from "../../../functions/question";
+import { getAnswerById } from "../../../functions/answers";
+import { useEffect, useState } from "react";
+import { IQuestionDocument } from "../../../../core";
+import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 
 const SAEPageQField = () => {
+  const [questionBody, setQuestionBody] = useState<IQuestionDocument | null>(
+    null
+  );
+  const { answerId } = useParams();
+
+  useEffect(() => {
+    try {
+      if (answerId) {
+        const fetchQuestion = async () => {
+          const answer = await getAnswerById(answerId);
+          const question = await getQuestionById(answer.question);
+
+          setQuestionBody(question);
+        };
+        fetchQuestion();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <Container w="90%" align="start" h="40%" justify="space-between">
-      <InfoField />
-      <Container h="150px" fd="row" justify="space-between" align="start">
-        <Icon
+      <InfoField user={questionBody?.user} />
+      <Container
+        w="100%"
+        h="150px"
+        fd="row"
+        justify="space-between"
+        align="start"
+      >
+        <BodyContainer style={{ width: "5%", alignItems: "start" }}>
+          <Icon
+            style={{
+              fontSize: 25,
+              width: "100%",
+              textAlign: "left",
+              marginRight: 0,
+              display: "flex",
+              alignItems: "start",
+
+              justifyContent: "start",
+            }}
+            icon="mdi:help-circle-outline"
+          />
+        </BodyContainer>
+        <BodyContainer
           style={{
-            fontSize: 20,
-            width: 100,
-            marginRight: 5,
+            alignItems: "start",
+            //  backgroundColor: "green"
           }}
-          icon="mdi:help-circle-outline"
-        />
-        <Typography textalign="left" variant="normal" weight={600}>
-          Hows can I be saved if I am dead but I know with no money and I pray
-          at the last hour that God should save me but I dont end the prayer
-          with Amen and my land lady comes out to rape me and I scream God and I
-          dont see it?
-        </Typography>
+        >
+          <Typography textalign="left" variant="h3" weight={600}>
+            {questionBody?.body}
+          </Typography>
+        </BodyContainer>
       </Container>
     </Container>
   );

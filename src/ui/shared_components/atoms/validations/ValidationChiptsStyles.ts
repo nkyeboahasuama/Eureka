@@ -6,28 +6,18 @@ export const BaseValidationChip = styled.button`
   border-radius: 25px;
   border: none;
   cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  font-size: 24px;
 `;
 
 export const ApprovedChip = styled(BaseValidationChip)`
   background-color: #03c988;
-  /* color: #03c988; */
-  font-weight: 500;
 `;
 
 export const RejectedChip = styled(BaseValidationChip)`
   background-color: #cd1818;
-  font-size: 50px;
 `;
-
-// interface ChipVariantsTypes {
-//   [key: string]: any;
-// }
-
-// export const chipVariants: ChipVariantsTypes = {
-//   open: openChip,
-//   closed: closedChip,
-// };

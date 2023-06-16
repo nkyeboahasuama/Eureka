@@ -15,8 +15,8 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
 
   return (
     <Container style={{ flexShrink: 0 }} variant="secondary" w="100%" h="100px">
-      <Container fd="row" h="60%">
-        <Typography variant="medium" m="0 20px">
+      <Container justify="space-between" fd="row" h="60%" w="90%">
+        <Typography variant="medium" m="0 0px">
           @Emoo201
         </Typography>
         <HeaderStyles />

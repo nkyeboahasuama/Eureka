@@ -5,6 +5,7 @@ import { questionService } from "../../../../services";
 import { useState } from "react";
 import { IQuestion } from "../../../../core";
 import { useNavigate } from "react-router";
+import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 
 const FormPage = () => {
   const [user, setUser] = useState("");
@@ -32,14 +33,14 @@ const FormPage = () => {
   };
 
   const handleSubmit = async () => {
-    if (user.trim().length < 5 || body.trim().length < 5) {
+    if (user.trim().length < 0 || body.trim().length < 0) {
       alert("User field cannot be empty");
       return;
     }
 
     try {
-      navigate("/askquestion/success");
       const res = await questionService.addQuestion(payload);
+      navigate("/askquestion/success");
       console.log(res);
     } catch (error: any) {
       console.log(error);
@@ -47,8 +48,16 @@ const FormPage = () => {
   };
   return (
     <Container justify="space-between">
-      <EmailField userFnc={userFnc} />
-      <FormField bodyFnc={bodyFnc} handleSubmit={handleSubmit} />
+      <BodyContainer style={{ height: "35%" }}>
+        <EmailField userFnc={userFnc} />
+      </BodyContainer>
+
+      <BodyContainer
+        bg="black"
+        style={{ height: "65%", color: "white", gap: 5 }}
+      >
+        <FormField bodyFnc={bodyFnc} handleSubmit={handleSubmit} />
+      </BodyContainer>
     </Container>
   );
 };

@@ -48,7 +48,7 @@ export class BaseRepository<T = any, DocType = any> {
   deleteDocById = async () => {};
   deleteDocsByFilter = async () => {};
 
-  protected createDocRef = (id: string) => {
+  createDocRef = (id: string) => {
     return doc(this.collection, id);
   };
 }
