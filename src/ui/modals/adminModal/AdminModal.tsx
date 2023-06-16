@@ -24,21 +24,21 @@ const AdminModal: React.FC<AdminModalProps> = ({
 
   const AdminData = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
-    : null;
+    : console.log("Doesnt exist");
 
-  const SuperAdminData = localStorage.getItem("isSuperLocal")
-    ? JSON.parse(localStorage.getItem("isSuperLocal")!)
-    : null;
-  // WYc4fcTqIhtfjTfrjHzi
   const handleMarkQuestion = async () => {
     try {
       const adminId: string = AdminData.id;
-      console.log(adminId);
+
+      navigate(`/questions/question/${question?.id}`);
       if (question) {
         console.log(question.id);
-        const mark = await questionService.markQuestion(adminId, question.id);
-        console.log(mark);
-        navigate(`/questions/question/${question?.id}`);
+        console.log(adminId);
+        if (adminId === question.markedBy) {
+          console.log("I marked this question");
+        } else {
+          const mark = await questionService.markQuestion(adminId, question.id);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -64,15 +64,36 @@ const AdminModal: React.FC<AdminModalProps> = ({
             style={{ overflow: "scroll" }}
           >
             {<Typography variant="h3">{question?.body}</Typography>}
+            {question?.marked && question.markedBy === AdminData.id ? (
+              <Typography variant="small">
+                Marked by you, {question.markedBy}!{" "}
+              </Typography>
+            ) : (
+              question?.marked && (
+                <Typography variant="small">
+                  Marked by {question?.markedBy}, not you!{" "}
+                </Typography>
+              )
+            )}
           </BodyContainer>
         </Container>
 
-        {question?.marked ? (
-          <Button variant="disabled">I would like to answer</Button>
-        ) : (
-          <Button onClick={handleMarkQuestion} variant="accept">
-            I would like to answer
+        {question?.marked && question.markedBy === AdminData.id ? (
+          <Button
+            onClick={() => navigate(`/questions/question/${question?.id}`)}
+            style={{
+              backgroundColor: "rgba(3, 180, 120, 0.5)",
+              color: "white",
+            }}
+          >
+            I would like to answer now!
           </Button>
+        ) : !question?.marked ? (
+          <Button variant="accept" onClick={handleMarkQuestion}>
+            Want to answer?
+          </Button>
+        ) : (
+          <Button variant="disabled">Someone in here!</Button>
         )}
 
         <Button w="100%" onClick={() => closeAdminModal()} variant="secondary">

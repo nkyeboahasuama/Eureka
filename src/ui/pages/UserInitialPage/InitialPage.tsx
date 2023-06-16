@@ -22,7 +22,7 @@ const InitialPage = () => {
           if (data.isSuper) {
             console.log("valid Super");
             redirect(`/superadmin/validatequestions`);
-            localStorage.setItem("isSuperLocal", JSON.stringify(data));
+            localStorage.setItem("isAdminLocal", JSON.stringify(data));
           } else if (isValidAdmin(email)) {
             localStorage.setItem("isAdminLocal", JSON.stringify(data));
             console.log("valid admin");

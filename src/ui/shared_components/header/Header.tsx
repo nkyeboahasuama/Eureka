@@ -16,10 +16,8 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
         </Typography>
         <HeaderStyles />
       </Container>
-      <Container h="40%" fd="row" justify="space-between" w="100%">
-        <Typography variant="medium" m="0 20px">
-          {page}
-        </Typography>
+      <Container h="40%" m="0 20px" fd="row" justify="space-between" w="90%">
+        {page}
       </Container>
     </Container>
   );

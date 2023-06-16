@@ -4,13 +4,12 @@ import { BaseProps } from "./TypographyStyles";
 import { typographyVariants } from "./TypographyStyles";
 
 interface TypoTypes extends BaseProps {
-  children: React.ReactNode;
   variant?: keyof typeof typographyVariants;
 }
 
-const Typography: React.FC<TypoTypes> = ({ children, variant, ...props }) => {
+const Typography: React.FC<TypoTypes> = ({ variant, ...props }) => {
   const StyledTypography = typographyVariants[variant || "normal"] || Base;
-  return <StyledTypography {...props}>{children}</StyledTypography>;
+  return <StyledTypography {...props}></StyledTypography>;
 };
 
 export default Typography;

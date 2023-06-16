@@ -11,7 +11,6 @@ import { questionService } from "../../../../services";
 import { IQuestionDocument } from "../../../../core";
 
 import ValidationChips from "../../../shared_components/atoms/validations/ValidationChips";
-import { useNavigate, useParams } from "react-router";
 import Loader from "../../../shared_components/loader/Loader";
 import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
 
@@ -21,8 +20,6 @@ const SAdminQuestionField = () => {
   const [questions, setQuestions] = useState<IQuestionDocument[]>([]);
   const [selectedQuestion, setSelectedQuestion] =
     useState<IQuestionDocument | null>(null);
-  const { email } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getQuestionsList();
@@ -31,13 +28,12 @@ const SAdminQuestionField = () => {
 
   const getQuestionsList = async () => {
     const data = await questionService.getQuestions();
-    // console.log(data);
     setQuestions(data);
   };
 
   const verifySuperAdmin = () => {
-    if (localStorage.getItem("isSuperLocal")) {
-      const SuperAdminDate = JSON.parse(localStorage.getItem("isSuperLocal")!);
+    if (localStorage.getItem("isAdminLocal")) {
+      const SuperAdminDate = JSON.parse(localStorage.getItem("isAdminLocal")!);
       console.log(SuperAdminDate);
       if (SuperAdminDate.isSuper) {
         console.log("Super User exists");
@@ -72,27 +68,24 @@ const SAdminQuestionField = () => {
         <Loader />
       ) : (
         <BodyContainer
-          // bg="blue"
           style={{ overflow: "scrollY" }}
           w="90%"
           text="left"
           m="20px 0"
         >
           {questions.map((question) => (
-            <>
+            <BodyContainer key={question.id}>
               {question.user && question.body && (
                 <>
                   <SAQUserDetails user={question.user} />
 
                   <Typography
-                    key={question.id}
                     style={{
                       width: "100%",
                       textAlign: "left",
                       cursor: "pointer",
                       margin: "5px 0 10px 0",
                       ...lineClampStyle,
-                      // backgroundColor: "red",
                     }}
                     variant="h3"
                     onClick={() => openAdminModal(question)}
@@ -104,7 +97,6 @@ const SAdminQuestionField = () => {
                     justify="space-between"
                     m="0 0 40px 0"
                     fd="row"
-                    // bg="green"
                   >
                     <Button
                       variant="secondary"
@@ -147,7 +139,7 @@ const SAdminQuestionField = () => {
                   )}
                 </>
               )}
-            </>
+            </BodyContainer>
           ))}
         </BodyContainer>
       )}

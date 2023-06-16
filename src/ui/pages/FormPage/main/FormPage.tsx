@@ -34,7 +34,6 @@ const FormPage = () => {
   const handleSubmit = async () => {
     if (user.trim().length < 5 || body.trim().length < 5) {
       alert("User field cannot be empty");
-
       return;
     }
 
