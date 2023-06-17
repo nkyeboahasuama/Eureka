@@ -16,11 +16,15 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
   useEffect(() => {
     const debounce = setTimeout(() => {
       bodyFnc(textareaContent);
-    }, 1000);
+    }, 500);
     return () => {
       clearTimeout(debounce);
     };
   }, [textareaContent, bodyFnc]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaContent(event.target.value);
+  };
 
   return (
     <>
@@ -48,6 +52,7 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
               height: "100%",
               color: "white",
             }}
+            onChange={handleChange}
           />
           <Button onClick={handleSubmit} variant="primary">
             Submit your answer
