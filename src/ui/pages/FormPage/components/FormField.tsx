@@ -38,6 +38,9 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
               height: "100%",
               color: "white",
             }}
+            onChange={(e) => {
+              bodyFnc(e.target.value);
+            }}
           />
           <Button onClick={handleSubmit} variant="primary">
             Submit your answer

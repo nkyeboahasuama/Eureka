@@ -1,6 +1,6 @@
 import { IQuestion, ValidationStatusType } from "../core";
 import { checkIfAdminCanValidateQuestion } from "../core/admin";
-import { AdminRepo, QuestionRepo } from "../infras/cloud";
+import { AdminRepo, AnswerRepo, QuestionRepo } from "../infras/cloud";
 
 const addQuestion = async (payload: Pick<IQuestion, "body" | "user">) => {
   const $payload: IQuestion = {
@@ -63,10 +63,15 @@ const getValidatedQuestions = async () => {
   return results;
 };
 
+const getQuestionAnswerExists = async (id: string) => {
+  await AnswerRepo.getQuestionAnswerExists(id);
+};
+
 export const questionService = {
   addQuestion,
   markQuestion,
   validateQuestion,
   getQuestions,
   getValidatedQuestions,
+  getQuestionAnswerExists,
 } as const;
