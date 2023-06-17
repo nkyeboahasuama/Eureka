@@ -1,8 +1,12 @@
 import { IAdminDocument, IQuestionDocument } from "./interfaces";
 
 //
-export const superAdmins = ["sp@gmail.com", "anthony@gmail.com"];
-export const admins = ["ad@gmail.com"];
+export const superAdmins = [
+  "sp@gmail.com",
+  "anthony@gmail.com",
+  "snana@gmail.com",
+];
+export const admins = ["ad@gmail.com", "nana@gmail.com"];
 //
 
 export function isValidAdmin(email: string) {

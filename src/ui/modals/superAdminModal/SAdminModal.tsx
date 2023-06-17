@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../shared_components/atoms/container/Container";
 import Date from "../../shared_components/date/Date";
 import UserEmail from "../../shared_components/user/UserEmail";
@@ -6,13 +6,45 @@ import Button from "../../shared_components/atoms/button/Button";
 
 import Typography from "../../shared_components/atoms/typography/Typography";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";
+import { IQuestionDocument, ValidationStatusType } from "../../../core";
+import { adminService, questionService } from "../../../services";
+import { IAdminDocument } from "../../../core";
+import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
+// import ErrorBoundary from "../../errorhandler/ErrorBoundary";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
+  question?: IQuestionDocument | null;
+  getQuestionsList: () => void;
 }
 
-const SAdminModal: React.FC<SAdminModalProps> = ({ closeSAdminModal }) => {
+const SAdminModal: React.FC<SAdminModalProps> = ({
+  closeSAdminModal,
+  question,
+  getQuestionsList,
+}) => {
+  const handleValidation = async (status: ValidationStatusType) => {
+    try {
+      const user: IAdminDocument = JSON.parse(
+        localStorage.getItem("isAdminLocal")!
+      );
+
+      if (status === "approve" && question?.id && user.id) {
+        await questionService.validateQuestion(user.id, question.id, status);
+        getQuestionsList();
+      } else if (status === "reject" && question?.id && user.id) {
+        await questionService.validateQuestion(user.id, question.id, status);
+        getQuestionsList();
+      }
+      closeSAdminModal();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   return (
+    // <ErrorBoundary>
     <ModalWrapper>
       <ModalContent>
         <Container
@@ -24,40 +56,34 @@ const SAdminModal: React.FC<SAdminModalProps> = ({ closeSAdminModal }) => {
         >
           <Container w="95%" m="5px 0" h="10%" fd="row" align="start">
             <Date />
-            <UserEmail />
+            <UserEmail user={question?.user} />
           </Container>
-          <Container h="330px" justify="start" lh="1.5">
-            <Typography variant="h3">
-              How can I be saved if I am dead but I know with no money and I
-              pray at the last hour that God should save me but I dont end the
-              prayer with Amen and my land lady comes out to rape me and I
-              scream God and I dont see it?
-            </Typography>
-          </Container>
+          <BodyContainer
+            justify="start"
+            lh="2.0"
+            style={{ overflow: "scroll" }}
+          >
+            <Typography variant="h3">{question?.body}</Typography>
+          </BodyContainer>
         </Container>
         <Container h="fit">
-          <Button
-            style={{
-              backgroundColor: "#03C988",
-              color: "white",
-              width: "100%",
-            }}
-          >
+          <Button variant="accept" onClick={() => handleValidation("approve")}>
             Accept
           </Button>
-          <Button style={{ backgroundColor: "#CD1818", color: "white" }}>
+          <Button variant="reject" onClick={() => handleValidation("reject")}>
             Reject
           </Button>
         </Container>
         <Button
           style={{ marginTop: 40 }}
-          onClick={() => closeSAdminModal()}
+          onClick={closeSAdminModal}
           variant="secondary"
         >
           Close
         </Button>
       </ModalContent>
     </ModalWrapper>
+    // </ErrorBoundary>
   );
 };
 

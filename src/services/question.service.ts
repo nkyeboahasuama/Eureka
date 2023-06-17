@@ -12,6 +12,7 @@ const addQuestion = async (payload: Pick<IQuestion, "body" | "user">) => {
     markedBy: null,
   };
   await QuestionRepo.addDoc($payload);
+  return $payload;
 };
 
 const validateQuestion = async (

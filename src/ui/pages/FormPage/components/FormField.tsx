@@ -1,43 +1,62 @@
-import Container from "../../../shared_components/atoms/container/Container";
 import { TextArea } from "../../../shared_components/atoms/input/Input";
 
 import Button from "../../../shared_components/atoms/button/Button";
 import Typography from "../../../shared_components/atoms/typography/Typography";
-import { answerService } from "../../../../services/answer.service";
+import { useEffect, useState } from "react";
+import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 
-const FormField = () => {
-  const handleSubmit = async () => {
-    try {
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
+interface IBodyFnc {
+  bodyFnc: (body: string) => void;
+  handleSubmit: () => void;
+}
+const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
+  const [textareaContent, setTextareaContent] = useState("");
 
   return (
-    <Container w="100%" h="65%" variant="secondary">
-      <Container w="90%">
-        <Container text="left" align="start" h="20%">
-          <Typography variant="h2">What is on your mind?</Typography>
-          <Typography variant="normal">
-            Share your thoughts with an amazing community of leaders.
-          </Typography>
-        </Container>
-        <Container h="80%">
+    <>
+      <BodyContainer text="left" align="start" w="90%">
+        <Typography variant="h2">What is on your mind?</Typography>
+        <Typography variant="normal">
+          Share your thoughts with an amazing community of leaders.
+        </Typography>
+      </BodyContainer>
+      <BodyContainer w="90%" style={{ height: "75%" }}>
+        <BodyContainer
+          style={{
+            flexShrink: 0,
+            height: "100%",
+            margin: 0,
+            width: "100%",
+          }}
+          w="90%"
+        >
           <TextArea
             style={{
-              backgroundColor: "black",
-              color: "white",
-              height: "79%",
               margin: 0,
+              backgroundColor: "black",
+              width: "100%",
+              height: "100%",
+              color: "white",
             }}
           />
           <Button onClick={handleSubmit} variant="primary">
-            Submit
+            Submit your answer
           </Button>
-        </Container>
-      </Container>
-    </Container>
+        </BodyContainer>
+      </BodyContainer>
+    </>
   );
 };
 
 export default FormField;
+{
+  /* <BodyContainer style={{ flexShrink: 0, height: "45%" }} w="90%">
+      <TextArea
+        style={{ height: "80%", margin: 0 }}
+        required
+      />
+      <Button onClick={handleSubmit} variant="secondary">
+        Submit your answer
+      </Button>
+    </BodyContainer> */
+}

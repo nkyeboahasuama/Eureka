@@ -8,24 +8,34 @@ import QuestionsPage from "./ui/pages/QuestionsPage/main/QuestionsPage";
 import SAAPage from "./ui/pages/SAAPage/main/SAAPage";
 import SAQPage from "./ui/pages/SuperAdminPage/main/SAQPage";
 import SAEPage from "./ui/pages/SAEPage/main/SAEPage";
+import InitialPage from "./ui/pages/UserInitialPage/InitialPage";
+// import ErrorBoundary from "./ui/errorhandler/ErrorBoundary";
 
 function App() {
   return (
     <>
       <GlobalStyles />
 
+      {/* <ErrorBoundary> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FormPage />} />
+          <Route path="/askquestion/form/" element={<FormPage />} />
 
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/questions" element={<QuestionsPage />} />
-          <Route path="/question/:id" element={<AdminPage />} />
-          <Route path="/verifyquestion" element={<SAQPage />} />
-          <Route path="/verifyanswer" element={<SAAPage />} />
-          <Route path="/edit" element={<SAEPage />} />
+          <Route path="/openforum/entry/:email/" element={<InitialPage />} />
+
+          <Route path="askquestion/success" element={<SuccessPage />} />
+
+          <Route path="/admin/validquestions" element={<QuestionsPage />} />
+
+          <Route path="/questions/question/:id" element={<AdminPage />} />
+
+          <Route path="/superadmin/validatequestions" element={<SAQPage />} />
+
+          <Route path="/superadmin/validateanswers" element={<SAAPage />} />
+          <Route path="superadmin/edit/:answerId" element={<SAEPage />} />
         </Routes>
       </BrowserRouter>
+      {/* </ErrorBoundary> */}
     </>
   );
 }

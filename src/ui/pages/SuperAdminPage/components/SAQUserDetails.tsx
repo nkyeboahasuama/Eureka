@@ -3,11 +3,15 @@ import { BodyContainer } from "../../../shared_components/atoms/container/Contai
 import Date from "../../../shared_components/date/Date";
 import UserEmail from "../../../shared_components/user/UserEmail";
 
-const SAQUserDetails = () => {
+interface ISuperAdminUserProps {
+  user: string;
+}
+
+const SAQUserDetails: React.FC<ISuperAdminUserProps> = ({ user }) => {
   return (
     <BodyContainer justify="space-between" w="100%" fd="row" m="10px 0">
       <Date />
-      <UserEmail />
+      <UserEmail user={user} />
     </BodyContainer>
   );
 };
