@@ -40,11 +40,12 @@ const FormPage = () => {
 
     try {
       const res = await questionService.addQuestion(payload);
-      navigate("/askquestion/success");
+
       console.log(res);
     } catch (error: any) {
       console.log(error);
     }
+    navigate("/askquestion/success");
   };
   return (
     <Container justify="space-between">

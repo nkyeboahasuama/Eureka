@@ -28,7 +28,7 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
       const user: IAdminDocument = JSON.parse(
         localStorage.getItem("isAdminLocal")!
       );
-      closeSAdminModal();
+
       if (status === "approve" && question?.id && user.id) {
         await questionService.validateQuestion(user.id, question.id, status);
         getQuestionsList();
@@ -36,6 +36,7 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
         await questionService.validateQuestion(user.id, question.id, status);
         getQuestionsList();
       }
+      closeSAdminModal();
     } catch (error) {
       console.error(error);
       throw error;

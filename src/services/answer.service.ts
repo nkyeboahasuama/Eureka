@@ -22,7 +22,9 @@ const submitDraftAnswer = async (
     isEdited: false,
     submittedBy: null,
   };
-
+  const qtn = await QuestionRepo.getDoc(questionId);
+  if (!qtn) throw new Error("Invalid question submitted");
+  checkIfQtnCanBeAnswered(qtn);
   await AnswerRepo.addDoc(payload);
 };
 
@@ -87,4 +89,9 @@ function checkIfCanEditAndSubmitAnswer(
     throw new Error("Question already closed");
   if (ans.availability !== "open")
     throw new Error("Answer has already been submitted");
+}
+
+function checkIfQtnCanBeAnswered(qtn: IQuestionDocument) {
+  if (qtn.marked || qtn.availability === "closed")
+    throw new Error("Question is currently closed");
 }
