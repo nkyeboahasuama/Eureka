@@ -22,9 +22,13 @@ const submitDraftAnswer = async (
     isEdited: false,
     submittedBy: null,
   };
-  const qtn = await QuestionRepo.getDoc(questionId);
+  const [qtn, answer] = await Promise.all([
+    QuestionRepo.getDoc(questionId),
+    AnswerRepo.getQuestionAnswerExists(questionId),
+  ]);
   if (!qtn) throw new Error("Invalid question submitted");
-  checkIfQtnCanBeAnswered(qtn);
+  if (answer) throw new Error("Question already has a draft");
+  checkIfQtnCanBeAnswered(qtn, adminId);
   await AnswerRepo.addDoc(payload);
 };
 
@@ -91,7 +95,9 @@ function checkIfCanEditAndSubmitAnswer(
     throw new Error("Answer has already been submitted");
 }
 
-function checkIfQtnCanBeAnswered(qtn: IQuestionDocument) {
-  if (qtn.marked || qtn.availability === "closed")
+function checkIfQtnCanBeAnswered(qtn: IQuestionDocument, admin: string) {
+  if (qtn.availability === "closed")
     throw new Error("Question is currently closed");
+  if (qtn.marked && qtn.markedBy !== admin)
+    throw new Error("Invalid admin trying to answer qtn");
 }

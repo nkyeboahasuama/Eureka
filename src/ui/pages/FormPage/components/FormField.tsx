@@ -1,4 +1,3 @@
-import Container from "../../../shared_components/atoms/container/Container";
 import { TextArea } from "../../../shared_components/atoms/input/Input";
 
 import Button from "../../../shared_components/atoms/button/Button";
@@ -55,34 +54,11 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
             onChange={handleChange}
           />
           <Button onClick={handleSubmit} variant="primary">
-            Submit your answer
+            Submit your question
           </Button>
         </BodyContainer>
       </BodyContainer>
     </>
-    // <Container w="100%" h="65%" variant="secondary">
-    //   <Container w="90%">
-    //     <BodyContainer text="left" align="start">
-    //       <Typography variant="h2">What is on your mind?</Typography>
-    //       <Typography variant="normal">
-    //         Share your thoughts with an amazing community of leaders.
-    //       </Typography>
-    //     </BodyContainer>
-    //     <BodyContainer style={{ flexShrink: 0, height: "50%" }} w="100%">
-    //       <TextArea
-    //         style={{
-    //           height: "80%",
-    //           margin: 0,
-    //           backgroundColor: "black",
-    //           color: "white",
-    //         }}
-    //       />
-    //       <Button onClick={handleSubmit} variant="primary">
-    //         Submit your answer
-    //       </Button>
-    //     </BodyContainer>
-    //   </Container>
-    // </Container>
   );
 };
 
