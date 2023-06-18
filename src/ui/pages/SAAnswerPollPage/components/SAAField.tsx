@@ -12,20 +12,26 @@ import { useNavigate } from "react-router";
 
 const SAAField = () => {
   const [answers, setAnswers] = useState<IAnswerDocument[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const answers = async () => {
       const data = await answerService.getAnswers();
       setAnswers(data);
+      setLoading(false);
     };
     answers();
   }, [answers]);
 
   return (
     <>
-      {answers.length === 0 ? (
+      {loading ? (
         <Loader />
+      ) : answers.length === 0 ? (
+        <>
+          <Typography variant="h3">No data available</Typography>
+        </>
       ) : (
         <BodyContainer
           style={{ overflow: "scrollY" }}
