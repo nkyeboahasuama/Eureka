@@ -46,6 +46,7 @@ const FormPage = () => {
     } catch (error: any) {
       console.log(error);
     }
+    navigate("/askquestion/success");
   };
   return (
     <Container justify="space-between">
