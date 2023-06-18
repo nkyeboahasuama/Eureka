@@ -18,7 +18,8 @@ class QuestionRepoClass extends BaseRepository<IQuestion, IQuestionDocument> {
     const queryRef = query(
       this.collection,
       where("marked", "==", true),
-      where("markedBy", "==", adminId)
+      where("markedBy", "==", adminId),
+      where("availability", "==", "open")
     );
     const docsRef = await getDocs(queryRef);
     if (docsRef.docs.length > 0) return false;

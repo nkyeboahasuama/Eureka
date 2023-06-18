@@ -6,11 +6,13 @@ import { useState, useEffect } from "react";
 import { IAnswerDocument } from "../../../../core";
 import { getAnswerById } from "../../../functions/answers";
 import { answerService } from "../../../../services/answer.service";
+import { useNavigate } from "react-router-dom";
 
 const SAEPageInput = () => {
   const [textareaValue, setTextareaValue] = useState<IAnswerDocument | string>(
     ""
   );
+  const navigate = useNavigate();
 
   const { answerId } = useParams();
   useEffect(() => {
@@ -45,7 +47,9 @@ const SAEPageInput = () => {
           answerId,
           textareaValue as string
         );
+        console.log("data");
         setTextareaValue("");
+        navigate("/superadmin/validateanswers");
       } catch (error) {
         console.log(error);
       }

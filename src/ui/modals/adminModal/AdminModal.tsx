@@ -77,8 +77,9 @@ const AdminModal: React.FC<AdminModalProps> = ({
             )}
           </BodyContainer>
         </Container>
-
-        {question?.marked && question.markedBy === AdminData.id ? (
+        {question?.marked &&
+        question.markedBy === AdminData.id &&
+        question.availability === "open" ? (
           <Button
             onClick={() => navigate(`/questions/question/${question?.id}`)}
             style={{
@@ -92,6 +93,8 @@ const AdminModal: React.FC<AdminModalProps> = ({
           <Button variant="accept" onClick={handleMarkQuestion}>
             Want to answer?
           </Button>
+        ) : question.availability === "closed" ? (
+          <Button variant="disabled">Question is closed!</Button>
         ) : (
           <Button variant="disabled">Someone in here!</Button>
         )}

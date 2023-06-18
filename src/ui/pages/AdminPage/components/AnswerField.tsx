@@ -3,25 +3,27 @@ import Button from "../../../shared_components/atoms/button/Button";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 import { useState } from "react";
 import { answerService } from "../../../../services/answer.service";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 const AnswerField = () => {
   const [body, setBody] = useState("");
   const params = useParams();
   const questionId = params.id;
+  const navigate = useNavigate();
 
   const adminId = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
 
   const handleDraftAnswerSubmit = async () => {
-    try {
-      if (adminId && questionId && body) {
+    if (adminId && questionId && body) {
+      try {
         await answerService.submitDraftAnswer(adminId.id, questionId, body);
         setBody("");
+        navigate("/admin/validquestions");
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 
