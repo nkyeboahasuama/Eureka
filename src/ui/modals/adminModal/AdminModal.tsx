@@ -26,7 +26,16 @@ const AdminModal: React.FC<AdminModalProps> = ({
 
   const AdminData = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
-    : console.log("Doesnt exist");
+    : null;
+
+  useEffect(() => {
+    const validations = question?.validators.filter(
+      (a) => a.status === "approve"
+    ).length;
+    if (validations) {
+      setApprovedValidated(validations);
+    }
+  }, [question]);
 
   console.log(approvedValidated);
 
@@ -42,22 +51,17 @@ const AdminModal: React.FC<AdminModalProps> = ({
   }, [question]);
 
   const handleMarkQuestion = async () => {
-    try {
-      const adminId: string = AdminData.id;
+    if (question) {
+      try {
+        const adminId: string = AdminData.id;
 
-      if (question) {
-        console.log(question.id);
-
-        console.log(approvedValidated);
-        if (adminId === question.markedBy) {
-          console.log("I marked this question");
-        } else {
+        if (adminId !== question.markedBy) {
           await questionService.markQuestion(adminId, question.id);
           navigate(`/questions/question/${question?.id}`);
         }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
   return (

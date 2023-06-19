@@ -20,7 +20,6 @@ const QuestionContainer = () => {
   useEffect(() => {
     const getQuestionsList = async () => {
       const data = await questionService.getValidatedQuestions();
-      console.log(data);
       setQuestions(data);
       setIsLoading(false);
     };
