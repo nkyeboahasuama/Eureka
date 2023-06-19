@@ -30,6 +30,7 @@ const SAdminQuestionField = () => {
   const getQuestionsList = async () => {
     const data = await questionService.getQuestions();
     setQuestions(data);
+    console.log(data);
     setLoading(false);
   };
 
