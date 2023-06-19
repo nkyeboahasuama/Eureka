@@ -30,7 +30,7 @@ export const BaseButton = styled.button<ButtonProps>`
   // Variant styles
   color: ${(props) => props.color || "white"};
   background-color: ${(props) => props.bg || "black"};
-  font-size: ${(props) => props.size || "18px"};
+  font-size: ${(props) => props.size || "14px"};
   border-radius: ${(props) => props.radius};
   width: ${(props) => props.w || "100%"};
 
