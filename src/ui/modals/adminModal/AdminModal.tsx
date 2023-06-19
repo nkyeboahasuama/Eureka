@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../../shared_components/atoms/container/Container";
 import Date from "../../shared_components/date/Date";
 import UserEmail from "../../shared_components/user/UserEmail";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { IQuestionDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import { questionService } from "../../../services";
+import { useState } from "react";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
@@ -20,11 +21,25 @@ const AdminModal: React.FC<AdminModalProps> = ({
   closeAdminModal,
   question,
 }) => {
+  const [approvedValidated, setApprovedValidated] = useState(0);
   const navigate = useNavigate();
 
   const AdminData = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : console.log("Doesnt exist");
+
+  console.log(approvedValidated);
+
+  useEffect(() => {
+    const validations = question?.validators.filter(
+      (a) => a.status === "approve"
+    ).length;
+    if (validations) {
+      setApprovedValidated(validations);
+    }
+
+    console.log(validations);
+  }, [question]);
 
   const handleMarkQuestion = async () => {
     try {
@@ -32,11 +47,12 @@ const AdminModal: React.FC<AdminModalProps> = ({
 
       if (question) {
         console.log(question.id);
-        console.log(adminId);
+
+        console.log(approvedValidated);
         if (adminId === question.markedBy) {
           console.log("I marked this question");
         } else {
-          const mark = await questionService.markQuestion(adminId, question.id);
+          await questionService.markQuestion(adminId, question.id);
           navigate(`/questions/question/${question?.id}`);
         }
       }
@@ -89,12 +105,14 @@ const AdminModal: React.FC<AdminModalProps> = ({
           >
             I would like to answer now!
           </Button>
-        ) : !question?.marked ? (
+        ) : !question?.marked && approvedValidated > 1 ? (
           <Button variant="accept" onClick={handleMarkQuestion}>
             Want to answer?
           </Button>
-        ) : question.availability === "closed" ? (
+        ) : question?.availability === "closed" ? (
           <Button variant="disabled">Question is closed!</Button>
+        ) : approvedValidated < 3 ? (
+          <Button variant="disabled">Question needs validation!</Button>
         ) : (
           <Button variant="disabled">Someone in here!</Button>
         )}
