@@ -10,6 +10,7 @@ import { IQuestionDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import { questionService } from "../../../services";
 import { useState } from "react";
+import DateComponent from "../../shared_components/date/Date";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
@@ -75,7 +76,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
           w="80vw"
         >
           <Container h="10%" w="95%" m=" 5px 0px" fd="row" align="start">
-            <Date />
+            <DateComponent date={question?.markedAt} />
             <UserEmail user={question?.user} />
           </Container>
           <BodyContainer
