@@ -12,6 +12,8 @@ const SAEPageInput = () => {
   const [textareaValue, setTextareaValue] = useState<IAnswerDocument | string>(
     ""
   );
+  const [answer, setAnswer] = useState<IAnswerDocument | null>(null);
+
   const navigate = useNavigate();
 
   const { answerId } = useParams();
@@ -20,6 +22,7 @@ const SAEPageInput = () => {
       if (answerId) {
         const fetchAnswer = async () => {
           const answer = await getAnswerById(answerId);
+          setAnswer(answer);
           setTextareaValue(answer.body || "");
         };
         fetchAnswer();
@@ -39,18 +42,24 @@ const SAEPageInput = () => {
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
 
+  console.log(adminId);
+  console.log(answer);
+
   const handleSubmit = async () => {
     if (adminId && answerId && textareaValue) {
-      try {
-        await answerService.editAndSubmitDraft(
-          adminId.id,
-          answerId,
-          textareaValue as string
-        );
-        setTextareaValue("");
-        navigate("/superadmin/validateanswers");
-      } catch (error) {
-        console.log(error);
+      if (true) {
+        try {
+          await answerService.editAndSubmitDraft(
+            adminId.id,
+            answerId,
+            textareaValue as string
+          );
+          console.log("data");
+          setTextareaValue("");
+          navigate("/superadmin/validateanswers");
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   };
@@ -61,10 +70,19 @@ const SAEPageInput = () => {
         value={textareaValue as string}
         onChange={handleTextareaChange}
       />
-
-      <Button onClick={handleSubmit} variant="secondary">
-        Submit Review
-      </Button>
+      {adminId.id === answer?.admin ? (
+        <Button
+          style={{ border: "black 1px solid" }}
+          onClick={handleSubmit}
+          variant="disabled"
+        >
+          Not allowed to review
+        </Button>
+      ) : (
+        <Button onClick={handleSubmit} variant="secondary">
+          Submit Review
+        </Button>
+      )}
     </Container>
   );
 };

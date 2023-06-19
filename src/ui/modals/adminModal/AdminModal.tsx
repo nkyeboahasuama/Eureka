@@ -113,10 +113,10 @@ const AdminModal: React.FC<AdminModalProps> = ({
           <Button variant="accept" onClick={handleMarkQuestion}>
             Want to answer?
           </Button>
+        ) : !question?.marked && approvedValidated < 3 ? (
+          <Button variant="disabled">Question needs validation!</Button>
         ) : question?.availability === "closed" ? (
           <Button variant="disabled">Question is closed!</Button>
-        ) : approvedValidated < 3 ? (
-          <Button variant="disabled">Question needs validation!</Button>
         ) : (
           <Button variant="disabled">Someone in here!</Button>
         )}
