@@ -20,12 +20,11 @@ const QuestionContainer = () => {
   useEffect(() => {
     const getQuestionsList = async () => {
       const data = await questionService.getValidatedQuestions();
-      // console.log(data);
       setQuestions(data);
       setIsLoading(false);
     };
     getQuestionsList();
-  }, [questions]);
+  }, []);
 
   const openAdminModal = (question: IQuestionDocument) => {
     setModal(true);
