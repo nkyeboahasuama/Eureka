@@ -11,16 +11,23 @@ const AnswerField = () => {
   const questionId = params.id;
   const navigate = useNavigate();
 
-  const adminId = localStorage.getItem("isAdminLocal")
+  const admin = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
+  console.log(admin.id);
+  console.log(questionId);
+  console.log(body);
 
   const handleDraftAnswerSubmit = async () => {
-    if (adminId && questionId && body) {
+    if (admin && questionId && body) {
       try {
-        await answerService.submitDraftAnswer(adminId.id, questionId, body);
+        await answerService.submitDraftAnswer(admin.id, questionId, body);
         setBody("");
-        navigate("/admin/validquestions");
+        if (admin.isSuper) {
+          navigate("/superadmin/validatequestions");
+        } else {
+          navigate("/admin/validquestions");
+        }
       } catch (error) {
         console.error(error);
       }
