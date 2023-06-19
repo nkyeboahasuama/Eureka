@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAGIPVzYdk7s-ktmRlajOhyjhwvmzQ4R_I",
-  authDomain: "eureka-61181.firebaseapp.com",
-  projectId: "eureka-61181",
-  storageBucket: "eureka-61181.appspot.com",
-  messagingSenderId: "1055845408056",
-  appId: "1:1055845408056:web:9eb55270c73ab2b26ab5cd",
-  measurementId: "G-RXBEZSC5LN",
+  apiKey: "AIzaSyCtCla3HjTbrtUXaT09NWCnBA4Wiuag0Ug",
+  authDomain: "eureka-dev-a0773.firebaseapp.com",
+  projectId: "eureka-dev-a0773",
+  storageBucket: "eureka-dev-a0773.appspot.com",
+  messagingSenderId: "251766484207",
+  appId: "1:251766484207:web:6c0d95327bfb7a938a7f1a",
+  measurementId: "G-8990BK9SYF",
 };
 
 const app = initializeApp(firebaseConfig);
