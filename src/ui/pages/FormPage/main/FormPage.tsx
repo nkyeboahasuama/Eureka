@@ -42,6 +42,7 @@ const FormPage = () => {
       const res = await questionService.addQuestion(payload);
 
       console.log(res);
+      navigate("/askquestion/success");
     } catch (error: any) {
       console.log(error);
     }

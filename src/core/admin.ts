@@ -6,7 +6,7 @@ export const superAdmins = [
   "anthony@gmail.com",
   "snana@gmail.com",
 ];
-export const admins = ["ad@gmail.com", "nana@gmail.com"];
+export const admins = ["ad@gmail.com", "admin@gmail.com", "nana@gmail.com"];
 //
 
 export function isValidAdmin(email: string) {
