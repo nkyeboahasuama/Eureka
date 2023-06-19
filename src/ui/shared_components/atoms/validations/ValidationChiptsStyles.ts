@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const BaseValidationChip = styled.button`
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   border-radius: 25px;
   border: none;
   cursor: pointer;
@@ -11,7 +11,8 @@ export const BaseValidationChip = styled.button`
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 24px;
+  font-size: 13px;
+  text-align: center;
 `;
 
 export const ApprovedChip = styled(BaseValidationChip)`

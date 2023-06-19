@@ -54,7 +54,6 @@ const SAEPageInput = () => {
             answerId,
             textareaValue as string
           );
-          console.log("data");
           setTextareaValue("");
           navigate("/superadmin/validateanswers");
         } catch (error) {

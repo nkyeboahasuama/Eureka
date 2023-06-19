@@ -5,5 +5,6 @@ export const getQuestionById = async (questionId: string) => {
 
   const questionObj = data.filter((q) => q.id === questionId);
   const body = questionObj[0];
+  console.log(body);
   return body;
 };

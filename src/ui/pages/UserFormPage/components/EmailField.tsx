@@ -51,10 +51,12 @@ const EmailField: React.FC<IuserFnc> = ({ userFnc }) => {
             onChange={(e) => setUser(e.target.value)}
             style={{
               height: "40px",
-              fontSize: 18,
+              fontSize: "14px",
               width: "100%",
-              padding: "0",
+              padding: "0 5px",
               margin: "0",
+              display: "flex",
+              boxSizing: "border-box",
             }}
           />
         </BodyContainer>

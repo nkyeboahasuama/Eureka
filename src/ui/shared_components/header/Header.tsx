@@ -22,15 +22,10 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
         h="60%"
         w="90%"
       >
-        {user?.isSuper ? (
-          <Container align="start" h="100%" w="100%">
-            Super Admin: @{user?.username}
-          </Container>
-        ) : (
-          <Container align="start" h="100%" w="100%">
-            Admin: @{user?.username}
-          </Container>
-        )}
+        <Container align="start" h="100%" w="100%">
+          @{user?.username}
+        </Container>
+
         <HeaderStyles />
       </Container>
       <Container

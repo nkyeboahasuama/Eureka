@@ -22,19 +22,19 @@ export const Base = styled.p<BaseProps>`
 `;
 
 export const HeaderOne = styled(Base)`
-  font-size: 30px;
+  font-size: 25px;
   font-weight: ${({ weight }) => weight || 700};
 `;
 export const HeaderTwo = styled(Base)`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: ${({ weight }) => weight || 600};
 `;
 export const HeaderThree = styled(Base)`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: ${({ weight }) => weight || 500};
 `;
 export const Normal = styled(Base)`
-  font-size: 14px;
+  font-size: 13px;
   font-weight: ${({ weight }) => weight || 400};
 `;
 export const Medium = styled(Base)`
