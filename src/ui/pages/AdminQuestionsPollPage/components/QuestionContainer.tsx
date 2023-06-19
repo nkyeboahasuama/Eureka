@@ -15,15 +15,17 @@ const QuestionContainer = () => {
   const [questions, setQuestions] = useState<IQuestionDocument[]>([]);
   const [selectedQuestion, setSelectedQuestion] =
     useState<IQuestionDocument | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getQuestionsList = async () => {
       const data = await questionService.getValidatedQuestions();
-      console.log(data);
+      // console.log(data);
       setQuestions(data);
+      setIsLoading(false);
     };
     getQuestionsList();
-  }, []);
+  }, [questions]);
 
   const openAdminModal = (question: IQuestionDocument) => {
     setModal(true);
@@ -37,8 +39,14 @@ const QuestionContainer = () => {
 
   return (
     <>
-      {questions.length === 0 ? (
+      {isLoading ? (
         <Loader />
+      ) : questions.length === 0 ? (
+        <>
+          <Typography variant="h3" weight={500}>
+            No data available
+          </Typography>
+        </>
       ) : (
         <>
           {questions.map((question) => (

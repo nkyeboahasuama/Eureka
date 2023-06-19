@@ -20,6 +20,7 @@ const SAdminQuestionField = () => {
   const [questions, setQuestions] = useState<IQuestionDocument[]>([]);
   const [selectedQuestion, setSelectedQuestion] =
     useState<IQuestionDocument | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getQuestionsList();
@@ -29,6 +30,7 @@ const SAdminQuestionField = () => {
   const getQuestionsList = async () => {
     const data = await questionService.getQuestions();
     setQuestions(data);
+    setLoading(false);
   };
 
   const verifySuperAdmin = () => {
@@ -64,8 +66,12 @@ const SAdminQuestionField = () => {
 
   return (
     <>
-      {questions.length === 0 ? (
+      {loading ? (
         <Loader />
+      ) : questions.length === 0 ? (
+        <>
+          <Typography variant="h3">Data not available</Typography>
+        </>
       ) : (
         <BodyContainer
           style={{ overflow: "scrollY" }}
