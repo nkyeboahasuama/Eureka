@@ -15,10 +15,22 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
 
   return (
     <Container style={{ flexShrink: 0 }} variant="secondary" w="100%" h="100px">
-      <Container justify="space-between" fd="row" h="60%" w="90%">
-        <Typography variant="medium" m="0 0px">
-          @Emoo201
-        </Typography>
+      <Container
+        style={{ fontSize: "11px", color: "white" }}
+        justify="space-between"
+        fd="row"
+        h="60%"
+        w="90%"
+      >
+        {user?.isSuper ? (
+          <Container align="start" h="100%" w="100%">
+            Super Admin: @{user?.username}
+          </Container>
+        ) : (
+          <Container align="start" h="100%" w="100%">
+            Admin: @{user?.username}
+          </Container>
+        )}
         <HeaderStyles />
       </Container>
       <Container
@@ -28,18 +40,15 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
         fd="row"
         justify="space-between"
       >
-        <Container h="100%" fd="row" justify="space-between" w="50%">
+        <Container
+          h="100%"
+          fd="row"
+          justify="space-between"
+          w="100%"
+          align="center"
+        >
           {page}
         </Container>
-        {user?.isSuper ? (
-          <Container align="end" h="100%" w="50%">
-            Super Admin: {user?.username}
-          </Container>
-        ) : (
-          <Container align="end" h="100%" w="50%">
-            Admin: {user?.username}
-          </Container>
-        )}
       </Container>
     </Container>
   );

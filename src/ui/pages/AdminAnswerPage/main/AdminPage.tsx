@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { questionService } from "../../../../services";
 import { IQuestionDocument } from "../../../../core";
 import { answerService } from "../../../../services/answer.service";
+import Navigations from "../../../shared_components/navLinks/Navigations";
 
 const AdminPage = () => {
   const params = useParams();
@@ -34,7 +35,7 @@ const AdminPage = () => {
 
   return (
     <Container justify="space-between">
-      <Header page="Questions" />
+      <Header page={<Navigations />} />
       <QuestionField question={question} />
       <AnswerField />
     </Container>
