@@ -9,6 +9,7 @@ import { questionService } from "../../../../services";
 import { IQuestionDocument } from "../../../../core";
 import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
 import Loader from "../../../shared_components/loader/Loader";
+import DateComponent from "../../../shared_components/date/Date";
 
 const QuestionContainer = () => {
   const [modal, setModal] = useState(false);
@@ -57,7 +58,7 @@ const QuestionContainer = () => {
               m="20px 0"
               align="left"
             >
-              <Date />
+              <DateComponent date={question.markedAt} />
               <Typography
                 style={{
                   cursor: "pointer",

@@ -6,8 +6,9 @@ export const BaseChip = styled.button`
   border-radius: 20px;
   border: none;
   cursor: pointer;
+  font-size: 11;
 `;
- 
+
 const openChip = styled(BaseChip)`
   background-color: rgba(3, 201, 136, 0.1);
   color: #03c988;

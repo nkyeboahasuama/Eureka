@@ -10,6 +10,7 @@ import { IQuestionDocument, ValidationStatusType } from "../../../core";
 import { adminService, questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
+import DateComponent from "../../shared_components/date/Date";
 // import ErrorBoundary from "../../errorhandler/ErrorBoundary";
 
 interface SAdminModalProps {
@@ -55,7 +56,7 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           w="80vw"
         >
           <Container w="95%" m="5px 0" h="10%" fd="row" align="start">
-            <Date />
+            <DateComponent date={question?.markedAt} />
             <UserEmail user={question?.user} />
           </Container>
           <BodyContainer
