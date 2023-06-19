@@ -12,6 +12,19 @@ interface IBodyFnc {
 const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
   const [textareaContent, setTextareaContent] = useState("");
 
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      bodyFnc(textareaContent);
+    }, 500);
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [textareaContent, bodyFnc]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaContent(event.target.value);
+  };
+
   return (
     <>
       <BodyContainer text="left" align="start" w="90%">
@@ -38,12 +51,10 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
               height: "100%",
               color: "white",
             }}
-            onChange={(e) => {
-              bodyFnc(e.target.value);
-            }}
+            onChange={handleChange}
           />
           <Button onClick={handleSubmit} variant="primary">
-            Submit your answer
+            Submit your question
           </Button>
         </BodyContainer>
       </BodyContainer>
