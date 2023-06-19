@@ -14,9 +14,6 @@ const AnswerField = () => {
   const admin = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
-  console.log(admin.id);
-  console.log(questionId);
-  console.log(body);
 
   const handleDraftAnswerSubmit = async () => {
     if (admin && questionId && body) {

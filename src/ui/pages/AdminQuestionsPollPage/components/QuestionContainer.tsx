@@ -79,14 +79,14 @@ const QuestionContainer = () => {
                 <UserEmail user={question.user} />
                 <Chips variant={question.availability} />
               </BodyContainer>
-              {modal && (
-                <AdminModal
-                  question={selectedQuestion}
-                  closeAdminModal={closeAdminModal}
-                />
-              )}
             </BodyContainer>
           ))}
+          {modal && (
+            <AdminModal
+              question={selectedQuestion}
+              closeAdminModal={closeAdminModal}
+            />
+          )}
         </>
       )}
     </>
