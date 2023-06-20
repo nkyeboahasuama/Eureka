@@ -9,18 +9,15 @@ import SAAPage from "./ui/pages/SAAnswerPollPage/main/SAAPage";
 import SAQPage from "./ui/pages/SAQuestionsPollPage/main/SAQPage";
 import SAEPage from "./ui/pages/SAAnswerEditPage/main/SAEPage";
 import InitialPage from "./ui/pages/UserInitialPage/InitialPage";
-// import ErrorBoundary from "./ui/errorhandler/ErrorBoundary";
 
 function App() {
   return (
     <>
       <GlobalStyles />
 
-      {/* <ErrorBoundary> */}
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<FormPage />} /> */}
-          <Route path="/askquestion/form/" element={<FormPage />} />
+          <Route path="/" element={<FormPage />} />
 
           <Route path="/openforum/entry/:email/" element={<InitialPage />} />
 
@@ -36,7 +33,6 @@ function App() {
           <Route path="superadmin/edit/:answerId" element={<SAEPage />} />
         </Routes>
       </BrowserRouter>
-      {/* </ErrorBoundary> */}
     </>
   );
 }
