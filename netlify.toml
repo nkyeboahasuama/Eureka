@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/"
-  to = "/askquestion/form"
+  to = "/askquestion/form/"
   status = 200
