@@ -14,9 +14,6 @@ const AnswerField = () => {
   const admin = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
-  console.log(admin.id);
-  console.log(questionId);
-  console.log(body);
 
   const handleDraftAnswerSubmit = async () => {
     if (admin && questionId && body) {
@@ -39,7 +36,7 @@ const AnswerField = () => {
       <TextArea
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        style={{ height: "80%", margin: 0 }}
+        style={{ width: "100%", height: "80%", margin: 0 }}
         required
       />
       <Button onClick={handleDraftAnswerSubmit} variant="secondary">

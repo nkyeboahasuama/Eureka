@@ -44,13 +44,12 @@ const SAEPageQField = () => {
         <BodyContainer style={{ width: "5%", alignItems: "start" }}>
           <Icon
             style={{
-              fontSize: 25,
+              fontSize: "20px",
               width: "100%",
               textAlign: "left",
               marginRight: 0,
               display: "flex",
               alignItems: "start",
-
               justifyContent: "start",
             }}
             icon="mdi:help-circle-outline"

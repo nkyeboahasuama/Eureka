@@ -11,31 +11,62 @@ import { adminService, questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import DateComponent from "../../shared_components/date/Date";
+import { getQuestionById } from "../../functions/question";
+import AdminModal from "../adminModal/AdminModal";
 // import ErrorBoundary from "../../errorhandler/ErrorBoundary";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
   question?: IQuestionDocument | null;
+  questions: IQuestionDocument[];
   getQuestionsList: () => void;
+  newState?: (data: IQuestionDocument) => void;
 }
 
 const SAdminModal: React.FC<SAdminModalProps> = ({
   closeSAdminModal,
   question,
-  getQuestionsList,
+  newState,
 }) => {
   const handleValidation = async (status: ValidationStatusType) => {
     try {
       const user: IAdminDocument = JSON.parse(
         localStorage.getItem("isAdminLocal")!
       );
+      const admin: string = user.id;
 
       if (status === "approve" && question?.id && user.id) {
         await questionService.validateQuestion(user.id, question.id, status);
-        getQuestionsList();
+        const existingValidators = question.validators || [];
+        const updateValidators = [
+          ...existingValidators,
+          {
+            admin: admin,
+            status: status,
+          },
+        ];
+        const updateQuestion = {
+          ...question,
+          validators: updateValidators,
+        };
+        if (newState) newState(updateQuestion);
+        closeSAdminModal();
       } else if (status === "reject" && question?.id && user.id) {
         await questionService.validateQuestion(user.id, question.id, status);
-        getQuestionsList();
+        const existingValidators = question.validators || [];
+        const updateValidators = [
+          ...existingValidators,
+          {
+            admin: admin,
+            status: status,
+          },
+        ];
+        const updateQuestion = {
+          ...question,
+          validators: updateValidators,
+        };
+        if (newState) newState(updateQuestion);
+        closeSAdminModal();
       }
       closeSAdminModal();
     } catch (error) {

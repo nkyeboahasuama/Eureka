@@ -30,24 +30,28 @@ const SAdminQuestionField = () => {
   const getQuestionsList = async () => {
     const data = await questionService.getQuestions();
     setQuestions(data);
-    console.log(data);
     setLoading(false);
   };
 
   const verifySuperAdmin = () => {
     if (localStorage.getItem("isAdminLocal")) {
-      const SuperAdminDate = JSON.parse(localStorage.getItem("isAdminLocal")!);
-      console.log(SuperAdminDate);
-      if (SuperAdminDate.isSuper) {
-        console.log("Super User exists");
-      } else {
-        console.log("Is not Super admin");
-      }
+      JSON.parse(localStorage.getItem("isAdminLocal")!);
     } else {
       console.log("Does not exist");
     }
   };
+  console.log(questions);
 
+  const newState = (data: IQuestionDocument) => {
+    const newQuestions = questions.map((q) => {
+      if (q.id === data.id) {
+        return data;
+      } else {
+        return q;
+      }
+    });
+    setQuestions(newQuestions);
+  };
   const openSAdminModal = (question: IQuestionDocument) => {
     setSelectedQuestion(question);
     setModal(true);
@@ -65,6 +69,9 @@ const SAdminQuestionField = () => {
     setAdminModal(false);
   };
 
+  useEffect(() => {
+    console.log("yeou");
+  }, [selectedQuestion]);
   return (
     <>
       {loading ? (
@@ -108,7 +115,13 @@ const SAdminQuestionField = () => {
                     <Button
                       variant="secondary"
                       w="40%"
-                      style={{ borderRadius: 20, margin: 0 }}
+                      style={{
+                        borderRadius: 20,
+                        margin: 0,
+                        height: "30px",
+                        fontSize: "12px",
+                        width: "100px",
+                      }}
                       onClick={() => openSAdminModal(question)}
                     >
                       Review
@@ -131,23 +144,25 @@ const SAdminQuestionField = () => {
                       <Chips variant={question.availability} />
                     </BodyContainer>
                   </BodyContainer>
-                  {modal && (
-                    <SAdminModal
-                      getQuestionsList={getQuestionsList}
-                      closeSAdminModal={closeSAdminModal}
-                      question={selectedQuestion}
-                    />
-                  )}
-                  {adminModal && (
-                    <AdminModal
-                      question={selectedQuestion}
-                      closeAdminModal={closeAdminModal}
-                    />
-                  )}
                 </>
               )}
             </BodyContainer>
           ))}
+          {modal && (
+            <SAdminModal
+              getQuestionsList={getQuestionsList}
+              questions={questions}
+              newState={newState}
+              closeSAdminModal={closeSAdminModal}
+              question={selectedQuestion}
+            />
+          )}
+          {adminModal && (
+            <AdminModal
+              question={selectedQuestion}
+              closeAdminModal={closeAdminModal}
+            />
+          )}
         </BodyContainer>
       )}
     </>

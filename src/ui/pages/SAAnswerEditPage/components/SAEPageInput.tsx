@@ -54,7 +54,6 @@ const SAEPageInput = () => {
             answerId,
             textareaValue as string
           );
-          console.log("data");
           setTextareaValue("");
           navigate("/superadmin/validateanswers");
         } catch (error) {
@@ -66,7 +65,7 @@ const SAEPageInput = () => {
   return (
     <Container h="45%" w="90%">
       <TextArea
-        style={{ height: "80%", margin: "0" }}
+        style={{ width: "100%", height: "80%", margin: "0" }}
         value={textareaValue as string}
         onChange={handleTextareaChange}
       />

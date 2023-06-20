@@ -10,7 +10,7 @@ export const ModalWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* backdrop-filter: blur(0px); */
+  backdrop-filter: blur(3px);
 `;
 
 export const ModalContent = styled.div`

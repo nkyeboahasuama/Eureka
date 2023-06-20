@@ -38,19 +38,6 @@ const AdminModal: React.FC<AdminModalProps> = ({
     }
   }, [question]);
 
-  console.log(approvedValidated);
-
-  useEffect(() => {
-    const validations = question?.validators.filter(
-      (a) => a.status === "approve"
-    ).length;
-    if (validations) {
-      setApprovedValidated(validations);
-    }
-
-    console.log(validations);
-  }, [question]);
-
   const handleMarkQuestion = async () => {
     if (question) {
       try {
