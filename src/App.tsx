@@ -19,8 +19,8 @@ function App() {
       {/* <ErrorBoundary> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FormPage />} />
-          {/* <Route path="/askquestion/form/" element={<FormPage />} /> */}
+          {/* <Route path="/" element={<FormPage />} /> */}
+          <Route path="/askquestion/form/" element={<FormPage />} />
 
           <Route path="/openforum/entry/:email/" element={<InitialPage />} />
 
