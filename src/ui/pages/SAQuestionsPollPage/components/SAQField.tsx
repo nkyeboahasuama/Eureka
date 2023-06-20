@@ -36,11 +36,8 @@ const SAdminQuestionField = () => {
   const verifySuperAdmin = () => {
     if (localStorage.getItem("isAdminLocal")) {
       JSON.parse(localStorage.getItem("isAdminLocal")!);
-    } else {
-      console.log("Does not exist");
     }
   };
-  console.log(questions);
 
   const newState = (data: IQuestionDocument) => {
     const newQuestions = questions.map((q) => {
@@ -69,9 +66,6 @@ const SAdminQuestionField = () => {
     setAdminModal(false);
   };
 
-  useEffect(() => {
-    console.log("yeou");
-  }, [selectedQuestion]);
   return (
     <>
       {loading ? (

@@ -63,14 +63,3 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
 };
 
 export default FormField;
-{
-  /* <BodyContainer style={{ flexShrink: 0, height: "45%" }} w="90%">
-      <TextArea
-        style={{ height: "80%", margin: 0 }}
-        required
-      />
-      <Button onClick={handleSubmit} variant="secondary">
-        Submit your answer
-      </Button>
-    </BodyContainer> */
-}

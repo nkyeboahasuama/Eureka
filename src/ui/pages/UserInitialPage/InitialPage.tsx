@@ -17,20 +17,16 @@ const InitialPage = () => {
       try {
         if (email) {
           const data = await adminService.initAdmin(email);
-          console.log(data);
 
           if (data.isSuper) {
-            console.log("valid Super");
             redirect(`/superadmin/validatequestions`);
             localStorage.setItem("isAdminLocal", JSON.stringify(data));
           } else if (isValidAdmin(email)) {
             localStorage.setItem("isAdminLocal", JSON.stringify(data));
-            console.log("valid admin");
             redirect(`/admin/validquestions`);
           }
         }
       } catch (error) {
-        console.log("invalid admin or super");
         alert("You are not authorized to access this page");
         redirect("/askquestion/form/");
       }

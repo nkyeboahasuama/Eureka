@@ -27,9 +27,9 @@ const SAEPageQField = () => {
         fetchQuestion();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }, []);
+  }, [answerId]);
 
   return (
     <Container w="90%" align="start" h="40%" justify="space-between">
@@ -58,7 +58,6 @@ const SAEPageQField = () => {
         <BodyContainer
           style={{
             alignItems: "start",
-            //  backgroundColor: "green"
           }}
         >
           <Typography textalign="left" variant="h3" weight={600}>

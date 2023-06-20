@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Container from "../../shared_components/atoms/container/Container";
-import Date from "../../shared_components/date/Date";
 import UserEmail from "../../shared_components/user/UserEmail";
 import Button from "../../shared_components/atoms/button/Button";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";

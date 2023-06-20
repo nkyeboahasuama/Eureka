@@ -9,7 +9,6 @@ import Typography from "../../../shared_components/atoms/typography/Typography";
 import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
 import Loader from "../../../shared_components/loader/Loader";
 import { useNavigate } from "react-router";
-import DateComponent from "../../../shared_components/date/Date";
 
 const SAAField = () => {
   const [answers, setAnswers] = useState<IAnswerDocument[]>([]);
