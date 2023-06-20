@@ -28,9 +28,9 @@ const SAEPageInput = () => {
         fetchAnswer();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }, []);
+  }, [answerId]);
 
   const handleTextareaChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -41,9 +41,6 @@ const SAEPageInput = () => {
   const adminId = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
-
-  console.log(adminId);
-  console.log(answer);
 
   const handleSubmit = async () => {
     if (adminId && answerId && textareaValue) {
@@ -57,7 +54,7 @@ const SAEPageInput = () => {
           setTextareaValue("");
           navigate("/superadmin/validateanswers");
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
     }

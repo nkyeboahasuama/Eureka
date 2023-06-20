@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "../../shared_components/atoms/container/Container";
-import Date from "../../shared_components/date/Date";
 import UserEmail from "../../shared_components/user/UserEmail";
 import Button from "../../shared_components/atoms/button/Button";
 
 import Typography from "../../shared_components/atoms/typography/Typography";
 import { ModalContent, ModalWrapper } from "../modalStyles/ModalStyles";
 import { IQuestionDocument, ValidationStatusType } from "../../../core";
-import { adminService, questionService } from "../../../services";
+import { questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import DateComponent from "../../shared_components/date/Date";
-import { getQuestionById } from "../../functions/question";
-import AdminModal from "../adminModal/AdminModal";
-// import ErrorBoundary from "../../errorhandler/ErrorBoundary";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
@@ -76,7 +72,6 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   };
 
   return (
-    // <ErrorBoundary>
     <ModalWrapper>
       <ModalContent>
         <Container
@@ -115,7 +110,6 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
         </Button>
       </ModalContent>
     </ModalWrapper>
-    // </ErrorBoundary>
   );
 };
 

@@ -1,6 +1,5 @@
 import { IAdminDocument } from "../../../core";
 import Container from "../atoms/container/Container";
-import Typography from "../atoms/typography/Typography";
 import HeaderStyles from "./HeaderStyles";
 import React, { ReactNode } from "react";
 

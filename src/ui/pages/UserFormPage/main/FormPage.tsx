@@ -15,15 +15,11 @@ const FormPage = () => {
   const userFnc = (identity: string) => {
     if (identity.trim().length > 0) {
       setUser(identity);
-    } else {
-      console.log("Cannot submit texts less than 5 characters");
     }
   };
   const bodyFnc = (body: string) => {
     if (body.trim().length > 0) {
       setBody(body);
-    } else {
-      console.log("Body cannot have less than 5 characters");
     }
   };
 
@@ -39,12 +35,11 @@ const FormPage = () => {
     }
 
     try {
-      const res = await questionService.addQuestion(payload);
+      await questionService.addQuestion(payload);
 
-      console.log(res);
       navigate("/askquestion/success");
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
     }
     navigate("/askquestion/success");
   };

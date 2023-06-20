@@ -6,7 +6,6 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { questionService } from "../../../../services";
 import { IQuestionDocument } from "../../../../core";
-import { answerService } from "../../../../services/answer.service";
 import Navigations from "../../../shared_components/navLinks/Navigations";
 
 const AdminPage = () => {
@@ -25,13 +24,12 @@ const AdminPage = () => {
     const getAllQuestions = async () => {
       const allQuestions = await questionService.getQuestions();
       setQuestions(allQuestions);
-      console.log(allQuestions);
     };
     getValidatedQuestionsList();
     if (!question) {
       getAllQuestions();
     }
-  }, []);
+  }, [question]);
 
   return (
     <Container justify="space-between">

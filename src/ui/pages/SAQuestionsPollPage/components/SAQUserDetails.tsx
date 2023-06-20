@@ -9,7 +9,7 @@ interface ISuperAdminUserProps {
 
 const SAQUserDetails: React.FC<ISuperAdminUserProps> = ({ user }) => {
   return (
-    <BodyContainer justify="space-between" w="100%" fd="row" m="10px 0">
+    <BodyContainer justify="space-between" w="100%" fd="row" m="7px 0">
       <Date />
       <UserEmail user={user} />
     </BodyContainer>
