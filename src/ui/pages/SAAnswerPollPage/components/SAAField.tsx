@@ -16,13 +16,18 @@ const SAAField = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const answers = async () => {
-      const data = await answerService.getAnswers();
-      setAnswers(data);
-      setLoading(false);
+    const getAnswers = async () => {
+      try {
+        const data = await answerService.getAnswers();
+        setAnswers(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
     };
-    answers();
-  }, [answers]);
+    getAnswers();
+  }, []);
 
   return (
     <>
