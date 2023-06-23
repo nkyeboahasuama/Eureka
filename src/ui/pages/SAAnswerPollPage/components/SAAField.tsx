@@ -15,14 +15,21 @@ const SAAField = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  console.log("in here");
   useEffect(() => {
-    const answers = async () => {
-      const data = await answerService.getAnswers();
-      setAnswers(data);
-      setLoading(false);
+    const getAnswers = async () => {
+      console.log("in useEffect");
+      try {
+        const data = await answerService.getAnswers();
+        setAnswers(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
     };
-    answers();
-  }, [answers]);
+    getAnswers();
+  }, []);
 
   return (
     <>
