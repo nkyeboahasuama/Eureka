@@ -10,7 +10,6 @@ export interface BaseProps extends React.HTMLAttributes<HTMLParagraphElement> {
 
 export const Base = styled.p<BaseProps>`
   font-size: 14px;
-  word-wrap: break-word;
   font-weight: 300;
   padding: ${({ p }) => p || "0px"};
   margin: ${({ m }) => m || "0px"};

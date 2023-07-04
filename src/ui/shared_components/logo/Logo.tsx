@@ -1,10 +1,14 @@
+import { icons } from "../../assets";
 import Container from "../atoms/container/Container";
-import { LogoStyles } from "./LogoStyles";
 
-const Logo = () => {
+interface LogoProps {
+  icon?: any;
+}
+
+const Logo = ({ icon = icons.ic_logoLt }: LogoProps) => {
   return (
-    <Container h="35px" align="start" justify="end">
-      <LogoStyles />
+    <Container h="55px" align="start" justify="end">
+      <img src={icon} style={{ height: "50px", width: "45px" }} />
     </Container>
   );
 };

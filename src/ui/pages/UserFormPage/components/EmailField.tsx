@@ -25,10 +25,7 @@ const EmailField: React.FC<IuserFnc> = ({ userFnc }) => {
         <Logo />
         <BodyContainer style={{ alignItems: "start" }}>
           <Typography textalign="start" variant="h1">
-            Share your worries
-          </Typography>
-          <Typography textalign="start" variant="normal" m="2px 0 ">
-            An amazing lorem ipsum is used for dummy texts
+            Welcome to Eureka.
           </Typography>
         </BodyContainer>
 
