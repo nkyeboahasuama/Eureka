@@ -21,10 +21,10 @@ export interface ButtonProps
 
 export const BaseButton = styled.button<ButtonProps>`
   // Default styles
-  height: 40px;
+  height: 50px;
   border: none;
   font-family: "Montserrat", sans-serif;
-  margin: 10px;
+  margin: 15px 10px 10px 10px;
   cursor: pointer;
   text-align: center;
   display: flex;
@@ -36,7 +36,7 @@ export const BaseButton = styled.button<ButtonProps>`
   // Variant styles
   color: ${(props) => props.color || "white"};
   background-color: ${(props) => props.bg || "black"};
-  font-size: ${(props) => props.size || "14px"};
+  font-size: ${(props) => props.size || "12px"};
   border-radius: ${(props) => props.radius};
   width: ${(props) => props.w || "100%"};
 
