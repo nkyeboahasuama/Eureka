@@ -74,9 +74,6 @@ const AdminModal: React.FC<AdminModalProps> = ({
 
   const unMarkedValidatedQuestion = !marked && approvedValidated > 1;
 
-  const unMarkedUnvalidatedQuestion = !marked && approvedValidated < 2;
-
-  const closedQuestion = availability === "closed";
   return (
     <>
       {question && (
@@ -84,59 +81,44 @@ const AdminModal: React.FC<AdminModalProps> = ({
           <ModalContent>
             <Container
               justify="start"
-              p="0 10px"
+              m="0 0 20px 0"
               variant="primary"
-              h="70vh"
-              w="80vw"
+              h="65vh"
+              w="100%"
             >
-              <Container h="10%" w="95%" m=" 5px 0px" fd="row" align="start">
+              <Container h="10%" w="90%" m=" 5px 0px" fd="row" align="start">
                 <DateComponent date={markedAt} />
                 <UserEmail user={user} />
               </Container>
               <BodyContainer
+                w="90%"
                 justify="start"
                 lh="2.0"
-                style={{ overflow: "scroll" }}
+                style={{ overflow: "auto" }}
               >
                 {<Typography variant="h3">{body}</Typography>}
-                {isMarkedByLoggedUser && (
-                  <Typography variant="small">
-                    Marked by you, {markedBy}!{" "}
-                  </Typography>
-                )}{" "}
-                {isNotMarkedByLoggedUser && (
-                  <Typography variant="small">
-                    Marked by {markedBy}, not you!{" "}
-                  </Typography>
-                )}
               </BodyContainer>
             </Container>
             {openQuestionMarkedByLoggedUser && (
               <Button
                 onClick={() => navigate(`/questions/question/${id}`)}
-                style={{
-                  backgroundColor: "rgba(3, 180, 120, 0.5)",
-                  color: "white",
-                }}
+                variant="accept"
               >
-                I would like to answer now!
+                Proced to answer
               </Button>
             )}{" "}
             {unMarkedValidatedQuestion && (
               <Button variant="accept" onClick={handleMarkQuestion}>
-                Want to answer?
+                Proceed to answer
               </Button>
             )}{" "}
-            {unMarkedUnvalidatedQuestion && (
-              <Button variant="disabled">Question needs validation!</Button>
-            )}{" "}
-            {closedQuestion && (
-              <Button variant="disabled">Question is closed!</Button>
-            )}{" "}
             {openQuestionNotMarkedByLoggedUser && (
-              <Button variant="disabled">Someone in here!</Button>
+              <Button variant="warning">
+                Question has been marked to be answered by another user !
+              </Button>
             )}
             <Button
+              style={{ marginTop: 10 }}
               w="100%"
               onClick={() => closeAdminModal()}
               variant="secondary"

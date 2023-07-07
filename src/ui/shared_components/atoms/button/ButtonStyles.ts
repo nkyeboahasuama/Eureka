@@ -3,7 +3,13 @@ import styled from "styled-components";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "reject" | "accept" | "disabled";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "reject"
+    | "accept"
+    | "disabled"
+    | "warning";
   bg?: string;
   color?: string;
   size?: string;
@@ -61,5 +67,10 @@ export const ButtonVariants = {
     background-color: #eaf7ec;
     color: gray;
     cursor: not-allowed;
+  `,
+  warning: styled(BaseButton)`
+    background-color: transparent;
+    color: #ffcc00;
+    cursor: default;
   `,
 };
