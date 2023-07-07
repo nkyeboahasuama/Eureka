@@ -9,8 +9,14 @@ interface IUserEmail {
 
 const UserEmail: React.FC<IUserEmail> = ({ user }) => {
   return (
-    <Container justify="end" h="30px" w="fit" fd="row">
-      <Icon style={{ fontSize: "13px", marginRight: 5 }} icon="mdi:account" />
+    <Container
+      justify="end"
+      h="30px"
+      w="fit"
+      fd="row"
+      style={{ fontSize: "15px" }}
+    >
+      <Icon style={{ marginRight: 5 }} icon="mdi:account" />
       <Typography variant="small" weight={600}>
         {user}
       </Typography>

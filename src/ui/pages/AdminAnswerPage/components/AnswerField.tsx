@@ -33,12 +33,7 @@ const AnswerField = () => {
 
   return (
     <BodyContainer style={{ flexShrink: 0, height: "45%" }} w="90%">
-      <TextArea
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        style={{ width: "100%", height: "80%", margin: 0 }}
-        required
-      />
+      <TextArea value={body} onChange={(e) => setBody(e.target.value)} />
       <Button onClick={handleDraftAnswerSubmit} variant="secondary">
         Submit your answer
       </Button>

@@ -13,7 +13,7 @@ import DateComponent from "../../shared_components/date/Date";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
-  question?: IQuestionDocument | null;
+  question: IQuestionDocument | null;
   questions: IQuestionDocument[];
   getQuestionsList: () => void;
   newState?: (data: IQuestionDocument) => void;
@@ -67,42 +67,52 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
       closeSAdminModal();
     } catch (error) {
       console.error(error);
-      throw error;
     }
   };
+
+  const maximumValidators = question?.validators.length === 3;
+  const closedQuestion = question?.availability === "closed";
+
+  const hideValidationButtons = maximumValidators || closedQuestion;
 
   return (
     <ModalWrapper>
       <ModalContent>
         <Container
           justify="start"
-          p="0 10px"
+          m="0 0 20px 0"
           variant="primary"
-          h="60vh"
-          w="80vw"
+          h={hideValidationButtons ? "65vh" : "55vh"}
+          w="100%"
         >
-          <Container w="95%" m="5px 0" h="10%" fd="row" align="start">
+          <Container w="90%" m="5px 0" h="10%" fd="row" align="start">
             <DateComponent date={question?.markedAt} />
             <UserEmail user={question?.user} />
           </Container>
           <BodyContainer
+            w="90%"
             justify="start"
             lh="2.0"
-            style={{ overflow: "scroll" }}
+            style={{ overflow: "auto" }}
           >
             <Typography variant="h3">{question?.body}</Typography>
           </BodyContainer>
         </Container>
-        <Container h="fit">
-          <Button variant="accept" onClick={() => handleValidation("approve")}>
-            Accept
-          </Button>
-          <Button variant="reject" onClick={() => handleValidation("reject")}>
-            Reject
-          </Button>
-        </Container>
+        {!hideValidationButtons && (
+          <Container h="fit" m="0 0 20px 0">
+            <Button
+              variant="accept"
+              onClick={() => handleValidation("approve")}
+            >
+              Accept
+            </Button>
+            <Button variant="reject" onClick={() => handleValidation("reject")}>
+              Reject
+            </Button>
+          </Container>
+        )}
         <Button
-          style={{ marginTop: 40 }}
+          style={{ marginTop: 10 }}
           onClick={closeSAdminModal}
           variant="secondary"
         >

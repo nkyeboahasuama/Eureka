@@ -6,7 +6,7 @@ export const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,6 +14,7 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContent = styled.div`
+  width: 85%;
   display: flex;
   flex-direction: column;
   justify-content: center;
