@@ -62,7 +62,6 @@ const SAEPageInput = () => {
   return (
     <Container h="45%" w="90%">
       <TextArea
-        style={{ width: "100%", height: "80%", margin: "0" }}
         value={textareaValue as string}
         onChange={handleTextareaChange}
       />

@@ -40,6 +40,7 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
             height: "100%",
             margin: 0,
             width: "100%",
+            justifyContent: "space-between",
           }}
           w="90%"
         >
@@ -47,8 +48,7 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
             style={{
               margin: 0,
               backgroundColor: "black",
-              width: "100%",
-              height: "100%",
+
               color: "white",
             }}
             onChange={handleChange}
