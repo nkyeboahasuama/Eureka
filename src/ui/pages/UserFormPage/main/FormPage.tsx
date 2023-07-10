@@ -28,9 +28,20 @@ const FormPage = () => {
     body: body,
   };
 
+  function validateEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  const isValidEmail = validateEmail(user);
+
   const handleSubmit = async () => {
-    if (user.trim().length < 0 || body.trim().length < 0) {
-      alert("User field cannot be empty");
+    if (isValidEmail) {
+      if (body.trim().length <= 0) {
+        alert("Question field cannot be empty");
+        return;
+      }
+    } else {
+      alert("Invalid user email");
       return;
     }
 

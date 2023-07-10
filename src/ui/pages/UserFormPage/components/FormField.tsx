@@ -27,35 +27,44 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
 
   return (
     <>
-      <BodyContainer text="left" align="start" w="90%">
-        <Typography variant="h2">What is on your mind?</Typography>
-        <Typography variant="normal">
-          Share your thoughts with an amazing community of leaders.
-        </Typography>
-      </BodyContainer>
-      <BodyContainer w="90%" style={{ height: "75%" }}>
-        <BodyContainer
-          style={{
-            flexShrink: 0,
-            height: "100%",
-            margin: 0,
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-          w="90%"
-        >
-          <TextArea
+      <BodyContainer
+        style={{
+          height: "100%",
+          display: "flex",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <BodyContainer text="left" align="start" w="90%">
+          <Typography variant="h2">What is on your mind?</Typography>
+          <Typography variant="normal">
+            Share your thoughts with an amazing community.
+          </Typography>
+        </BodyContainer>
+        <BodyContainer w="90%" style={{ height: "75%" }}>
+          <BodyContainer
             style={{
+              flexShrink: 0,
+              height: "100%",
               margin: 0,
-              backgroundColor: "black",
-
-              color: "white",
+              width: "100%",
+              justifyContent: "space-between",
             }}
-            onChange={handleChange}
-          />
-          <Button onClick={handleSubmit} variant="primary">
-            Submit your question
-          </Button>
+            w="90%"
+          >
+            <TextArea
+              style={{
+                height: "80%",
+                margin: 0,
+                backgroundColor: "black",
+
+                color: "white",
+              }}
+              onChange={handleChange}
+            />
+            <Button onClick={handleSubmit} variant="primary">
+              Submit
+            </Button>
+          </BodyContainer>
         </BodyContainer>
       </BodyContainer>
     </>

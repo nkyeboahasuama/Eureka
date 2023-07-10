@@ -10,7 +10,7 @@ const SuccessField = () => {
       <BodyContainer text="left" w="90%">
         <Typography variant="h1">{"\u{1F389}"}Congratulations!</Typography>
         <Typography variant="normal">
-          An answer will be sent to via your mail soon.
+          An answer will be sent to you via email.
         </Typography>
       </BodyContainer>
       <BodyContainer w="90%" style={{ height: "75%" }}>
