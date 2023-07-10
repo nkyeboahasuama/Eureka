@@ -65,15 +65,7 @@ const SAEPageInput = () => {
         value={textareaValue as string}
         onChange={handleTextareaChange}
       />
-      {adminId.id === answer?.admin ? (
-        <Button
-          style={{ border: "black 1px solid" }}
-          onClick={handleSubmit}
-          variant="disabled"
-        >
-          Not allowed to review
-        </Button>
-      ) : (
+      {adminId.id !== answer?.admin && (
         <Button onClick={handleSubmit} variant="secondary">
           Submit Review
         </Button>

@@ -79,7 +79,7 @@ const SAdminQuestionField = () => {
           style={{ overflow: "scrollY" }}
           w="90%"
           text="left"
-          m="20px 0"
+          m="10px 0"
         >
           {questions.map((question) => (
             <BodyContainer key={question.id}>
@@ -103,7 +103,7 @@ const SAdminQuestionField = () => {
 
                   <BodyContainer
                     justify="space-between"
-                    m="0 0 40px 0"
+                    m="0 0 25px 0"
                     fd="row"
                   >
                     <Button

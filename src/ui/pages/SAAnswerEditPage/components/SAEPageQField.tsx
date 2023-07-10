@@ -32,7 +32,7 @@ const SAEPageQField = () => {
   }, [answerId]);
 
   return (
-    <Container w="90%" align="start" h="40%" justify="space-between">
+    <Container w="90%" justify="start" align="start" h="40%">
       <InfoField user={questionBody?.user} />
       <Container
         w="100%"

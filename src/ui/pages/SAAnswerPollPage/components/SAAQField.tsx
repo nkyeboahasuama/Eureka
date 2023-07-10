@@ -24,7 +24,7 @@ const SAAQField: React.FC<ISAAQFieldProps> = ({ question }) => {
     fetchQuestion();
   }, [question]);
   return (
-    <Container w="100%" h="50px" justify="start" fd="row" align="center">
+    <Container w="100%" h="30px" justify="start" fd="row" align="center">
       <BodyContainer
         style={{
           width: "20px",

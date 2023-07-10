@@ -12,11 +12,11 @@ const BackBtn = () => {
       style={{
         marginLeft: 0,
         borderRadius: "30px",
-        width: "30px",
-        height: "30px",
+        width: "28px",
+        height: "28px",
         display: "flex",
         justifyContent: "center",
-        fontSize: "20px",
+        fontSize: "15px",
       }}
     >
       <Icon icon="ion:chevron-back" />

@@ -4,7 +4,7 @@ import logo from "../../../assets/logo_eureka.svg";
 
 const HeaderStyles = () => {
   return (
-    <Container h="35px" align="end" justify="end">
+    <Container h="35px" align="start" justify="start">
       <LogoStyles>
         {" "}
         <img width={"100%"} src={logo} alt="Logo" />
