@@ -24,11 +24,12 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   question,
   newState,
 }) => {
+  const user: IAdminDocument = JSON.parse(
+    localStorage.getItem("isAdminLocal")!
+  );
+
   const handleValidation = async (status: ValidationStatusType) => {
     try {
-      const user: IAdminDocument = JSON.parse(
-        localStorage.getItem("isAdminLocal")!
-      );
       const admin: string = user.id;
 
       if (status === "approve" && question?.id && user.id) {
@@ -73,7 +74,12 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   const maximumValidators = question?.validators.length === 3;
   const closedQuestion = question?.availability === "closed";
 
-  const hideValidationButtons = maximumValidators || closedQuestion;
+  const adminValidatedQuestion =
+    question?.validators.length &&
+    question?.validators.find((validator) => validator.admin === user.id);
+
+  const hideValidationButtons =
+    maximumValidators || closedQuestion || adminValidatedQuestion;
 
   return (
     <ModalWrapper>
