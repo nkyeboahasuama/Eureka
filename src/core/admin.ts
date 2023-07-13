@@ -1,26 +1,17 @@
+import { AdminManager } from "./admin.user";
 import { IAdminDocument, IQuestionDocument } from "./interfaces";
 
-//
-export const superAdmins = [
-  "sp@gmail.com",
-  "anthony@gmail.com",
-  "snana@gmail.com",
-];
-export const admins = ["ad@gmail.com", "admin@gmail.com", "nana@gmail.com"];
-//
-
 export function isValidAdmin(email: string) {
-  const combined = superAdmins.concat(admins);
-  return combined.includes(email);
+  return AdminManager.allAdmins.includes(email);
 }
 
 export function isSuperAdmin(email: string) {
-  if (superAdmins.includes(email)) return true;
+  if (AdminManager.superAdmins.includes(email)) return true;
   return false;
 }
 
 export function isAdmin(email: string) {
-  if (admins.includes(email)) return true;
+  if (AdminManager.admins.includes(email)) return true;
   return false;
 }
 
