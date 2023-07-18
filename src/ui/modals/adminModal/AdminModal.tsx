@@ -23,16 +23,8 @@ const AdminModal: React.FC<AdminModalProps> = ({
   question,
 }) => {
   const [approvedValidated, setApprovedValidated] = useState(0);
-  const {
-    user,
-    marked,
-    markedBy,
-    markedAt,
-    availability,
-    id,
-    validators,
-    body,
-  } = question || {};
+  const { user, marked, markedBy, availability, id, validators, body } =
+    question || {};
   const navigate = useNavigate();
 
   const AdminData = localStorage.getItem("isAdminLocal")
@@ -88,7 +80,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
               w="100%"
             >
               <Container h="10%" w="90%" m=" 5px 0px" fd="row" align="start">
-                <DateComponent date={markedAt} />
+                <DateComponent date={question.createdAt} />
                 <UserEmail user={user} />
               </Container>
               <BodyContainer

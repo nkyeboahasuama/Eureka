@@ -85,7 +85,10 @@ const SAdminQuestionField = () => {
             <BodyContainer key={question.id}>
               {question.user && question.body && (
                 <>
-                  <SAQUserDetails user={question.user} />
+                  <SAQUserDetails
+                    user={question.user}
+                    date={question.createdAt}
+                  />
 
                   <Typography
                     style={{

@@ -20,7 +20,7 @@ const QuestionField: React.FC<IQuestion> = ({ question }) => {
         align="start"
         justify="space-between"
       >
-        <InfoField user={question?.user} />
+        <InfoField date={question?.createdAt} user={question?.user} />
         {question === undefined ? (
           <Loader />
         ) : (

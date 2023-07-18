@@ -34,8 +34,11 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
       const admin: string = user.id;
 
       if (status === "approve" && question?.id && user.id) {
+        toast("Accepting question...");
+
         await questionService.validateQuestion(user.id, question.id, status);
         toast("Question accepted successfully");
+        closeSAdminModal();
 
         const existingValidators = question.validators || [];
         const updateValidators = [
@@ -50,10 +53,12 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           validators: updateValidators,
         };
         if (newState) newState(updateQuestion);
-        closeSAdminModal();
       } else if (status === "reject" && question?.id && user.id) {
+        toast("Rejecting question...");
+
         await questionService.validateQuestion(user.id, question.id, status);
         toast("Question rejected successfully");
+        closeSAdminModal();
 
         const existingValidators = question.validators || [];
         const updateValidators = [
@@ -68,11 +73,10 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           validators: updateValidators,
         };
         if (newState) newState(updateQuestion);
-        closeSAdminModal();
       }
-      closeSAdminModal();
     } catch (error) {
       console.error(error);
+      // toast.error(error);
     }
   };
 
@@ -97,7 +101,7 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           w="100%"
         >
           <Container w="90%" m="5px 0" h="10%" fd="row" align="start">
-            <DateComponent date={question?.markedAt} />
+            <DateComponent date={question?.createdAt} />
             <UserEmail user={question?.user} />
           </Container>
           <BodyContainer

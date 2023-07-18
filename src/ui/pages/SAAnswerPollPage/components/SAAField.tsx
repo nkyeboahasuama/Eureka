@@ -49,7 +49,7 @@ const SAAField = () => {
             <BodyContainer key={answer.id}>
               {answer.admin && answer.body && (
                 <>
-                  <Date />
+                  <Date date={answer.createdAt} />
                   <SAAQField question={answer.question} />
                   <Typography
                     style={{

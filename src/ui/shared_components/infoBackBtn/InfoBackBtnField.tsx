@@ -19,8 +19,7 @@ const InfoField: React.FC<IInfoProps> = ({ user, date }) => {
     >
       <BackBtn />
       <Container h="45px" m="5px 0 0 0" align="start" fd="row">
-        {/* Remember to add the date prop to the Date component */}
-        <Date />
+        <Date date={date} />
         <UserEmail user={user} />
       </Container>
     </Container>

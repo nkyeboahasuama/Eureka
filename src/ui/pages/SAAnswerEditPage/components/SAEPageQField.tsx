@@ -33,7 +33,7 @@ const SAEPageQField = () => {
 
   return (
     <Container w="90%" justify="start" align="start" h="40%">
-      <InfoField user={questionBody?.user} />
+      <InfoField date={questionBody?.createdAt} user={questionBody?.user} />
       <Container
         w="100%"
         h="150px"
