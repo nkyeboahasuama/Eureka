@@ -1,6 +1,8 @@
 import { IQuestion, ValidationStatusType } from "../core";
 import { checkIfAdminCanValidateQuestion } from "../core/admin";
 import { AdminRepo, AnswerRepo, QuestionRepo } from "../infras/cloud";
+import { NotifyAdmins } from "./adminNotification.service";
+import { NotifySuperAdmins } from "./superAdminNotification.service";
 
 const addQuestion = async (payload: Pick<IQuestion, "body" | "user">) => {
   const $payload: IQuestion = {
@@ -12,6 +14,10 @@ const addQuestion = async (payload: Pick<IQuestion, "body" | "user">) => {
     markedBy: null,
   };
   await QuestionRepo.addDoc($payload);
+  await NotifySuperAdmins({
+    subject: "Eureka Community💡: New Question🙋🏻‍♀️🙋🏽. Please Validate",
+    message: payload.body,
+  });
   return $payload;
 };
 
@@ -33,6 +39,16 @@ const validateQuestion = async (
     status,
   };
   await QuestionRepo.addValidator(questionId, validator);
+  // if at least two checks, send notification to admins about a new question
+  const approvedLen = [...question.validators, { status }].filter(
+    (val) => val.status === "approve"
+  );
+  if (approvedLen.length >= 2) {
+    await NotifyAdmins({
+      message: "Eureka Community💡: New Question🙋🏻‍♀️🙋🏽.",
+      subject: question.body,
+    });
+  }
 };
 
 const markQuestion = async (adminId: string, questionId: string) => {
