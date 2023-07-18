@@ -9,6 +9,7 @@ import Typography from "../../../shared_components/atoms/typography/Typography";
 import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
 import Loader from "../../../shared_components/loader/Loader";
 import { useNavigate } from "react-router";
+import { AppRoutes } from "../../../types/routing";
 
 const SAAField = () => {
   const [answers, setAnswers] = useState<IAnswerDocument[]>([]);
@@ -59,7 +60,9 @@ const SAAField = () => {
                       ...lineClampStyle,
                     }}
                     variant="h3"
-                    onClick={() => navigate(`/superadmin/edit/${answer.id}`)}
+                    onClick={() =>
+                      navigate(`${AppRoutes.SADMIN_ANSWERS}/${answer.id}`)
+                    }
                   >
                     {answer.body}
                   </Typography>

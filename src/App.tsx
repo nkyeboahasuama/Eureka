@@ -9,28 +9,38 @@ import SAAPage from "./ui/pages/SAAnswerPollPage/main/SAAPage";
 import SAQPage from "./ui/pages/SAQuestionsPollPage/main/SAQPage";
 import SAEPage from "./ui/pages/SAAnswerEditPage/main/SAEPage";
 import InitialPage from "./ui/pages/UserInitialPage/InitialPage";
+import { AppRoutes } from "./ui/types/routing";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FormPage />} />
+          <Route path={AppRoutes.ROOT} element={<FormPage />} />
 
-          <Route path="/openforum/entry/:email/" element={<InitialPage />} />
+          <Route path={AppRoutes.FORM_SUCCESS} element={<SuccessPage />} />
 
-          <Route path="askquestion/success" element={<SuccessPage />} />
+          <Route
+            path={`${AppRoutes.SETUP}/:email/`}
+            element={<InitialPage />}
+          />
 
-          <Route path="/admin/validquestions" element={<QuestionsPage />} />
+          <Route path={AppRoutes.ADMIN_QUESTIONS} element={<QuestionsPage />} />
 
-          <Route path="/questions/question/:id" element={<AdminPage />} />
+          <Route
+            path={`${AppRoutes.ADMIN_QUESTIONS}/:id`}
+            element={<AdminPage />}
+          />
 
-          <Route path="/superadmin/validatequestions" element={<SAQPage />} />
+          <Route path={AppRoutes.SADMIN_QUESTIONS} element={<SAQPage />} />
 
-          <Route path="/superadmin/validateanswers" element={<SAAPage />} />
-          <Route path="superadmin/edit/:answerId" element={<SAEPage />} />
+          <Route path={AppRoutes.SADMIN_ANSWERS} element={<SAAPage />} />
+
+          <Route
+            path={`${AppRoutes.SADMIN_ANSWERS}/:answerId`}
+            element={<SAEPage />}
+          />
         </Routes>
       </BrowserRouter>
     </>

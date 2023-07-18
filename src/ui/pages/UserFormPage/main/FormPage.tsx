@@ -6,6 +6,7 @@ import { useState } from "react";
 import { IQuestion } from "../../../../core";
 import { useNavigate } from "react-router";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
+import { AppRoutes } from "../../../types/routing";
 
 const FormPage = () => {
   const [user, setUser] = useState("");
@@ -47,12 +48,10 @@ const FormPage = () => {
 
     try {
       await questionService.addQuestion(payload);
-
-      navigate("/askquestion/success");
+      navigate(AppRoutes.FORM_SUCCESS);
     } catch (error: any) {
       console.error(error);
     }
-    navigate("/askquestion/success");
   };
   return (
     <Container justify="space-between">

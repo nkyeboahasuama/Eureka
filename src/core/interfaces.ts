@@ -4,6 +4,11 @@ export type ResourceAvailabilityType = "open" | "closed";
 export type ValidationStatusType = "approve" | "reject";
 export type QuestionValidationStatus = "pending" | "rejected" | "approved";
 
+export interface Document {
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface IValidator {
   admin: string;
   status: ValidationStatusType;
@@ -19,9 +24,11 @@ export interface IQuestion {
   availability: ResourceAvailabilityType;
 }
 
-export interface IQuestionDocument extends IQuestion {
+export interface IQuestionDocument extends IQuestion, Document {
   id: string;
   validationStatus: QuestionValidationStatus;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IAdmin {
@@ -30,7 +37,7 @@ export interface IAdmin {
   isSuper: boolean;
 }
 
-export interface IAdminDocument extends IAdmin {
+export interface IAdminDocument extends IAdmin, Document {
   id: string;
 }
 
@@ -38,7 +45,7 @@ export interface ISuperAdmin extends IAdmin {
   isSuper: true;
 }
 
-export interface ISuperAdminDocument extends ISuperAdmin {
+export interface ISuperAdminDocument extends ISuperAdmin, Document {
   id: string;
 }
 
@@ -52,6 +59,6 @@ export interface IAnswer {
   submittedBy: string | null;
 }
 
-export interface IAnswerDocument extends IAnswer {
+export interface IAnswerDocument extends IAnswer, Document {
   id: string;
 }
