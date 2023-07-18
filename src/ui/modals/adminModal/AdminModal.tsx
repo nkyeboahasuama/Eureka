@@ -10,6 +10,7 @@ import { BodyContainer } from "../../shared_components/atoms/container/Container
 import { questionService } from "../../../services";
 import { useState } from "react";
 import DateComponent from "../../shared_components/date/Date";
+import { AppRoutes } from "../../types/routing";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
@@ -54,7 +55,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
 
         if (adminId !== markedBy) {
           await questionService.markQuestion(adminId, id ?? "");
-          navigate(`/questions/question/${id}`);
+          navigate(`${AppRoutes.ADMIN_QUESTIONS}/${id}`);
         }
       } catch (error) {
         console.error(error);
@@ -101,7 +102,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
             </Container>
             {openQuestionMarkedByLoggedUser && (
               <Button
-                onClick={() => navigate(`/questions/question/${id}`)}
+                onClick={() => navigate(`${AppRoutes.ADMIN_QUESTIONS}/${id}`)}
                 variant="accept"
               >
                 Proced to answer

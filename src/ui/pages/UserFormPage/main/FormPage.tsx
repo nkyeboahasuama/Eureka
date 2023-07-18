@@ -6,6 +6,7 @@ import { useState } from "react";
 import { IQuestion } from "../../../../core";
 import { useNavigate } from "react-router";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
+import { AppRoutes } from "../../../types/routing";
 
 import { toast } from "react-toastify";
 
@@ -50,9 +51,9 @@ const FormPage = () => {
     try {
       toast("Submitting question...");
       await questionService.addQuestion(payload);
-      navigate("/askquestion/success");
 
       toast("Question submitted");
+      navigate(AppRoutes.FORM_SUCCESS);
     } catch (error: any) {
       toast.error(error);
     }

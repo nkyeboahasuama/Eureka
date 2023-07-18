@@ -4,6 +4,7 @@ import { BodyContainer } from "../../../shared_components/atoms/container/Contai
 import { useState } from "react";
 import { answerService } from "../../../../services/answer.service";
 import { useParams, useNavigate } from "react-router";
+import { AppRoutes } from "../../../types/routing";
 
 const AnswerField = () => {
   const [body, setBody] = useState("");
@@ -21,9 +22,9 @@ const AnswerField = () => {
         await answerService.submitDraftAnswer(admin.id, questionId, body);
         setBody("");
         if (admin.isSuper) {
-          navigate("/superadmin/validatequestions");
+          navigate(AppRoutes.SADMIN_QUESTIONS);
         } else {
-          navigate("/admin/validquestions");
+          navigate(AppRoutes.ADMIN_QUESTIONS);
         }
       } catch (error) {
         console.error(error);
