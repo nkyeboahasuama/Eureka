@@ -14,10 +14,10 @@ const addQuestion = async (payload: Pick<IQuestion, "body" | "user">) => {
     markedBy: null,
   };
   await QuestionRepo.addDoc($payload);
-  await NotifySuperAdmins({
-    subject: "Eureka Community💡: New Question🙋🏻‍♀️🙋🏽. Please Validate",
-    message: payload.body,
-  });
+  // await NotifySuperAdmins({
+  //   subject: "Eureka Community💡: New Question🙋🏻‍♀️🙋🏽. Please Validate",
+  //   message: payload.body,
+  // });
   return $payload;
 };
 
@@ -44,10 +44,10 @@ const validateQuestion = async (
     (val) => val.status === "approve"
   );
   if (approvedLen.length >= 2) {
-    await NotifyAdmins({
-      message: "Eureka Community💡: New Question🙋🏻‍♀️🙋🏽.",
-      subject: question.body,
-    });
+    // await NotifyAdmins({
+    //   message: "Eureka Community💡: New Question🙋🏻‍♀️🙋🏽.",
+    //   subject: question.body,
+    // });
   }
 };
 

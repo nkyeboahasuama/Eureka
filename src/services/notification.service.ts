@@ -15,6 +15,7 @@ export const sendMail = async (payload: NotificationPayloadType) => {
   const body = JSON.stringify(payload);
   return await fetch(env.MAILING_SERVER_URL, {
     body,
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
