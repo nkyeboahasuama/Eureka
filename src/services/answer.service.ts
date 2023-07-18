@@ -7,6 +7,7 @@ import {
 } from "../core";
 import { AdminRepo, AnswerRepo, QuestionRepo } from "../infras/cloud";
 import { cloud } from "../infras/cloud/setup";
+import { NotificationService } from "./notification.service";
 
 const submitDraftAnswer = async (
   adminId: string,
@@ -66,6 +67,10 @@ const editAndSubmitDraft = async (
     payload.availability = "closed";
     transaction.update(answerDocRef, payload);
     transaction.update(questionDocRef, { availability: "closed" });
+    await NotificationService.submitAnswerNotification({
+      message: answer.body,
+      to: questionDoc.user,
+    });
     await Promise.resolve();
   });
 };
