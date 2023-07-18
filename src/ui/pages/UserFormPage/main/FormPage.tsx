@@ -7,6 +7,8 @@ import { IQuestion } from "../../../../core";
 import { useNavigate } from "react-router";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 
+import { toast } from "react-toastify";
+
 const FormPage = () => {
   const [user, setUser] = useState("");
   const [body, setBody] = useState("");
@@ -37,22 +39,23 @@ const FormPage = () => {
   const handleSubmit = async () => {
     if (isValidEmail) {
       if (body.trim().length <= 0) {
-        alert("Question field cannot be empty");
+        toast.error("Question field cannot be empty");
         return;
       }
     } else {
-      alert("Invalid user email");
+      toast.error("Invalid user email");
       return;
     }
 
     try {
+      toast("Submitting question...");
       await questionService.addQuestion(payload);
-
       navigate("/askquestion/success");
+
+      toast("Question submitted");
     } catch (error: any) {
-      console.error(error);
+      toast.error(error);
     }
-    navigate("/askquestion/success");
   };
   return (
     <Container justify="space-between">

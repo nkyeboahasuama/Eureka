@@ -10,12 +10,16 @@ import SAQPage from "./ui/pages/SAQuestionsPollPage/main/SAQPage";
 import SAEPage from "./ui/pages/SAAnswerEditPage/main/SAEPage";
 import InitialPage from "./ui/pages/UserInitialPage/InitialPage";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>
       <GlobalStyles />
 
       <BrowserRouter>
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<FormPage />} />
 

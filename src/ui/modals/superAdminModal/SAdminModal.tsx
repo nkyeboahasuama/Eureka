@@ -10,6 +10,7 @@ import { questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import DateComponent from "../../shared_components/date/Date";
+import { toast } from "react-toastify";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
@@ -34,6 +35,8 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
 
       if (status === "approve" && question?.id && user.id) {
         await questionService.validateQuestion(user.id, question.id, status);
+        toast("Question accepted successfully");
+
         const existingValidators = question.validators || [];
         const updateValidators = [
           ...existingValidators,
@@ -50,6 +53,8 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
         closeSAdminModal();
       } else if (status === "reject" && question?.id && user.id) {
         await questionService.validateQuestion(user.id, question.id, status);
+        toast("Question rejected successfully");
+
         const existingValidators = question.validators || [];
         const updateValidators = [
           ...existingValidators,

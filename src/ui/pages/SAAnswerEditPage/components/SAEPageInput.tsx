@@ -7,6 +7,7 @@ import { IAnswerDocument } from "../../../../core";
 import { getAnswerById } from "../../../functions/answers";
 import { answerService } from "../../../../services/answer.service";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SAEPageInput = () => {
   const [textareaValue, setTextareaValue] = useState<IAnswerDocument | string>(
@@ -52,6 +53,8 @@ const SAEPageInput = () => {
             textareaValue as string
           );
           setTextareaValue("");
+          toast("Review submitted");
+
           navigate("/superadmin/validateanswers");
         } catch (error) {
           console.error(error);

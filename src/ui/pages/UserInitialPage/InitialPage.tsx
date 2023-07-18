@@ -28,7 +28,7 @@ const InitialPage = () => {
         }
       } catch (error) {
         alert("You are not authorized to access this page");
-        redirect("/askquestion/form/");
+        redirect("/");
       }
     };
     initAdmin();
