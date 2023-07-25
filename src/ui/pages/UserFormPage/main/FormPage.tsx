@@ -9,11 +9,13 @@ import { BodyContainer } from "../../../shared_components/atoms/container/Contai
 import { AppRoutes } from "../../../types/routing";
 
 import { toast } from "react-toastify";
+import { useToast } from "../../../hooks/useToast";
 
 const FormPage = () => {
   const [user, setUser] = useState("");
   const [body, setBody] = useState("");
   const navigate = useNavigate();
+  const { show: showToast, update: updateToast } = useToast();
 
   const userFnc = (identity: string) => {
     if (identity.trim().length > 0) {
@@ -49,10 +51,10 @@ const FormPage = () => {
     }
 
     try {
-      toast("Submitting question...");
+      showToast("Submitting question...", { isLoading: true });
       await questionService.addQuestion(payload);
 
-      toast("Question submitted");
+      updateToast("Question submitted", { isLoading: false, autoClose: 1200 });
       navigate(AppRoutes.FORM_SUCCESS);
     } catch (error: any) {
       toast.error(error);

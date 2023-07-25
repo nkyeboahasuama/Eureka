@@ -7,7 +7,6 @@ import {
 } from "../core";
 import { AdminRepo, AnswerRepo, QuestionRepo } from "../infras/cloud";
 import { cloud } from "../infras/cloud/setup";
-import { NotificationService } from "./notification.service";
 
 const submitDraftAnswer = async (
   adminId: string,
