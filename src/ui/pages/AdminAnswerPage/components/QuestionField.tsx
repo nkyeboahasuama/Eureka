@@ -24,21 +24,52 @@ const QuestionField: React.FC<IQuestion> = ({ question }) => {
         {question === undefined ? (
           <Loader />
         ) : (
-          <Container justify="left" align="start">
-            <BodyContainer h="250px" fd="row" justify="left" align="center">
+          <Container
+            w="100%"
+            h="250px"
+            fd="row"
+            justify="space-between"
+            align="start"
+          >
+            <BodyContainer style={{ width: "5%", alignItems: "start" }}>
               <Icon
-                icon="mdi:help-circle-outline"
                 style={{
-                  margin: 0,
-                  width: "30px",
+                  fontSize: "20px",
+                  width: "100%",
+                  textAlign: "left",
+                  marginRight: 0,
+                  display: "flex",
+                  alignItems: "start",
+                  justifyContent: "start",
                 }}
+                icon="mdi:help-circle-outline"
               />
-
-              <Typography variant="h3" weight={600} textalign="left">
+            </BodyContainer>
+            <BodyContainer
+              style={{
+                alignItems: "start",
+              }}
+            >
+              <Typography textalign="left" variant="h3" weight={600}>
                 {question && question.body}
               </Typography>
             </BodyContainer>
           </Container>
+          // <Container justify="left" align="start">
+          //   <BodyContainer h="250px" fd="row" justify="left" align="center">
+          //     <Icon
+          //       icon="mdi:help-circle-outline"
+          //       style={{
+          //         margin: 0,
+          //         width: "30px",
+          //       }}
+          //     />
+
+          //     <Typography variant="h3" weight={600} textalign="left">
+          //       {question && question.body}
+          //     </Typography>
+          //   </BodyContainer>
+          // </Container>
         )}
       </BodyContainer>
     </>

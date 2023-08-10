@@ -60,10 +60,10 @@ const AdminModal: React.FC<AdminModalProps> = ({
   const isNotMarkedByLoggedUser = marked && markedBy !== AdminData.id;
 
   const openQuestionMarkedByLoggedUser =
-    isMarkedByLoggedUser && availability === "open";
+    availability === "open" && isMarkedByLoggedUser;
 
   const openQuestionNotMarkedByLoggedUser =
-    isNotMarkedByLoggedUser && availability === "open";
+    availability === "open" && isNotMarkedByLoggedUser;
 
   const unMarkedValidatedQuestion = !marked && approvedValidated > 1;
 
