@@ -69,7 +69,7 @@ const SAEPageInput = () => {
         value={textareaValue as string}
         onChange={handleTextareaChange}
       />
-      {adminId.id !== answer?.admin && (
+      {adminId.id !== answer?.admin && answer?.availability === "open" && (
         <Button onClick={handleSubmit} variant="secondary">
           Submit Review
         </Button>
