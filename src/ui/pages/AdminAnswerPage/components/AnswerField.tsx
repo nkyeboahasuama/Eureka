@@ -5,7 +5,7 @@ import { useState } from "react";
 import { answerService } from "../../../../services/answer.service";
 import { useParams, useNavigate } from "react-router";
 import { AppRoutes } from "../../../types/routing";
-import { toast } from "react-toastify";
+import { useToast } from "../../../hooks/useToast";
 
 const AnswerField = () => {
   const [body, setBody] = useState("");
@@ -17,20 +17,28 @@ const AnswerField = () => {
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
 
+  const { show: showToast, update: updateToast } = useToast();
+
   const handleDraftAnswerSubmit = async () => {
     if (admin && questionId && body) {
-      toast("Submitting answer");
       try {
+        showToast("Submittng answer...", { isLoading: true });
         await answerService.submitDraftAnswer(admin.id, questionId, body);
+        updateToast("Submitted successfully", {
+          isLoading: false,
+          autoClose: 1500,
+        });
         setBody("");
         if (admin.isSuper) {
           navigate(AppRoutes.SADMIN_QUESTIONS);
-          toast("Answer submitted");
         } else {
           navigate(AppRoutes.ADMIN_QUESTIONS);
-          toast("Answer submitted");
         }
       } catch (error) {
+        updateToast("There was an error", {
+          isLoading: false,
+          autoClose: 1500,
+        });
         console.error(error);
       }
     }

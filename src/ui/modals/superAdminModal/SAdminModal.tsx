@@ -10,7 +10,7 @@ import { questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import DateComponent from "../../shared_components/date/Date";
-import { toast } from "react-toastify";
+import { useToast } from "../../hooks/useToast";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
@@ -28,16 +28,20 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   const user: IAdminDocument = JSON.parse(
     localStorage.getItem("isAdminLocal")!
   );
+  const { show: showToast, update: updateToast } = useToast();
 
   const handleValidation = async (status: ValidationStatusType) => {
     try {
       const admin: string = user.id;
 
       if (status === "approve" && question?.id && user.id) {
-        toast("Accepting question...");
+        showToast("Accepting question...", { isLoading: true });
 
         await questionService.validateQuestion(user.id, question.id, status);
-        toast("Question accepted successfully");
+        updateToast("Question accepted successfully", {
+          isLoading: false,
+          autoClose: 1200,
+        });
         closeSAdminModal();
 
         const existingValidators = question.validators || [];
@@ -54,10 +58,13 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
         };
         if (newState) newState(updateQuestion);
       } else if (status === "reject" && question?.id && user.id) {
-        toast("Rejecting question...");
+        showToast("Rejecting question...", { isLoading: true });
 
         await questionService.validateQuestion(user.id, question.id, status);
-        toast("Question rejected successfully");
+        updateToast("Question rejected successfully", {
+          isLoading: false,
+          autoClose: 1200,
+        });
         closeSAdminModal();
 
         const existingValidators = question.validators || [];
@@ -75,8 +82,8 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
         if (newState) newState(updateQuestion);
       }
     } catch (error) {
+      updateToast("There was an error", { isLoading: false, autoClose: 1200 });
       console.error(error);
-      // toast.error(error);
     }
   };
 

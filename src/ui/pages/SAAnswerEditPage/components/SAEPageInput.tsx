@@ -7,8 +7,8 @@ import { IAnswerDocument } from "../../../../core";
 import { getAnswerById } from "../../../functions/answers";
 import { answerService } from "../../../../services/answer.service";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { AppRoutes } from "../../../types/routing";
+import { useToast } from "../../../hooks/useToast";
 
 const SAEPageInput = () => {
   const [textareaValue, setTextareaValue] = useState<IAnswerDocument | string>(
@@ -17,6 +17,7 @@ const SAEPageInput = () => {
   const [answer, setAnswer] = useState<IAnswerDocument | null>(null);
 
   const navigate = useNavigate();
+  const { show: showToast, update: updateToast } = useToast();
 
   const { answerId } = useParams();
   useEffect(() => {
@@ -48,13 +49,17 @@ const SAEPageInput = () => {
     if (adminId && answerId && textareaValue) {
       if (true) {
         try {
+          showToast("Submitting review...", { isLoading: true });
           await answerService.editAndSubmitDraft(
             adminId.id,
             answerId,
             textareaValue as string
           );
           setTextareaValue("");
-          toast("Review submitted");
+          updateToast("Review submitted", {
+            isLoading: false,
+            autoClose: 1200,
+          });
 
           navigate(AppRoutes.SADMIN_ANSWERS);
         } catch (error) {

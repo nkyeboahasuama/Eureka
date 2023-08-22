@@ -18,7 +18,6 @@ const InitialPage = () => {
       try {
         if (email) {
           const data = await adminService.initAdmin(email);
-          console.log(data);
 
           if (data.isSuper) {
             redirect(AppRoutes.SADMIN_QUESTIONS);

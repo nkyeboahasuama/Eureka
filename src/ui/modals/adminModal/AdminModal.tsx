@@ -11,6 +11,7 @@ import { questionService } from "../../../services";
 import { useState } from "react";
 import DateComponent from "../../shared_components/date/Date";
 import { AppRoutes } from "../../types/routing";
+import { useToast } from "../../hooks/useToast";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
@@ -26,6 +27,7 @@ const AdminModal: React.FC<AdminModalProps> = ({
   const { user, marked, markedBy, availability, id, validators, body } =
     question || {};
   const navigate = useNavigate();
+  const { show: showToast, update: updateToast } = useToast();
 
   const AdminData = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
@@ -46,7 +48,9 @@ const AdminModal: React.FC<AdminModalProps> = ({
         const adminId: string = AdminData.id;
 
         if (adminId !== markedBy) {
+          showToast("Proceeding to answer...", { isLoading: true });
           await questionService.markQuestion(adminId, id ?? "");
+          updateToast("Done", { isLoading: false, autoClose: 1000 });
           navigate(`${AppRoutes.ADMIN_QUESTIONS}/${id}`);
         }
       } catch (error) {

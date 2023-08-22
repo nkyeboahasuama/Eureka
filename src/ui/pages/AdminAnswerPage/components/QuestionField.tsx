@@ -55,21 +55,6 @@ const QuestionField: React.FC<IQuestion> = ({ question }) => {
               </Typography>
             </BodyContainer>
           </Container>
-          // <Container justify="left" align="start">
-          //   <BodyContainer h="250px" fd="row" justify="left" align="center">
-          //     <Icon
-          //       icon="mdi:help-circle-outline"
-          //       style={{
-          //         margin: 0,
-          //         width: "30px",
-          //       }}
-          //     />
-
-          //     <Typography variant="h3" weight={600} textalign="left">
-          //       {question && question.body}
-          //     </Typography>
-          //   </BodyContainer>
-          // </Container>
         )}
       </BodyContainer>
     </>
