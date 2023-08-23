@@ -15,11 +15,15 @@ const DateComponent: React.FC<IDateProp> = ({ date }) => {
     year: "numeric",
   });
   return (
-    <Container m="0px 0" justify="start" h="30px" w="100%" fd="row">
-      <Icon
-        style={{ fontSize: "13px", marginRight: 5 }}
-        icon="mdi:calendar-month-outline"
-      />
+    <Container
+      m="0px 0"
+      justify="start"
+      h="30px"
+      w="100%"
+      fd="row"
+      style={{ fontSize: "15px" }}
+    >
+      <Icon style={{ marginRight: 5 }} icon="mdi:calendar-month-outline" />
       <Typography variant="medium" weight={700}>
         {formattedDate}
       </Typography>

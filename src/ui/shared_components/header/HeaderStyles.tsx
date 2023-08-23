@@ -1,10 +1,14 @@
 import Container from "../atoms/container/Container";
-import { icons } from "../../assets";
+import logo from "../../../assets/logo_eureka.svg";
+import { LogoStyles } from "../logo/LogoStyles";
 
 const HeaderStyles = () => {
   return (
-    <Container h="35px" align="end" justify="end">
-      <img src={icons.ic_logo} style={{ height: "42px", width: "35px" }} />
+    <Container h="35px" align="start" justify="start">
+      <LogoStyles>
+        {" "}
+        <img width={"100%"} src={logo} alt="Logo" />
+      </LogoStyles>
     </Container>
   );
 };

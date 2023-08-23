@@ -8,6 +8,7 @@ import { getAnswerById } from "../../../functions/answers";
 import { useEffect, useState } from "react";
 import { IQuestionDocument } from "../../../../core";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
+import Loader from "../../../shared_components/loader/Loader";
 
 const SAEPageQField = () => {
   const [questionBody, setQuestionBody] = useState<IQuestionDocument | null>(
@@ -32,39 +33,43 @@ const SAEPageQField = () => {
   }, [answerId]);
 
   return (
-    <Container w="90%" align="start" h="40%" justify="space-between">
-      <InfoField user={questionBody?.user} />
-      <Container
-        w="100%"
-        h="150px"
-        fd="row"
-        justify="space-between"
-        align="start"
-      >
-        <BodyContainer style={{ width: "5%", alignItems: "start" }}>
-          <Icon
-            style={{
-              fontSize: "20px",
-              width: "100%",
-              textAlign: "left",
-              marginRight: 0,
-              display: "flex",
-              alignItems: "start",
-              justifyContent: "start",
-            }}
-            icon="mdi:help-circle-outline"
-          />
-        </BodyContainer>
-        <BodyContainer
-          style={{
-            alignItems: "start",
-          }}
+    <Container w="90%" justify="start" align="start" h="40%">
+      <InfoField date={questionBody?.createdAt} user={questionBody?.user} />
+      {questionBody === null ? (
+        <Loader />
+      ) : (
+        <Container
+          w="100%"
+          h="150px"
+          fd="row"
+          justify="space-between"
+          align="start"
         >
-          <Typography textalign="left" variant="h3" weight={600}>
-            {questionBody?.body}
-          </Typography>
-        </BodyContainer>
-      </Container>
+          <BodyContainer style={{ width: "5%", alignItems: "start" }}>
+            <Icon
+              style={{
+                fontSize: "20px",
+                width: "100%",
+                textAlign: "left",
+                marginRight: 0,
+                display: "flex",
+                alignItems: "start",
+                justifyContent: "start",
+              }}
+              icon="mdi:help-circle-outline"
+            />
+          </BodyContainer>
+          <BodyContainer
+            style={{
+              alignItems: "start",
+            }}
+          >
+            <Typography textalign="left" variant="h3" weight={600}>
+              {questionBody?.body}
+            </Typography>
+          </BodyContainer>
+        </Container>
+      )}
     </Container>
   );
 };

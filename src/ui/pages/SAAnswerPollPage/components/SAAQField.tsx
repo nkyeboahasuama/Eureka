@@ -24,13 +24,14 @@ const SAAQField: React.FC<ISAAQFieldProps> = ({ question }) => {
     fetchQuestion();
   }, [question]);
   return (
-    <Container w="100%" h="50px" justify="start" fd="row" align="center">
+    <Container w="100%" h="30px" justify="start" fd="row" align="center">
       <BodyContainer
         style={{
           width: "20px",
           display: "flex",
           alignItems: "start",
           justifyContent: "start",
+          fontSize: "15px",
           margin: 0,
           padding: 0,
         }}
@@ -38,7 +39,6 @@ const SAAQField: React.FC<ISAAQFieldProps> = ({ question }) => {
         <Icon
           icon="mdi:help-circle-outline"
           style={{
-            fontSize: "13px",
             margin: 0,
           }}
         />

@@ -4,6 +4,8 @@ import { BodyContainer } from "../../../shared_components/atoms/container/Contai
 import { useState } from "react";
 import { answerService } from "../../../../services/answer.service";
 import { useParams, useNavigate } from "react-router";
+import { AppRoutes } from "../../../types/routing";
+import { useToast } from "../../../hooks/useToast";
 
 const AnswerField = () => {
   const [body, setBody] = useState("");
@@ -15,17 +17,28 @@ const AnswerField = () => {
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
 
+  const { show: showToast, update: updateToast } = useToast();
+
   const handleDraftAnswerSubmit = async () => {
     if (admin && questionId && body) {
       try {
+        showToast("Submittng answer...", { isLoading: true });
         await answerService.submitDraftAnswer(admin.id, questionId, body);
+        updateToast("Submitted successfully", {
+          isLoading: false,
+          autoClose: 1500,
+        });
         setBody("");
         if (admin.isSuper) {
-          navigate("/superadmin/validatequestions");
+          navigate(AppRoutes.SADMIN_QUESTIONS);
         } else {
-          navigate("/admin/validquestions");
+          navigate(AppRoutes.ADMIN_QUESTIONS);
         }
       } catch (error) {
+        updateToast("There was an error", {
+          isLoading: false,
+          autoClose: 1500,
+        });
         console.error(error);
       }
     }
@@ -33,14 +46,9 @@ const AnswerField = () => {
 
   return (
     <BodyContainer style={{ flexShrink: 0, height: "45%" }} w="90%">
-      <TextArea
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        style={{ width: "100%", height: "80%", margin: 0 }}
-        required
-      />
+      <TextArea value={body} onChange={(e) => setBody(e.target.value)} />
       <Button onClick={handleDraftAnswerSubmit} variant="secondary">
-        Submit your answer
+        Submit
       </Button>
     </BodyContainer>
   );

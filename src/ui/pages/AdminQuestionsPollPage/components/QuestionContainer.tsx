@@ -56,7 +56,7 @@ const QuestionContainer = () => {
               m="20px 0"
               align="left"
             >
-              <DateComponent date={question.markedAt} />
+              <DateComponent date={question.createdAt} />
               <Typography
                 style={{
                   cursor: "pointer",

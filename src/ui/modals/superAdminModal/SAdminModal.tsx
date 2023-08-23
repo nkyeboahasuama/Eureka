@@ -10,10 +10,11 @@ import { questionService } from "../../../services";
 import { IAdminDocument } from "../../../core";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import DateComponent from "../../shared_components/date/Date";
+import { useToast } from "../../hooks/useToast";
 
 interface SAdminModalProps {
   closeSAdminModal: () => void;
-  question?: IQuestionDocument | null;
+  question: IQuestionDocument | null;
   questions: IQuestionDocument[];
   getQuestionsList: () => void;
   newState?: (data: IQuestionDocument) => void;
@@ -24,15 +25,25 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
   question,
   newState,
 }) => {
+  const user: IAdminDocument = JSON.parse(
+    localStorage.getItem("isAdminLocal")!
+  );
+  const { show: showToast, update: updateToast } = useToast();
+
   const handleValidation = async (status: ValidationStatusType) => {
     try {
-      const user: IAdminDocument = JSON.parse(
-        localStorage.getItem("isAdminLocal")!
-      );
       const admin: string = user.id;
 
       if (status === "approve" && question?.id && user.id) {
+        showToast("Accepting question...", { isLoading: true });
+
         await questionService.validateQuestion(user.id, question.id, status);
+        updateToast("Question accepted successfully", {
+          isLoading: false,
+          autoClose: 1200,
+        });
+        closeSAdminModal();
+
         const existingValidators = question.validators || [];
         const updateValidators = [
           ...existingValidators,
@@ -46,9 +57,16 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           validators: updateValidators,
         };
         if (newState) newState(updateQuestion);
-        closeSAdminModal();
       } else if (status === "reject" && question?.id && user.id) {
+        showToast("Rejecting question...", { isLoading: true });
+
         await questionService.validateQuestion(user.id, question.id, status);
+        updateToast("Question rejected successfully", {
+          isLoading: false,
+          autoClose: 1200,
+        });
+        closeSAdminModal();
+
         const existingValidators = question.validators || [];
         const updateValidators = [
           ...existingValidators,
@@ -62,47 +80,61 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           validators: updateValidators,
         };
         if (newState) newState(updateQuestion);
-        closeSAdminModal();
       }
-      closeSAdminModal();
     } catch (error) {
+      updateToast("There was an error", { isLoading: false, autoClose: 1200 });
       console.error(error);
-      throw error;
     }
   };
+
+  const maximumValidators = question?.validators.length === 3;
+  const closedQuestion = question?.availability === "closed";
+
+  const adminValidatedQuestion =
+    question?.validators.length &&
+    question?.validators.find((validator) => validator.admin === user.id);
+
+  const hideValidationButtons =
+    maximumValidators || closedQuestion || adminValidatedQuestion;
 
   return (
     <ModalWrapper>
       <ModalContent>
         <Container
           justify="start"
-          p="0 10px"
+          m="0 0 20px 0"
           variant="primary"
-          h="60vh"
-          w="80vw"
+          h={hideValidationButtons ? "65vh" : "55vh"}
+          w="100%"
         >
-          <Container w="95%" m="5px 0" h="10%" fd="row" align="start">
-            <DateComponent date={question?.markedAt} />
+          <Container w="90%" m="5px 0" h="10%" fd="row" align="start">
+            <DateComponent date={question?.createdAt} />
             <UserEmail user={question?.user} />
           </Container>
           <BodyContainer
+            w="90%"
             justify="start"
             lh="2.0"
-            style={{ overflow: "scroll" }}
+            style={{ overflow: "auto" }}
           >
             <Typography variant="h3">{question?.body}</Typography>
           </BodyContainer>
         </Container>
-        <Container h="fit">
-          <Button variant="accept" onClick={() => handleValidation("approve")}>
-            Accept
-          </Button>
-          <Button variant="reject" onClick={() => handleValidation("reject")}>
-            Reject
-          </Button>
-        </Container>
+        {!hideValidationButtons && (
+          <Container h="fit" m="0 0 20px 0">
+            <Button
+              variant="accept"
+              onClick={() => handleValidation("approve")}
+            >
+              Accept
+            </Button>
+            <Button variant="reject" onClick={() => handleValidation("reject")}>
+              Reject
+            </Button>
+          </Container>
+        )}
         <Button
-          style={{ marginTop: 40 }}
+          style={{ marginTop: 10 }}
           onClick={closeSAdminModal}
           variant="secondary"
         >

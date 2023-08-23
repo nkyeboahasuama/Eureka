@@ -66,6 +66,10 @@ const editAndSubmitDraft = async (
     payload.availability = "closed";
     transaction.update(answerDocRef, payload);
     transaction.update(questionDocRef, { availability: "closed" });
+    // await NotificationService.submitAnswerNotification({
+    //   message: answer.body,
+    //   to: questionDoc.user,
+    // });
     await Promise.resolve();
   });
 };

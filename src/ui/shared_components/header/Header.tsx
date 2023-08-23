@@ -21,11 +21,11 @@ const Header: React.FC<HeaderProps> = ({ page }) => {
         h="60%"
         w="90%"
       >
-        <Container align="start" h="100%" w="100%">
+        <HeaderStyles />
+
+        <Container align="end" h="100%" w="100%">
           @{user?.username}
         </Container>
-
-        <HeaderStyles />
       </Container>
       <Container
         style={{ fontSize: "11px", color: "white" }}

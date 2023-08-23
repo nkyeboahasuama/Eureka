@@ -25,7 +25,10 @@ const EmailField: React.FC<IuserFnc> = ({ userFnc }) => {
         <Logo />
         <BodyContainer style={{ alignItems: "start" }}>
           <Typography textalign="start" variant="h1">
-            Welcome to Eureka.
+            Welcome💡
+          </Typography>
+          <Typography textalign="start" variant="normal" m="2px 0 ">
+            Share your worries
           </Typography>
         </BodyContainer>
 
@@ -42,6 +45,7 @@ const EmailField: React.FC<IuserFnc> = ({ userFnc }) => {
         >
           <Typography weight={600}>Enter your email</Typography>
           <input
+            type="email"
             required
             onChange={(e) => setUser(e.target.value)}
             style={{

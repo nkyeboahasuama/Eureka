@@ -1,5 +1,7 @@
 import { icons } from "../../assets";
 import Container from "../atoms/container/Container";
+import { LogoStyles } from "./LogoStyles";
+import logo from "../../../assets/logo_eureka.svg";
 
 interface LogoProps {
   icon?: any;
@@ -7,8 +9,10 @@ interface LogoProps {
 
 const Logo = ({ icon = icons.ic_logoLt }: LogoProps) => {
   return (
-    <Container h="55px" align="start" justify="end">
-      <img src={icon} style={{ height: "50px", width: "45px" }} />
+    <Container h="35px" align="start" justify="end">
+      <LogoStyles>
+        <img width={"100%"} src={logo} alt="Logo" />
+      </LogoStyles>
     </Container>
   );
 };

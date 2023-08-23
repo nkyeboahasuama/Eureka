@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const LogoStyles = styled.div`
-  background-color: gray;
-  width: 100px;
+  width: 90px;
   height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -19,7 +19,7 @@ const WhiteField = () => {
             height: "70%",
           }}
         >
-          <Typography variant="h1">Come back later!</Typography>
+          <Typography variant="h2">Come back later!</Typography>
         </BodyContainer>
       </BodyContainer>
     </>

@@ -5,6 +5,7 @@ import Container from "../../../shared_components/atoms/container/Container";
 
 import { IQuestionDocument } from "../../../../core";
 import Loader from "../../../shared_components/loader/Loader";
+import { Icon } from "@iconify/react";
 
 interface IQuestion {
   question: IQuestionDocument | undefined;
@@ -13,23 +14,47 @@ const QuestionField: React.FC<IQuestion> = ({ question }) => {
   return (
     <>
       <BodyContainer
-        style={{ height: "40%", overflow: "scroll" }}
+        style={{ height: "40%", overflow: "auto" }}
         w="90%"
         text="left"
         align="start"
         justify="space-between"
       >
-        <InfoField user={question?.user} />
+        <InfoField date={question?.createdAt} user={question?.user} />
         {question === undefined ? (
           <Loader />
         ) : (
-          <BodyContainer>
-            <Container h="250px" fd="row" justify="space-between" align="start">
-              <Typography variant="h3" weight={600} textalign="left">
+          <Container
+            w="100%"
+            h="250px"
+            fd="row"
+            justify="space-between"
+            align="start"
+          >
+            <BodyContainer style={{ width: "5%", alignItems: "start" }}>
+              <Icon
+                style={{
+                  fontSize: "20px",
+                  width: "100%",
+                  textAlign: "left",
+                  marginRight: 0,
+                  display: "flex",
+                  alignItems: "start",
+                  justifyContent: "start",
+                }}
+                icon="mdi:help-circle-outline"
+              />
+            </BodyContainer>
+            <BodyContainer
+              style={{
+                alignItems: "start",
+              }}
+            >
+              <Typography textalign="left" variant="h3" weight={600}>
                 {question && question.body}
               </Typography>
-            </Container>
-          </BodyContainer>
+            </BodyContainer>
+          </Container>
         )}
       </BodyContainer>
     </>

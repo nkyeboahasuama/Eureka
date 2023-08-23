@@ -9,6 +9,7 @@ import Typography from "../../../shared_components/atoms/typography/Typography";
 import { lineClampStyle } from "../../../shared_components/lineHeightStyles/lineHeight";
 import Loader from "../../../shared_components/loader/Loader";
 import { useNavigate } from "react-router";
+import { AppRoutes } from "../../../types/routing";
 
 const SAAField = () => {
   const [answers, setAnswers] = useState<IAnswerDocument[]>([]);
@@ -16,13 +17,18 @@ const SAAField = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const answers = async () => {
-      const data = await answerService.getAnswers();
-      setAnswers(data);
-      setLoading(false);
+    const getAnswers = async () => {
+      try {
+        const data = await answerService.getAnswers();
+        setAnswers(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
     };
-    answers();
-  }, [answers]);
+    getAnswers();
+  }, []);
 
   return (
     <>
@@ -37,13 +43,13 @@ const SAAField = () => {
           style={{ overflow: "scrollY" }}
           w="90%"
           text="left"
-          m="20px 0"
+          m="10px 0"
         >
           {answers?.map((answer) => (
             <BodyContainer key={answer.id}>
               {answer.admin && answer.body && (
                 <>
-                  <Date />
+                  <Date date={answer.createdAt} />
                   <SAAQField question={answer.question} />
                   <Typography
                     style={{
@@ -54,14 +60,16 @@ const SAAField = () => {
                       ...lineClampStyle,
                     }}
                     variant="h3"
-                    onClick={() => navigate(`/superadmin/edit/${answer.id}`)}
+                    onClick={() =>
+                      navigate(`${AppRoutes.SADMIN_ANSWERS}/${answer.id}`)
+                    }
                   >
                     {answer.body}
                   </Typography>
 
                   <BodyContainer
                     justify="space-between"
-                    m="0 0 40px 0"
+                    m="0 0 25px 0"
                     fd="row"
                   >
                     <BodyContainer

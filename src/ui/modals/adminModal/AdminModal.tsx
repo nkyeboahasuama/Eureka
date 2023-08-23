@@ -10,6 +10,8 @@ import { BodyContainer } from "../../shared_components/atoms/container/Container
 import { questionService } from "../../../services";
 import { useState } from "react";
 import DateComponent from "../../shared_components/date/Date";
+import { AppRoutes } from "../../types/routing";
+import { useToast } from "../../hooks/useToast";
 
 interface AdminModalProps {
   closeAdminModal: () => void;
@@ -22,97 +24,108 @@ const AdminModal: React.FC<AdminModalProps> = ({
   question,
 }) => {
   const [approvedValidated, setApprovedValidated] = useState(0);
+  const { user, marked, markedBy, availability, id, validators, body } =
+    question || {};
   const navigate = useNavigate();
+  const { show: showToast, update: updateToast } = useToast();
 
   const AdminData = localStorage.getItem("isAdminLocal")
     ? JSON.parse(localStorage.getItem("isAdminLocal")!)
     : null;
 
   useEffect(() => {
-    const validations = question?.validators.filter(
+    const validations = validators?.filter(
       (a) => a.status === "approve"
     ).length;
     if (validations) {
       setApprovedValidated(validations);
     }
-  }, [question]);
+  }, [question, validators]);
 
   const handleMarkQuestion = async () => {
     if (question) {
       try {
         const adminId: string = AdminData.id;
 
-        if (adminId !== question.markedBy) {
-          await questionService.markQuestion(adminId, question.id);
-          navigate(`/questions/question/${question?.id}`);
+        if (adminId !== markedBy) {
+          showToast("Proceeding to answer...", { isLoading: true });
+          await questionService.markQuestion(adminId, id ?? "");
+          updateToast("Done", { isLoading: false, autoClose: 1000 });
+          navigate(`${AppRoutes.ADMIN_QUESTIONS}/${id}`);
         }
       } catch (error) {
         console.error(error);
       }
     }
   };
-  return (
-    <ModalWrapper>
-      <ModalContent>
-        <Container
-          justify="start"
-          p="0 10px"
-          variant="primary"
-          h="70vh"
-          w="80vw"
-        >
-          <Container h="10%" w="95%" m=" 5px 0px" fd="row" align="start">
-            <DateComponent date={question?.markedAt} />
-            <UserEmail user={question?.user} />
-          </Container>
-          <BodyContainer
-            justify="start"
-            lh="2.0"
-            style={{ overflow: "scroll" }}
-          >
-            {<Typography variant="h3">{question?.body}</Typography>}
-            {question?.marked && question.markedBy === AdminData.id ? (
-              <Typography variant="small">
-                Marked by you, {question.markedBy}!{" "}
-              </Typography>
-            ) : (
-              question?.marked && (
-                <Typography variant="small">
-                  Marked by {question?.markedBy}, not you!{" "}
-                </Typography>
-              )
-            )}
-          </BodyContainer>
-        </Container>
-        {question?.marked &&
-        question.markedBy === AdminData.id &&
-        question.availability === "open" ? (
-          <Button
-            onClick={() => navigate(`/questions/question/${question?.id}`)}
-            style={{
-              backgroundColor: "rgba(3, 180, 120, 0.5)",
-              color: "white",
-            }}
-          >
-            I would like to answer now!
-          </Button>
-        ) : !question?.marked && approvedValidated > 1 ? (
-          <Button variant="accept" onClick={handleMarkQuestion}>
-            Want to answer?
-          </Button>
-        ) : !question?.marked && approvedValidated < 3 ? (
-          <Button variant="disabled">Question needs validation!</Button>
-        ) : question?.availability === "closed" ? (
-          <Button variant="disabled">Question is closed!</Button>
-        ) : (
-          <Button variant="disabled">Someone in here!</Button>
-        )}
 
-        <Button w="100%" onClick={() => closeAdminModal()} variant="secondary">
-          Close
-        </Button>
-      </ModalContent>
-    </ModalWrapper>
+  const isMarkedByLoggedUser = marked && markedBy === AdminData.id;
+
+  const isNotMarkedByLoggedUser = marked && markedBy !== AdminData.id;
+
+  const openQuestionMarkedByLoggedUser =
+    availability === "open" && isMarkedByLoggedUser;
+
+  const openQuestionNotMarkedByLoggedUser =
+    availability === "open" && isNotMarkedByLoggedUser;
+
+  const unMarkedValidatedQuestion = !marked && approvedValidated > 1;
+
+  return (
+    <>
+      {question && (
+        <ModalWrapper>
+          <ModalContent>
+            <Container
+              justify="start"
+              m="0 0 20px 0"
+              variant="primary"
+              h="65vh"
+              w="100%"
+            >
+              <Container h="10%" w="90%" m=" 5px 0px" fd="row" align="start">
+                <DateComponent date={question.createdAt} />
+                <UserEmail user={user} />
+              </Container>
+              <BodyContainer
+                w="90%"
+                justify="start"
+                lh="2.0"
+                style={{ overflow: "auto" }}
+              >
+                {<Typography variant="h3">{body}</Typography>}
+              </BodyContainer>
+            </Container>
+            {openQuestionMarkedByLoggedUser && (
+              <Button
+                onClick={() => navigate(`${AppRoutes.ADMIN_QUESTIONS}/${id}`)}
+                variant="accept"
+              >
+                Proced to answer
+              </Button>
+            )}{" "}
+            {unMarkedValidatedQuestion && (
+              <Button variant="accept" onClick={handleMarkQuestion}>
+                Proceed to answer
+              </Button>
+            )}{" "}
+            {openQuestionNotMarkedByLoggedUser && (
+              <Button variant="warning">
+                Question has been marked to be answered by another user !
+              </Button>
+            )}
+            <Button
+              style={{ marginTop: 10 }}
+              w="100%"
+              onClick={() => closeAdminModal()}
+              variant="secondary"
+            >
+              Close
+            </Button>
+          </ModalContent>
+        </ModalWrapper>
+      )}
+    </>
   );
 };
 

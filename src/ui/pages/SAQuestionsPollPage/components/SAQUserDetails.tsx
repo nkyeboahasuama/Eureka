@@ -5,12 +5,13 @@ import UserEmail from "../../../shared_components/user/UserEmail";
 
 interface ISuperAdminUserProps {
   user: string;
+  date: string;
 }
 
-const SAQUserDetails: React.FC<ISuperAdminUserProps> = ({ user }) => {
+const SAQUserDetails: React.FC<ISuperAdminUserProps> = ({ user, date }) => {
   return (
-    <BodyContainer justify="space-between" w="100%" fd="row" m="7px 0">
-      <Date />
+    <BodyContainer justify="space-between" w="100%" fd="row">
+      <Date date={date} />
       <UserEmail user={user} />
     </BodyContainer>
   );

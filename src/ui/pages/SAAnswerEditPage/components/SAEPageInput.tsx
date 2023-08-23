@@ -7,6 +7,8 @@ import { IAnswerDocument } from "../../../../core";
 import { getAnswerById } from "../../../functions/answers";
 import { answerService } from "../../../../services/answer.service";
 import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../../types/routing";
+import { useToast } from "../../../hooks/useToast";
 
 const SAEPageInput = () => {
   const [textareaValue, setTextareaValue] = useState<IAnswerDocument | string>(
@@ -15,6 +17,7 @@ const SAEPageInput = () => {
   const [answer, setAnswer] = useState<IAnswerDocument | null>(null);
 
   const navigate = useNavigate();
+  const { show: showToast, update: updateToast } = useToast();
 
   const { answerId } = useParams();
   useEffect(() => {
@@ -46,13 +49,19 @@ const SAEPageInput = () => {
     if (adminId && answerId && textareaValue) {
       if (true) {
         try {
+          showToast("Submitting review...", { isLoading: true });
           await answerService.editAndSubmitDraft(
             adminId.id,
             answerId,
             textareaValue as string
           );
           setTextareaValue("");
-          navigate("/superadmin/validateanswers");
+          updateToast("Review submitted", {
+            isLoading: false,
+            autoClose: 1200,
+          });
+
+          navigate(AppRoutes.SADMIN_ANSWERS);
         } catch (error) {
           console.error(error);
         }
@@ -62,19 +71,10 @@ const SAEPageInput = () => {
   return (
     <Container h="45%" w="90%">
       <TextArea
-        style={{ width: "100%", height: "80%", margin: "0" }}
         value={textareaValue as string}
         onChange={handleTextareaChange}
       />
-      {adminId.id === answer?.admin ? (
-        <Button
-          style={{ border: "black 1px solid" }}
-          onClick={handleSubmit}
-          variant="disabled"
-        >
-          Not allowed to review
-        </Button>
-      ) : (
+      {adminId.id !== answer?.admin && answer?.availability === "open" && (
         <Button onClick={handleSubmit} variant="secondary">
           Submit Review
         </Button>

@@ -33,6 +33,12 @@ const validateQuestion = async (
     status,
   };
   await QuestionRepo.addValidator(questionId, validator);
+  // if at least two checks, send notification to admins about a new question
+  const approvedLen = [...question.validators, { status }].filter(
+    (val) => val.status === "approve"
+  );
+  if (approvedLen.length >= 2) {
+  }
 };
 
 const markQuestion = async (adminId: string, questionId: string) => {
