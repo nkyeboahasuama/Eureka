@@ -15,15 +15,11 @@ import { useToast } from "../../hooks/useToast";
 interface SAdminModalProps {
   closeSAdminModal: () => void;
   question: IQuestionDocument | null;
-  questions: IQuestionDocument[];
-  getQuestionsList: () => void;
-  newState?: (data: IQuestionDocument) => void;
 }
 
 const SAdminModal: React.FC<SAdminModalProps> = ({
   closeSAdminModal,
   question,
-  newState,
 }) => {
   const user: IAdminDocument = JSON.parse(
     localStorage.getItem("isAdminLocal")!
@@ -32,8 +28,6 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
 
   const handleValidation = async (status: ValidationStatusType) => {
     try {
-      const admin: string = user.id;
-
       if (status === "approve" && question?.id && user.id) {
         showToast("Accepting question...", { isLoading: true });
 
@@ -43,20 +37,6 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           autoClose: 1200,
         });
         closeSAdminModal();
-
-        const existingValidators = question.validators || [];
-        const updateValidators = [
-          ...existingValidators,
-          {
-            admin: admin,
-            status: status,
-          },
-        ];
-        const updateQuestion = {
-          ...question,
-          validators: updateValidators,
-        };
-        if (newState) newState(updateQuestion);
       } else if (status === "reject" && question?.id && user.id) {
         showToast("Rejecting question...", { isLoading: true });
 
@@ -66,20 +46,6 @@ const SAdminModal: React.FC<SAdminModalProps> = ({
           autoClose: 1200,
         });
         closeSAdminModal();
-
-        const existingValidators = question.validators || [];
-        const updateValidators = [
-          ...existingValidators,
-          {
-            admin: admin,
-            status: status,
-          },
-        ];
-        const updateQuestion = {
-          ...question,
-          validators: updateValidators,
-        };
-        if (newState) newState(updateQuestion);
       }
     } catch (error) {
       updateToast("There was an error", { isLoading: false, autoClose: 1200 });
