@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import Chips from "../../../shared_components/atoms/chips/Chips";
@@ -10,6 +10,7 @@ import Loader from "../../../shared_components/loader/Loader";
 import DateComponent from "../../../shared_components/date/Date";
 import { useSubscribeToRepository } from "../../../hooks/useSubscribeCloudDocs";
 import { Repos } from "../../../../infras/cloud/repos/interface";
+import { questionService } from "../../../../services";
 
 const QuestionContainer = () => {
   const [modal, setModal] = useState(false);
@@ -20,6 +21,18 @@ const QuestionContainer = () => {
   } = useSubscribeToRepository<IQuestionDocument>(Repos.QUESTION);
   const [selectedQuestion, setSelectedQuestion] =
     useState<IQuestionDocument | null>(null);
+
+  const [validatedQuestions, setValidatedQuestions] = useState<
+    IQuestionDocument[]
+  >([]);
+
+  useEffect(() => {
+    const getQuestionsList = async () => {
+      const data = await questionService.getValidatedQuestions();
+      setValidatedQuestions(data);
+    };
+    getQuestionsList();
+  }, []);
 
   const openAdminModal = (question: IQuestionDocument) => {
     setModal(true);
@@ -53,7 +66,7 @@ const QuestionContainer = () => {
 
   return (
     <>
-      {questions.map((question) => (
+      {validatedQuestions.map((question) => (
         <BodyContainer
           key={question.id}
           w="90%"
