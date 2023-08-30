@@ -11,7 +11,7 @@ interface PageDataSubscription<T = any> {
 
 export function useSubscribeToRepository<T = any>(
   repo: Repos,
-  filter?: (doc: T, index: number, arr: any[]) => boolean
+  filter?: (doc: T, index?: number, arr?: any[]) => boolean
 ): PageDataSubscription<T> {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
