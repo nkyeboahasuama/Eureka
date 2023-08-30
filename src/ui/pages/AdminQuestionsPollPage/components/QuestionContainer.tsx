@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BodyContainer } from "../../../shared_components/atoms/container/ContainerStyles";
 import Typography from "../../../shared_components/atoms/typography/Typography";
 import Chips from "../../../shared_components/atoms/chips/Chips";
