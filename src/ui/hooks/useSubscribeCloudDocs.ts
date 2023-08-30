@@ -10,7 +10,8 @@ interface PageDataSubscription<T = any> {
 }
 
 export function useSubscribeToRepository<T = any>(
-  repo: Repos
+  repo: Repos,
+  filter?: (doc: T, index: number, arr: any[]) => boolean
 ): PageDataSubscription<T> {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,11 @@ export function useSubscribeToRepository<T = any>(
           ...doc.data(),
           id: doc.id,
         })) as T[];
-        setData(docs);
+        let fetchedData = docs;
+        if (filter) {
+          fetchedData = docs.filter(filter);
+        }
+        setData(fetchedData);
         setLoading(false);
       },
       (error) => {
