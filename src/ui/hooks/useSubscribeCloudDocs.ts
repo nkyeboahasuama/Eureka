@@ -45,7 +45,7 @@ export function useSubscribeToRepository<T = any>(
     return function () {
       unSubscribe();
     };
-  }, []);
+  }, [filter, repo]);
 
   return {
     data,

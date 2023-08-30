@@ -13,6 +13,7 @@ import { AppRoutes } from "./ui/types/routing";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NoContent from "./ui/pages/NoContentPage/NoContent";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route path={AppRoutes.ROOT} element={<FormPage />} />
+
+          <Route path={AppRoutes.MISSING} element={<NoContent />} />
 
           <Route path={AppRoutes.FORM_SUCCESS} element={<SuccessPage />} />
 
