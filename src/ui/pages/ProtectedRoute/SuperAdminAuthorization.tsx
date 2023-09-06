@@ -8,7 +8,7 @@ const SuperAdminAuthorization = () => {
 
   const isSuper = loggedInUser.isSuper;
 
-  return isSuper ? <Outlet /> : <Navigate to={AppRoutes.ROOT} />;
+  return isSuper ? <Outlet /> : <Navigate to={AppRoutes.SADMIN_QUESTIONS} />;
 };
 
 export default SuperAdminAuthorization;
