@@ -13,6 +13,10 @@ import { AppRoutes } from "./ui/types/routing";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NoContent from "./ui/pages/NoContentPage/NoContent";
+import ProtectedRoute from "./ui/pages/ProtectedRoute/ProtectedRoute";
+import AdminAuthorization from "./ui/pages/ProtectedRoute/AdminAuthorization";
+import SuperAdminAuthorization from "./ui/pages/ProtectedRoute/SuperAdminAuthorization";
 
 function App() {
   return (
@@ -30,21 +34,32 @@ function App() {
             element={<InitialPage />}
           />
 
-          <Route path={AppRoutes.ADMIN_QUESTIONS} element={<QuestionsPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route
+              path={`${AppRoutes.ADMIN_QUESTIONS}/:id`}
+              element={<AdminPage />}
+            />
 
-          <Route
-            path={`${AppRoutes.ADMIN_QUESTIONS}/:id`}
-            element={<AdminPage />}
-          />
+            <Route element={<AdminAuthorization />}>
+              <Route
+                path={AppRoutes.ADMIN_QUESTIONS}
+                element={<QuestionsPage />}
+              />
+            </Route>
 
-          <Route path={AppRoutes.SADMIN_QUESTIONS} element={<SAQPage />} />
+            <Route element={<SuperAdminAuthorization />}>
+              <Route path={AppRoutes.SADMIN_QUESTIONS} element={<SAQPage />} />
 
-          <Route path={AppRoutes.SADMIN_ANSWERS} element={<SAAPage />} />
+              <Route path={AppRoutes.SADMIN_ANSWERS} element={<SAAPage />} />
 
-          <Route
-            path={`${AppRoutes.SADMIN_ANSWERS}/:answerId`}
-            element={<SAEPage />}
-          />
+              <Route
+                path={`${AppRoutes.SADMIN_ANSWERS}/:answerId`}
+                element={<SAEPage />}
+              />
+            </Route>
+          </Route>
+
+          <Route path={AppRoutes.MISSING} element={<NoContent />} />
         </Routes>
       </BrowserRouter>
     </>
