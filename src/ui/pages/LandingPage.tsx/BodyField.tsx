@@ -2,8 +2,11 @@ import React from "react";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import Typography from "../../shared_components/atoms/typography/Typography";
 import Button from "../../shared_components/atoms/button/Button";
+import { AppRoutes } from "../../types/routing";
+import { useNavigate } from "react-router-dom";
 
 const BodyField = () => {
+  const navigate = useNavigate();
   return (
     <>
       <BodyContainer
@@ -33,7 +36,11 @@ const BodyField = () => {
           </BodyContainer>
         </BodyContainer>
         <BodyContainer>
-          <Button variant="secondary" w="90%">
+          <Button
+            variant="secondary"
+            w="90%"
+            onClick={() => navigate(AppRoutes.INSTRUCTION)}
+          >
             How it works
           </Button>
         </BodyContainer>

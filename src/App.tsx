@@ -18,6 +18,7 @@ import ProtectedRoute from "./ui/pages/ProtectedRoute/ProtectedRoute";
 import AdminAuthorization from "./ui/pages/ProtectedRoute/AdminAuthorization";
 import SuperAdminAuthorization from "./ui/pages/ProtectedRoute/SuperAdminAuthorization";
 import IntroductionPage from "./ui/pages/LandingPage.tsx/IntroductionPage";
+import HowItWorksPage from "./ui/pages/LandingPage.tsx/HowItWorksPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route path={AppRoutes.INTRODUCTION} element={<IntroductionPage />} />
+          <Route path={AppRoutes.INSTRUCTION} element={<HowItWorksPage />} />
 
           <Route path={AppRoutes.ROOT} element={<FormPage />} />
 

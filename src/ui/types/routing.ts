@@ -7,4 +7,5 @@ export enum AppRoutes {
   SADMIN_ANSWERS = "/sadmin/vanswers",
   MISSING = "/*",
   INTRODUCTION = "/introduction",
+  INSTRUCTION = "/instruction",
 }
