@@ -22,7 +22,7 @@ export const BaseContainer = styled.div<BaseProps>`
   font-family: "Montserrat", sans-serif;
   width: ${(props) => props.w || "100%"};
   max-width: 100%;
-  height: ${(props) => props.h || "100vh"};
+  height: ${(props) => props.h || "100dvh"};
   margin: ${(props) => props.m};
   padding: ${(props) => props.p};
   border: ${(props) => props.border};
