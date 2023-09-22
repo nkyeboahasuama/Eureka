@@ -13,7 +13,7 @@ const BodyField = () => {
         style={{
           height: "100%",
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
         }}
       >
         <BodyContainer
@@ -23,7 +23,7 @@ const BodyField = () => {
           w="90%"
           style={{ height: "75%" }}
         >
-          <BodyContainer align="start" style={{ height: "50%" }}>
+          <BodyContainer align="start" style={{ height: "60%" }}>
             <Typography variant="h3" textalign="left" p="0px 0px 10px 0px">
               Eureka seeks to serve all and sundry by answering questions about
               Jesus Christ, faith, the church and all that pertains to

@@ -1,4 +1,3 @@
-import React from "react";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import Typography from "../../shared_components/atoms/typography/Typography";
 import Logo from "../../shared_components/logo/Logo";

@@ -1,7 +1,5 @@
-import React from "react";
 import Container from "../../shared_components/atoms/container/Container";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
-import Typography from "../../shared_components/atoms/typography/Typography";
 import HeaderField from "./HeaderField";
 import BodyField from "./BodyField";
 

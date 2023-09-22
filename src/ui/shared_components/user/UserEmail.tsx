@@ -17,7 +17,7 @@ const UserEmail: React.FC<IUserEmail> = ({ user }) => {
       style={{ fontSize: "15px" }}
     >
       <Icon style={{ marginRight: 5 }} icon="mdi:account" />
-      <Typography variant="small" weight={600}>
+      <Typography variant="small" weight={500}>
         {user}
       </Typography>
     </Container>
