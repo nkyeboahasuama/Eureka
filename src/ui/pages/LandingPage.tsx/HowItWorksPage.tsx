@@ -21,24 +21,24 @@ const HowItWorksPage = () => {
   };
   return (
     <Container justify="space-between">
-      <Container variant="secondary" h="100px">
-        <BodyContainer
-          w="90%"
-          fd="column"
-          align="start"
-          justify="space-between"
-          style={{ height: "90%" }}
-        >
-          <BodyContainer>
-            <Logo />
+      <BodyContainer>
+        <Container variant="secondary" h="100px">
+          <BodyContainer
+            w="90%"
+            fd="column"
+            align="start"
+            justify="space-between"
+            style={{ height: "90%" }}
+          >
+            <BodyContainer>
+              <Logo />
+            </BodyContainer>
+            <Typography variant="h2" weight={600}>
+              How it works
+            </Typography>
           </BodyContainer>
-          <Typography variant="h2" weight={600}>
-            How it works
-          </Typography>
-        </BodyContainer>
-      </Container>
+        </Container>
 
-      <BodyContainer justify="space-between" style={{ height: "85%" }}>
         <BodyContainer
           w="90%"
           style={{
@@ -46,10 +46,11 @@ const HowItWorksPage = () => {
             alignItems: "start",
             justifyContent: "start",
             padding: "0px 0px 10px 0px",
+            height: " 70dvh",
             overflow: "auto",
           }}
         >
-          <BodyContainer w="100%" align="start" style={{ marginTop: "0px" }}>
+          <BodyContainer w="100%" align="start" style={{ marginTop: "10px" }}>
             <Typography variant="h3" textalign="left" weight={600}>
               Authentication and your Board
             </Typography>
@@ -93,12 +94,11 @@ const HowItWorksPage = () => {
             </Typography>
           </BodyContainer>
         </BodyContainer>
-
-        <BodyContainer w="90%">
-          <Button variant="secondary" onClick={handleRedirect}>
-            My Board
-          </Button>
-        </BodyContainer>
+      </BodyContainer>
+      <BodyContainer w="90%">
+        <Button variant="secondary" onClick={handleRedirect}>
+          My Board
+        </Button>
       </BodyContainer>
     </Container>
   );

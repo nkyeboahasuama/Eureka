@@ -23,17 +23,15 @@ const BodyField = () => {
           w="90%"
           style={{ height: "75%" }}
         >
-          <BodyContainer align="start" style={{ height: "60%" }}>
-            <Typography variant="h3" textalign="left" p="0px 0px 10px 0px">
-              Eureka seeks to serve all and sundry by answering questions about
-              Jesus Christ, faith, the church and all that pertains to
-              Christianity, in the hopes that, faith is built through the
-              administering of the Word.
-            </Typography>
-            <Typography variant="h3">
-              Thank you for accepting this call to serve.
-            </Typography>
-          </BodyContainer>
+          <Typography variant="h3" textalign="left" p="10px 0px">
+            Eureka seeks to serve all and sundry by answering questions about
+            Jesus Christ, faith, the church and all that pertains to
+            Christianity, in the hopes that, faith is built through the
+            administering of the Word.
+          </Typography>
+          <Typography variant="h3">
+            Thank you for accepting this call to serve.
+          </Typography>
         </BodyContainer>
         <BodyContainer>
           <Button
