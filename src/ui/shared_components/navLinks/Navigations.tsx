@@ -12,16 +12,16 @@ const Navigations = () => {
       {admin.isSuper ? (
         <>
           <NavLink style={navStyle} to={AppRoutes.SADMIN_QUESTIONS}>
-            Question poll
+            Question pool
           </NavLink>
           <NavLink style={navStyle} to={AppRoutes.SADMIN_ANSWERS}>
-            Answer poll
+            Answer pool
           </NavLink>
         </>
       ) : (
         <>
           <NavLink style={navStyle} to={AppRoutes.ADMIN_QUESTIONS}>
-            Question poll
+            Question pool
           </NavLink>
         </>
       )}
