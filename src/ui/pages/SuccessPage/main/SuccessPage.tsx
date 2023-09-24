@@ -16,6 +16,7 @@ const SuccessPage = () => {
           height: "65%",
           color: "white",
           gap: 5,
+          justifyContent: "space-between",
         }}
       >
         <SuccessField />

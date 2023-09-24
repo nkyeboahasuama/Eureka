@@ -31,7 +31,7 @@ const FormField: React.FC<IBodyFnc> = ({ bodyFnc, handleSubmit }) => {
         style={{
           height: "100%",
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
         }}
       >
         <BodyContainer text="left" align="start" w="90%">

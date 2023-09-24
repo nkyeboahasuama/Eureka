@@ -24,7 +24,7 @@ const DateComponent: React.FC<IDateProp> = ({ date }) => {
       style={{ fontSize: "15px" }}
     >
       <Icon style={{ marginRight: 5 }} icon="mdi:calendar-month-outline" />
-      <Typography variant="medium" weight={700}>
+      <Typography variant="medium" weight={500}>
         {formattedDate}
       </Typography>
     </Container>

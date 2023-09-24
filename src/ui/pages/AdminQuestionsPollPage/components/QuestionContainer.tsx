@@ -77,7 +77,6 @@ const QuestionContainer = () => {
             }}
             onClick={() => openAdminModal(question)}
             variant="h3"
-            weight={500}
           >
             {question.body}
           </Typography>

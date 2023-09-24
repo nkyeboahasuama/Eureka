@@ -13,25 +13,10 @@ const SuccessField = () => {
           An answer will be sent to you via email.
         </Typography>
       </BodyContainer>
-      <BodyContainer w="90%" style={{ height: "75%" }}>
-        <BodyContainer
-          style={{
-            flexShrink: 0,
-            height: "100%",
-            margin: 0,
-            width: "100%",
-            justifyContent: "end",
-          }}
-          w="90%"
-        >
-          <Button
-            style={{ margin: 0 }}
-            onClick={() => navigate(-1)}
-            variant="primary"
-          >
-            Back to home
-          </Button>
-        </BodyContainer>
+      <BodyContainer w="90%">
+        <Button onClick={() => navigate(-1)} variant="primary">
+          Back to home
+        </Button>
       </BodyContainer>
     </>
   );

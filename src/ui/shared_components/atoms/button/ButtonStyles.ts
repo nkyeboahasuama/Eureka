@@ -30,7 +30,7 @@ export const BaseButton = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 700;
+  font-weight: 600;
   flex-shrink: 0;
 
   // Variant styles
