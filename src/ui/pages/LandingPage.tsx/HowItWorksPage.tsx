@@ -22,21 +22,18 @@ const HowItWorksPage = () => {
         </BodyContainer>
       </Container>
 
-      <BodyContainer justify="space-between">
+      <BodyContainer justify="space-between" style={{ height: "85%" }}>
         <BodyContainer
-          align="start"
-          justify="start"
           w="90%"
           style={{
             textAlign: "left",
             alignItems: "start",
             justifyContent: "start",
-            padding: "10px 0px 10px 0px",
+            padding: "0px 0px 10px 0px",
             overflow: "auto",
-            height: "60vh",
           }}
         >
-          <BodyContainer w="100%" align="start" style={{ marginTop: "20px" }}>
+          <BodyContainer w="100%" align="start" style={{ marginTop: "0px" }}>
             <Typography variant="h3" textalign="left" weight={600}>
               Authentication and your Board
             </Typography>
