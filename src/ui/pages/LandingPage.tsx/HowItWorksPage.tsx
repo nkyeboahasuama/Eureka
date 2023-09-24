@@ -3,26 +3,42 @@ import Typography from "../../shared_components/atoms/typography/Typography";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import Logo from "../../shared_components/logo/Logo";
 import Button from "../../shared_components/atoms/button/Button";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../types/routing";
 
 const HowItWorksPage = () => {
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    const loggedInUser = localStorage.getItem("isAdminLocal")
+      ? JSON.parse(localStorage.getItem("isAdminLocal")!)
+      : null;
+
+    if (loggedInUser.isSuper) {
+      navigate(AppRoutes.SADMIN_QUESTIONS);
+    } else {
+      navigate(AppRoutes.ADMIN_QUESTIONS);
+    }
+  };
   return (
     <Container justify="space-between">
-      <Container variant="secondary" h="100px">
-        <BodyContainer
-          w="90%"
-          fd="column"
-          align="start"
-          justify="space-between"
-          style={{ height: "90%" }}
-        >
-          <Logo />
-          <Typography variant="h2" weight={600}>
-            How it works
-          </Typography>
-        </BodyContainer>
-      </Container>
+      <BodyContainer>
+        <Container variant="secondary" h="100px">
+          <BodyContainer
+            w="90%"
+            fd="column"
+            align="start"
+            justify="space-between"
+            style={{ height: "90%" }}
+          >
+            <BodyContainer>
+              <Logo />
+            </BodyContainer>
+            <Typography variant="h2" weight={600}>
+              How it works
+            </Typography>
+          </BodyContainer>
+        </Container>
 
-      <BodyContainer justify="space-between" style={{ height: "85%" }}>
         <BodyContainer
           w="90%"
           style={{
@@ -30,10 +46,11 @@ const HowItWorksPage = () => {
             alignItems: "start",
             justifyContent: "start",
             padding: "0px 0px 10px 0px",
+            height: " 70vh",
             overflow: "auto",
           }}
         >
-          <BodyContainer w="100%" align="start" style={{ marginTop: "0px" }}>
+          <BodyContainer w="100%" align="start" style={{ marginTop: "10px" }}>
             <Typography variant="h3" textalign="left" weight={600}>
               Authentication and your Board
             </Typography>
@@ -77,10 +94,11 @@ const HowItWorksPage = () => {
             </Typography>
           </BodyContainer>
         </BodyContainer>
-
-        <BodyContainer w="90%">
-          <Button variant="secondary">My Board</Button>
-        </BodyContainer>
+      </BodyContainer>
+      <BodyContainer w="90%">
+        <Button variant="secondary" onClick={handleRedirect}>
+          My Board
+        </Button>
       </BodyContainer>
     </Container>
   );
