@@ -3,8 +3,22 @@ import Typography from "../../shared_components/atoms/typography/Typography";
 import { BodyContainer } from "../../shared_components/atoms/container/ContainerStyles";
 import Logo from "../../shared_components/logo/Logo";
 import Button from "../../shared_components/atoms/button/Button";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../types/routing";
 
 const HowItWorksPage = () => {
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    const loggedInUser = localStorage.getItem("isAdminLocal")
+      ? JSON.parse(localStorage.getItem("isAdminLocal")!)
+      : null;
+
+    if (loggedInUser.isSuper) {
+      navigate(AppRoutes.SADMIN_QUESTIONS);
+    } else {
+      navigate(AppRoutes.ADMIN_QUESTIONS);
+    }
+  };
   return (
     <Container justify="space-between">
       <Container variant="secondary" h="100px">
@@ -15,7 +29,9 @@ const HowItWorksPage = () => {
           justify="space-between"
           style={{ height: "90%" }}
         >
-          <Logo />
+          <BodyContainer>
+            <Logo />
+          </BodyContainer>
           <Typography variant="h2" weight={600}>
             How it works
           </Typography>
@@ -79,7 +95,9 @@ const HowItWorksPage = () => {
         </BodyContainer>
 
         <BodyContainer w="90%">
-          <Button variant="secondary">My Board</Button>
+          <Button variant="secondary" onClick={handleRedirect}>
+            My Board
+          </Button>
         </BodyContainer>
       </BodyContainer>
     </Container>
