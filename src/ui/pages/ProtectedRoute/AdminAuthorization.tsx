@@ -8,7 +8,7 @@ const AdminAuthorization = () => {
 
   const isAdmin = loggedInUser.isSuper === false;
 
-  return isAdmin ? <Outlet /> : <Navigate to={AppRoutes.ADMIN_QUESTIONS} />;
+  return isAdmin ? <Outlet /> : <Navigate to={AppRoutes.SADMIN_QUESTIONS} />;
 };
 
 export default AdminAuthorization;
