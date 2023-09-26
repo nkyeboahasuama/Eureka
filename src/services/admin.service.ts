@@ -8,6 +8,11 @@ const initAdmin = async (email: string) => {
   return admin;
 };
 
+const updateAdminUserFirstTimeLoginAfterLogin = async (id: string) => {
+  await AdminRepo.updateUserFirsrtTimeLogin(id);
+};
+
 export const adminService = {
   initAdmin,
+  updateAdminUserFirstTimeLoginAfterLogin,
 } as const;

@@ -35,6 +35,7 @@ export interface IAdmin {
   email: string;
   username: string;
   isSuper: boolean;
+  firstTimeLogin: boolean;
 }
 
 export interface IAdminDocument extends IAdmin, Document {
