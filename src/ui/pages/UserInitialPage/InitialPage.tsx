@@ -18,11 +18,17 @@ const InitialPage = () => {
           const data = await adminService.initAdmin(email);
 
           if (data) {
+            console.log(data);
             localStorage.setItem("isAdminLocal", JSON.stringify(data));
-            if (data.isSuper) {
-              redirect(AppRoutes.SADMIN_QUESTIONS);
+            const firstTImeLogin = data.firstTimeLogin;
+            if (firstTImeLogin) {
+              redirect(AppRoutes.INTRODUCTION);
             } else {
-              redirect(AppRoutes.ADMIN_QUESTIONS);
+              if (data.isSuper) {
+                redirect(AppRoutes.SADMIN_QUESTIONS);
+              } else {
+                redirect(AppRoutes.ADMIN_QUESTIONS);
+              }
             }
           }
         }
