@@ -27,6 +27,10 @@ class AdminRepoClass extends BaseRepository<IAdmin, IAdminDocument> {
     const results = docsRef.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     return results as IAdminDocument[];
   };
+
+  updateUserFirsrtTimeLogin = async (id: string) => {
+    await this.editDocById(id, { firstTimeLogin: false });
+  };
 }
 
 export const AdminRepo = new AdminRepoClass();

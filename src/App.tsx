@@ -27,9 +27,6 @@ function App() {
       <BrowserRouter>
         <ToastContainer />
         <Routes>
-          <Route path={AppRoutes.INTRODUCTION} element={<IntroductionPage />} />
-          <Route path={AppRoutes.INSTRUCTION} element={<HowItWorksPage />} />
-
           <Route path={AppRoutes.ROOT} element={<FormPage />} />
 
           <Route path={AppRoutes.FORM_SUCCESS} element={<SuccessPage />} />
@@ -40,6 +37,11 @@ function App() {
           />
 
           <Route element={<ProtectedRoute />}>
+            <Route
+              path={AppRoutes.INTRODUCTION}
+              element={<IntroductionPage />}
+            />
+            <Route path={AppRoutes.INSTRUCTION} element={<HowItWorksPage />} />
             <Route
               path={`${AppRoutes.ADMIN_QUESTIONS}/:id`}
               element={<AdminPage />}
