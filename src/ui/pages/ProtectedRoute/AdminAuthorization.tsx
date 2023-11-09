@@ -7,6 +7,7 @@ const AdminAuthorization = () => {
     : null;
 
   const isAdmin = loggedInUser.isSuper === false;
+  window.history.replaceState({}, document.title, window.location.pathname);
 
   return isAdmin ? <Outlet /> : <Navigate to={AppRoutes.SADMIN_QUESTIONS} />;
 };

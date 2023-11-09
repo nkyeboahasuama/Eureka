@@ -8,6 +8,8 @@ const SuperAdminAuthorization = () => {
 
   const isSuper = loggedInUser.isSuper;
 
+  window.history.replaceState({}, document.title, window.location.pathname);
+
   return isSuper ? <Outlet /> : <Navigate to={AppRoutes.ADMIN_QUESTIONS} />;
 };
 
